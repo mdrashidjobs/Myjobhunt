@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Job Hunt</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+    h1 { font-size: 32px; font-weight: bold; text-align: center; margin-bottom: 10px; }
+    hr { border: none; border-top: 2px solid #333; margin: 10px 0; }
+    .date { text-align: center; font-size: 1.1em; margin-bottom: 20px; }
+    .tabs { display: flex; cursor: pointer; margin-bottom: 20px; border-bottom: 2px solid #ccc; }
+    .tab { padding: 10px 20px; border: 1px solid #ccc; border-bottom: none; background: #f4f4f4; margin-right: 5px; border-radius: 8px 8px 0 0; }
+    .tab.active { background: white; font-weight: bold; border-bottom: 2px solid white; }
+    .tab-content { display: none; border: 1px solid #ccc; padding: 20px; border-radius: 0 8px 8px 8px; background: white; }
+    .tab-content.active { display: block; }
+    .job { margin-bottom: 15px; padding: 10px; border-bottom: 1px dashed #aaa; }
+    .job h3 { margin: 0; font-size: 18px; color: #333; }
+    .job p { margin: 5px 0; }
+    .job a { color: blue; text-decoration: none; }
+    .job a:hover { text-decoration: underline; }
+  </style>
+  <script>
+    function openTab(evt, tabId) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tab-content");
+      for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+      tablinks = document.getElementsByClassName("tab");
+      for (i = 0; i < tablinks.length; i++) { tablinks[i].classList.remove("active"); }
+      document.getElementById(tabId).style.display = "block";
+      evt.currentTarget.classList.add("active");
+    }
+    window.onload = function() { document.querySelector(".tab").click(); }
+  </script>
+</head>
+<body>
+  <h1>My Job Hunt</h1>
+  <hr>
+  <div class="date">📅 Date: 18 August 2025</div>
+  <hr>
+
+  <div class="tabs">
+    <div class="tab" onclick="openTab(event, 'admin')">Admin / Office</div>
+    <div class="tab" onclick="openTab(event, 'engineering')">Engineering / Technical</div>
+    <div class="tab" onclick="openTab(event, 'safety')">Safety</div>
+    <div class="tab" onclick="openTab(event, 'medical')">Medical / Healthcare</div>
+    <div class="tab" onclick="openTab(event, 'fnb')">F&B / Restaurant</div>
+    <div class="tab" onclick="openTab(event, 'sales')">Sales / Retail</div>
+    <div class="tab" onclick="openTab(event, 'skilled')">Skilled Trades</div>
+    <div class="tab" onclick="openTab(event, 'drivers')">Drivers / Logistics</div>
+  </div>
+
+  <!-- Admin / Office -->
+  <div id="admin" class="tab-content">
+    <div class="job">
+      <h3>Executive Secretary</h3>
+      <p>📍 Jabriya | ⏰ 9:00 AM – 4:00 PM | Sun–Thu</p>
+      <p>3–5 yrs experience, English & Arabic fluency, calendar & client coordination, invoices, clinic support</p>
+      <p>📌 Visa 18 (Local Transferable)</p>
+      <p><a href="https://wa.me/96566961228" target="_blank">📲 Apply via WhatsApp</a></p>
+    </div>
+    <div class="job">
+      <h3>Office Manager – United Integrated Holding Company</h3>
+      <p>Location: Kuwait | Strong organization & communication skills | Prior experience preferred</p>
+      <p><a href="https://www.bayt.com/en/international/jobs/united-integrated-holding-company-jobs/?filters%5Bgid_pid%5D%5B%5D=2168448-0&jobId=5356573" target="_blank">🌐 Apply Online</a></p>
+    </div>
+    <div class="job">
+      <h3>Office Cleaner</h3>
+      <p>Location: Kuwait | Preferably female from Indian, Sri Lankan, Nepali backgrounds | Relevant experience preferred</p>
+      <p><a href="mailto:jobrecruit.marita@gmail.com" target="_blank">📧 Apply via Email</a></p>
+    </div>
+    <div class="job">
+      <h3>Office Secretary</h3>
+      <p>Location: Kuwait | Preferably Arab female, relevant experience preferred</p>
+      <p><a href="mailto:jobrecruit.marita@gmail.com" target="_blank">📧 Apply via Email</a></p>
+    </div>
+    <div class="job">
+      <h3>Personal Assistant / Secretary</h3>
+      <p>Location: Salmiya | 2–3 yrs experience | Support senior management, schedule coordination, event planning</p>
+      <p><a href="https://wa.me/96560012345" target="_blank">📲 Apply via WhatsApp</a></p>
+    </div>
+    <div class="job">
+      <h3>Public Relations Officer – Decoration & Construction Company</h3>
+      <p>Females only, Kuwaiti/Lebanese/Iraqi/Iranian, fluent in Kuwaiti dialect</p>
+      <p><a href="https://wa.me/96597000794" target="_blank">📲 Apply via WhatsApp</a></p>
+    </div>
+    <div class="job">
+      <h3>Storekeeper – Avenues Restaurant</h3>
+      <p>Proven experience as storekeeper, computer & coordination skills</p>
+      <p><a href="https://wa.me/96560640688" target="_blank">📲 Apply via WhatsApp</a></p>
+    </div>
+    <div class="job">
+      <h3>Office Operations & Purchasing Executive – The Pearl</h3>
+      <p>University degree, MS Office, bilingual (Arabic/English), organizational skills</p>
+      <p><a href="mailto:info@thepearlkw.com" target="_blank">📧 Apply via Email</a></p>
+    </div>
+  </div>
+
+  <!-- Engineering / Technical -->
+  <div id="engineering" class="tab-content">
+    <div class="job">
+      <h3>Operations Manager</h3>
+      <p>Location: Kuwait City | 3–4 yrs managing teams | Tagalog speakers</p>
+      <p>Delegate tasks, manage SOPs, lead fast-paced luxury team</p>
+      <p><a href="https://wa.me/96566961228" target="_blank">📲 Apply via WhatsApp</a></p>
+    </div>
+    <div class="job">
+      <h3>Sales Engineer (Commercial Projects)</h3>
+      <p>Site-based + Kuwait City | 4+ yrs experience civil/construction</p>
+      <p>B2B sales, proposals, client meetings, trade shows</p>
+      <p><a href="https://wa.me/96560012345" target="_blank">📲 Apply via WhatsApp</a></p>
+    </div>
+    <div class="job">
+      <h3>Sales Engineer (Govt. & Private Projects)</h3>
+      <p>Site-based + Kuwait City | 4+ yrs experience</p>
+      <p>Government/private B2B sales, proposals, KPIs</p>
+      <p><a href="https://wa.me/96560012345" target="_blank">📲 Apply via WhatsApp</a></p>
+    </div>
+    <div class="job">
+      <h3>Planning Engineer (Civil & Construction)</h3>
+      <p>Kuwait City + Site visits | Min 5 yrs experience | Bachelor’s in Engineering</p>
+      <p>Primavera/MS Project, S-curves, EOT, delay analysis, reporting</p>
+      <p><a href="https://wa.me/96560012345" target="_blank">📲 Apply via WhatsApp</a></p>
+    </div>
+    <div class="job">
+      <h3>Electrical Engineer – Printing & Packaging Company</h3>
+      <p>Location: Shuwaikh, Kuwait | 3–4 yrs experience, electrical safety knowledge</p>
+      <p><a href="mailto:printingpress.jobs1@gmail.com" target="_blank">📧 Apply via Email</a></p>
+    </div>
+    <div class="job">
+      <h3>Electrical Helper</h3>
+      <p>Location: Kuwait | Willing to learn, basic electrical knowledge</p>
+      <p><a href="mailto:info.anfuture@gmail.com" target="_blank">📧 Apply via Email</a></p>
+    </div>
+    <div class="job">
+      <h3>Electrical Technician – United Integrated Holding Company</h3>
+      <p>Location: Kuwait | Inspect & maintain electrical systems, troubleshoot, install components</p>
+      <p><a href="https://www.bayt.com/en/international/jobs/united-integrated-holding-company-jobs/?filters%5Bgid_pid%5D%5B%5D=2168448-0&jobId=5356573" target="_blank">🌐 Apply Online</a></p>
+    </div>
+  </div>
+
+  <!-- Safety -->
+  <div id="safety" class="tab-content">
+    <div class="job">
+      <h3>Safety Officer</h3>
+      <p>Location: Kuwait | Ensure site safety compliance, manage risk assessments, conduct toolbox talks</p>
+      <p><a href="https://wa.me/96560012345" target="_blank">📲 Apply via WhatsApp</a></p>
+    </div>
+  </div>
+
+  <!-- Medical / Healthcare -->
+  <div id="medical" class="tab-content">
+    <div class="job">
+      <h3>Hospitality Coordinator – International Hospital</h3>
+      <p>Location: Kuwait | Experience in hotel/hospital | Strong communication & organizational skills</p>
+      <p><a href="mailto:careers@internationalhospital-kw.com" target="_blank">📧 Apply via Email</a></p>
+    </div>
+    <div class="job">
+      <h3>Hospitality Supervisor – International Hospital</h3>
+      <p>Location: Kuwait | Experience in hotel/hospital | Strong communication & organizational skills</p>
+      <p><a href="mailto:careers@internationalhospital-kw.com" target="_blank">📧 Apply via Email</a></p>
+    </div>
+    <div class="job">
+      <h3>Reception Supervisor – International Hospital</h3>
+      <p>Location: Kuwait | Relevant experience & qualifications</p>
+      <p><a href="mailto:careers@internationalhospital-kw.com" target="_blank">📧 Apply via Email</a></p>
+    </div>
+    <div class="job">
+      <h3>Senior Network & System Administrator – International Hospital</h3>
+      <p>Location: Kuwait | Relevant experience & qualifications</p>
+      <p><a href="mailto:careers@internationalhospital-kw.com" target="_blank">📧 Apply via Email</a></p>
+    </div>
+    <div class="job">
+      <h3>Storekeeper – International Hospital</h3>
+      <p>Location: Kuwait | Relevant experience & qualifications</p>
+      <p><a href="mailto:careers@internationalhospital-kw.com" target="_blank">📧 Apply via Email</a></p>
+    </div>
+  </div>
+
+  <!-- F&B / Restaurant -->
+  <div id="fnb" class="tab-content">
+    <div class="job">
+      <h3>Accountant – Nejoud Restaurant Management Company</h3>
+      <p>Location: Kuwait | Bachelor’s degree, 2 yrs accounting experience, transferable 18 visa</p>
+      <p><a href="https://kw.indeed.com/cmp/Nejoud-Restaurant-Management-Company/jobs?jk=43f77715b21ffa28&start=0&clearPrefilter=1#cmp-skip-header-desktop" target="_blank">🌐 Apply Online</a></p>
+    </div>
+    <div class="job">
+      <h3>Assistant Restaurant Manager – Nejoud Restaurant Management Company</h3>
+      <p>Location: Kuwait | Restaurant assistant manager experience, customer service, team management</p>
+      <p><a href="https://kw.indeed.com/cmp/Nejoud-Restaurant-Management-Company/jobs?jk=43f77715b21ffa28&start=0&clearPrefilter=1#cmp-skip-header-desktop" target="_blank">🌐 Apply Online</a></p>
+    </div>
+    <div class="job">
+      <h3>Kitchen Helper</h3>
+      <p>Location: Kuwait | Transferable Visa 18, local candidate, fast-paced kitchen</p>
+      <p><a href="mailto:reem.modak@blueseakw.com" target="_blank">📧 Apply via Email</a></p>
+    </div>
+    <div class="job">
+      <h3>Marble Slab Creamery – Area Manager</h3>
+      <p>Location: Kuwait | Bachelor’s preferred, 5+ yrs F&B/Multi-Unit Management</p>
+      <p><a href="https://kw.indeed.com/cmp/Nejoud-Restaurant-Management-Company/jobs?jk=43f77715b21ffa28&start=0&clearPrefilter=1#cmp-skip-header-desktop" target="_blank">🌐 Apply Online</a></p>
+    </div>
+    <div class="job">
+      <h3>Restaurant Supervisor – Nejoud Restaurant Management Company</h3>
+      <p>Location: Kuwait | Manage staff schedules, kitchen hygiene, inventory & cash flow</p>
+      <p><a href="https://kw.indeed.com/cmp/Nejoud-Restaurant-Management-Company/jobs?jk=43f77715b21ffa28&start=0&clearPrefilter=1#cmp-skip-header-desktop" target="_blank">🌐 Apply Online</a></p>
+    </div>
+  </div>
+
+  <!-- Sales / Retail -->
+  <div id="sales" class="tab-content">
+    <div class="job">
+      <h3>Model</h3>
+      <p>Location: Kuwait | Arab/Asian females | Full-size photo required</p>
+      <p><a href="mailto:jobrecruit.marita@gmail.com" target="_blank">📧 Apply via Email</a></p>
+    </div>
+    <div class="job">
+      <h3>Sales Manager</h3>
+      <p>Location: Kuwait | 7+ yrs sales experience including leadership, SDR & AE teams</p>
+      <p><a href="mailto:targetrecruitment2025@gmail.com" target="_blank">📧 Apply via Email</a></p>
+    </div>
+    <div class="job">
+      <h3>Senior Sales Executive – Rodeo Luxury</h3>
+      <p>Location: Kuwait | 3+ yrs sales experience, 5+ yrs fashion brand, managerial experience preferred</p>
+      <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSfnK5FosoqYU2QDH6CIhYFcZ-zb4A4ltNCkyE3AfS4KQ-NfYg/viewform" target="_blank">🌐 Apply Online</a></p>
+    </div>
+    <div class="job">
+      <h3>Store Manager – B Cosmetics Company</h3>
+      <p>Location: Kuwait | 3+ yrs beauty shop/sales experience, leadership, high communication & organization skills</p>
+      <p><a href="https://wa.me/96594744407" target="_blank">📲 Apply via WhatsApp</a></p>
+    </div>
+  </div>
+
+  <!-- Skilled Trades -->
+  <div id="skilled" class="tab-content">
+    <div class="job">
+      <h3>Fabricator</h3>
+      <p>Fahaheel, Mangaf, Mahaboula | 185–310 KD/month, 8 hrs/day, transportation available</p>
+      <p><a href="tel:96597961420">📞 Apply via Call</a></p>
+    </div>
+    <div class="job">
+      <h3>MIG Welder</h3>
+      <p>Fahaheel, Mangaf, Mahaboula</p>
+      <p><a href="tel:96597961420">📞 Apply via Call</a></p>
+    </div>
+    <div class="job">
+      <h3>Tack Welder (Arc)</h3>
+      <p>Fahaheel, Mangaf, Mahaboula</p>
+      <p><a href="tel:96597961420">📞 Apply via Call</a></p>
+    </div>
+    <div class="job">
+      <h3>Grinder</h3>
+      <p>Fahaheel, Mangaf, Mahaboula</p>
+      <p><a href="tel:96597961420">📞 Apply via Call</a></p>
+    </div>
+    <div class="job">
+      <h3>Store Helper</h3>
+      <p>Fahaheel, Mangaf, Mahaboula</p>
+      <p><a href="tel:96597961420">📞 Apply via Call</a></p>
+    </div>
+  </div>
+
+  <!-- Drivers / Logistics -->
+  <div id="drivers" class="tab-content">
+    <div class="job">
+      <h3>Delivery Driver / Logistics</h3>
+      <p>Location: Kuwait | Experience preferred | Transferable Visa 18</p>
+      <p><a href="https://wa.me/96560012345" target="_blank">📲 Apply via WhatsApp</a></p>
+    </div>
+  </div>
+
+</body>
+</html>
