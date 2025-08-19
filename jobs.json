@@ -1,0 +1,22 @@
+{
+  "19-August-2025": {
+    "admin": [
+      { "title": "Secretary – Flower Shop", "location": "Farwaniya", "details": "Handle orders", "requirements": "1-2 yrs experience", "apply": "tel:50825582" },
+      { "title": "Front Office Lead – NOC Operations", "location": "Kuwait", "requirements": "5+ yrs telecom NOC experience", "apply": "mailto:shabakkat.hr@shabakkat.com" }
+    ],
+    "finance": [
+      { "title": "Finance Manager – Light Fields", "location": "Kuwait", "requirements": "Odoo ERP exp", "apply": "mailto:careers@lightfields.co" }
+    ],
+    "it": [
+      { "title": "IT Technician – Omar Co.", "location": "Kuwait", "requirements": "Networking & PC troubleshooting", "apply": "mailto:rao@coaxialit.com" }
+    ]
+  },
+  "18-August-2025": {
+    "admin": [
+      { "title": "Receptionist – ABC Co.", "location": "Salmiya", "requirements": "1-2 yrs exp", "apply": "tel:12345678" }
+    ],
+    "finance": [
+      { "title": "Junior Accountant – XYZ Co.", "location": "Kuwait", "requirements": "2 yrs exp", "apply": "mailto:hr@xyz.com" }
+    ]
+  }
+}

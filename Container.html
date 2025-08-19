@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job JSON Parser</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+textarea { width: 100%; height: 300px; }
+button { padding: 10px 20px; margin-top: 10px; }
+</style>
+</head>
+<body>
+<h2>Job JSON Parser</h2>
+<p>Paste WhatsApp jobs below and click Parse → Generate jobs.json</p>
+<textarea id="jobInput"></textarea>
+<br>
+<button id="parseBtn">Parse & Download JSON</button>
+
+<script>
+document.getElementById('parseBtn').addEventListener('click', () => {
+  const rawText = document.getElementById('jobInput').value;
+  const today = new Date().toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
+  let jobsObj = { [today]: {} };
+
+  // Simple parser (assuming format: category line starts with 📌)
+  const lines = rawText.split('\n');
+  let currentCategory = '';
+  lines.forEach(line => {
+    line = line.trim();
+    if(line.startsWith('📌')) {
+      currentCategory = line.replace('📌','').trim().toLowerCase();
+      if(!jobsObj[today][currentCategory]) jobsObj[today][currentCategory] = [];
+    } else if(line) {
+      // Very basic parsing: treat line as job title
+      jobsObj[today][currentCategory].push({ title: line });
+    }
+  });
+
+  // Convert to JSON string
+  const jsonStr = JSON.stringify(jobsObj, null, 2);
+
+  // Download file
+  const blob = new Blob([jsonStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'jobs.json';
+  a.click();
+});
+</script>
+
+</body>
+</html>
