@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Job Parser</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body { font-family: Arial, sans-serif; padding: 20px; background:#f9f9f9; }
+    textarea { width:100%; height:300px; margin-bottom:10px; font-family: monospace; }
+    button { padding:10px 20px; font-size:16px; cursor:pointer; }
+</style>
+</head>
+<body>
+<h2>WhatsApp Job Parser</h2>
+<textarea id="jobInput" placeholder="Paste WhatsApp jobs here..."></textarea>
+<br>
+<button onclick="parseJobs()">Parse & Download JSON</button>
+
+<script>
+function parseJobs(){
+    const text = document.getElementById('jobInput').value.trim();
+    if(!text) { alert('Paste the WhatsApp jobs first!'); return; }
+
+    const lines = text.split('\n');
+    const data = {};
+    let currentDate = '';
+    let currentCategory = '';
+
+    lines.forEach(line => {
+        line = line.trim();
+        if(!line) return;
+
+        // Detect date line
+        if(line.startsWith('Date:')){
+            currentDate = line.replace('Date:','').trim();
+            if(!data[currentDate]) data[currentDate] = {Admin:[], Finance:[], IT:[], Engineering:[], Safety:[], Healthcare:[], Sales:[], Drivers:[]};
+        }
+        // Detect category
+        else if(line.startsWith('📌 Administrative')) currentCategory='Admin';
+        else if(line.startsWith('📌 Finance')) currentCategory='Finance';
+        else if(line.startsWith('📌 IT')) currentCategory='IT';
+        else if(line.startsWith('📌 Engineering')) currentCategory='Engineering';
+        else if(line.startsWith('📌 Safety')) currentCategory='Safety';
+        else if(line.startsWith('📌 Healthcare')) currentCategory='Healthcare';
+        else if(line.startsWith('📌 Sales')) currentCategory='Sales';
+        else if(line.startsWith('📌 Drivers')) currentCategory='Drivers';
+        else {
+            // Append to current category for current date
+            if(currentDate && currentCategory) data[currentDate][currentCategory].push(line);
+        }
+    });
+
+    const jsonStr = JSON.stringify(data, null, 2);
+    const blob = new Blob([jsonStr], {type: 'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'jobs.json';
+    a.click();
+}
+</script>
+</body>
+</html>
