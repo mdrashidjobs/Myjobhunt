@@ -3,19 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Job JSON Parser</title>
+<title>Job JSON Parser Enhanced</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
-textarea { width: 100%; height: 300px; }
+textarea { width: 100%; height: 400px; }
 button { padding: 10px 20px; margin-top: 10px; }
+pre { background: #eee; padding: 10px; overflow-x: auto; }
 </style>
 </head>
 <body>
-<h2>Job JSON Parser</h2>
-<p>Paste WhatsApp jobs below and click Parse → Generate jobs.json</p>
+
+<h2>Enhanced Job JSON Parser</h2>
+<p>Paste WhatsApp jobs (like your daily format) and click Parse → Generate jobs.json</p>
 <textarea id="jobInput"></textarea>
 <br>
 <button id="parseBtn">Parse & Download JSON</button>
+
+<h3>Preview JSON</h3>
+<pre id="jsonPreview"></pre>
 
 <script>
 document.getElementById('parseBtn').addEventListener('click', () => {
@@ -23,24 +28,45 @@ document.getElementById('parseBtn').addEventListener('click', () => {
   const today = new Date().toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
   let jobsObj = { [today]: {} };
 
-  // Simple parser (assuming format: category line starts with 📌)
   const lines = rawText.split('\n');
   let currentCategory = '';
+  let currentJob = null;
+
   lines.forEach(line => {
     line = line.trim();
-    if(line.startsWith('📌')) {
-      currentCategory = line.replace('📌','').trim().toLowerCase();
+
+    // Detect category
+    if(line.startsWith('📌') && line.includes('Roles')) {
+      currentCategory = line.replace('📌','').replace('Roles','').trim().toLowerCase();
       if(!jobsObj[today][currentCategory]) jobsObj[today][currentCategory] = [];
-    } else if(line) {
-      // Very basic parsing: treat line as job title
-      jobsObj[today][currentCategory].push({ title: line });
+      currentJob = null;
+      return;
     }
+
+    // Detect new job start
+    if(line.startsWith('📌') && !line.includes('Roles')) {
+      if(currentCategory === '') currentCategory = 'misc';
+      if(!jobsObj[today][currentCategory]) jobsObj[today][currentCategory] = [];
+
+      currentJob = { title: line.replace('📌','').trim() };
+      jobsObj[today][currentCategory].push(currentJob);
+      return;
+    }
+
+    if(!currentJob) return; // Skip lines until first job
+
+    // Extract known fields
+    if(line.startsWith('Location:')) currentJob.location = line.replace('Location:','').trim();
+    else if(line.startsWith('💼 Details:') || line.startsWith('Details:')) currentJob.details = line.replace(/💼 Details:|Details:/,'').trim();
+    else if(line.startsWith('✅ Requirements:') || line.startsWith('Requirements:')) currentJob.requirements = line.replace(/✅ Requirements:|Requirements:/,'').trim();
+    else if(line.startsWith('💰 Salary:') || line.startsWith('Salary:')) currentJob.salary = line.replace(/💰 Salary:|Salary:/,'').trim();
+    else if(line.startsWith('📩 Apply:') || line.startsWith('📱 Apply')) currentJob.apply = line.replace(/📩 Apply:|📱 Apply via WhatsApp:|📱 Apply:/,'').trim();
   });
 
-  // Convert to JSON string
   const jsonStr = JSON.stringify(jobsObj, null, 2);
+  document.getElementById('jsonPreview').textContent = jsonStr;
 
-  // Download file
+  // Download JSON
   const blob = new Blob([jsonStr], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
