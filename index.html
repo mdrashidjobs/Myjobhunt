@@ -2,75 +2,84 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Kuwait Jobs Portal</title>
+  <title>Job Listings</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+    body { font-family: Arial, sans-serif; margin: 20px; }
     h1 { text-align: center; }
-    .tabs { display: flex; margin-bottom: 20px; }
-    .tab {
-      padding: 10px 20px;
-      margin-right: 5px;
-      background: #ddd;
-      border-radius: 5px 5px 0 0;
-      cursor: pointer;
-    }
-    .tab.active { background: #4285f4; color: white; }
-    .tab-content { display: none; padding: 20px; background: white; border: 1px solid #ccc; border-top: none; }
+
+    /* Tabs */
+    .tabs { display: flex; border-bottom: 2px solid #ccc; margin-bottom: 15px; }
+    .tab { padding: 10px 20px; cursor: pointer; border: 1px solid #ccc; border-bottom: none; background: #f7f7f7; margin-right: 5px; border-radius: 8px 8px 0 0; }
+    .tab.active { background: #fff; font-weight: bold; }
+
+    .tab-content { display: none; }
     .tab-content.active { display: block; }
-    .job-date { background: #4285f4; color: white; padding: 8px; margin: 10px 0; border-radius: 5px; }
-    .job-item { padding: 10px; border: 1px solid #ddd; margin: 5px 0; background: #fff; border-radius: 5px; }
+
+    .job-date { font-size: 1.2em; margin-top: 20px; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+    .job { margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #fafafa; }
+    .divider { text-align: center; margin: 10px 0; color: #888; }
   </style>
 </head>
 <body>
-  <h1>📢 Kuwait Jobs Portal</h1>
+  <h1>📢 Job Listings</h1>
 
   <!-- Tabs -->
   <div class="tabs">
-    <div class="tab active" data-tab="latest">Latest Jobs</div>
-    <div class="tab" data-tab="previous">Previous Jobs</div>
+    <div class="tab active" data-tab="latest">Latest</div>
+    <div class="tab" data-tab="archive">Archive</div>
   </div>
 
-  <!-- Tab Contents -->
+  <!-- Content -->
   <div id="latest" class="tab-content active"></div>
-  <div id="previous" class="tab-content"></div>
+  <div id="archive" class="tab-content"></div>
 
   <script>
     async function loadJobs() {
       try {
-        const res = await fetch("jobs.json");
-        const data = await res.json();
+        const response = await fetch('jobs.json');
+        const data = await response.json();
 
-        const latestContainer = document.getElementById("latest");
-        const previousContainer = document.getElementById("previous");
+        const latestContainer = document.getElementById('latest');
+        const archiveContainer = document.getElementById('archive');
 
-        latestContainer.innerHTML = "";
-        previousContainer.innerHTML = "";
+        // Sort dates (newest first)
+        const sortedDates = Object.keys(data).sort((a, b) => new Date(b) - new Date(a));
+        const latestDate = sortedDates[0];
 
-        let dates = Object.keys(data).sort((a,b) => new Date(b) - new Date(a));
-
-        dates.forEach((date, index) => {
-          let jobsHtml = `<div class="job-date">📅 ${date}</div>`;
-          data[date].forEach(job => {
-            jobsHtml += `<div class="job-item">${job}</div>`;
-          });
-
-          if (index === 0) {
-            latestContainer.innerHTML += jobsHtml; // Latest date jobs
-          } else {
-            previousContainer.innerHTML += jobsHtml; // Older jobs
-          }
+        // Render latest jobs
+        latestContainer.innerHTML = `<h2 class="job-date">${latestDate}</h2>`;
+        data[latestDate].forEach(job => {
+          latestContainer.innerHTML += `
+            <div class="job">
+              <p>${job}</p>
+            </div>
+            <div class="divider">━━━━━━━━━━━━✦✿✦━━━━━━━━━━━━</div>
+          `;
         });
-      } catch (e) {
-        console.error("Error loading jobs.json", e);
+
+        // Render archive (expanded with all previous dates)
+        archiveContainer.innerHTML = "";
+        sortedDates.slice(1).forEach(date => {
+          archiveContainer.innerHTML += `<h2 class="job-date">${date}</h2>`;
+          data[date].forEach(job => {
+            archiveContainer.innerHTML += `
+              <div class="job">
+                <p>${job}</p>
+              </div>
+              <div class="divider">━━━━━━━━━━━━✦✿✦━━━━━━━━━━━━</div>
+            `;
+          });
+        });
+      } catch (error) {
+        console.error("Error loading jobs.json:", error);
       }
     }
 
-    // Tabs behavior
+    // Tabs
     document.querySelectorAll(".tab").forEach(tab => {
       tab.addEventListener("click", () => {
         document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
         document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-
         tab.classList.add("active");
         document.getElementById(tab.dataset.tab).classList.add("active");
       });
