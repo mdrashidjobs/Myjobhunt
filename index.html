@@ -4,96 +4,78 @@
 <meta charset="UTF-8">
 <title>My Job Hunt</title>
 <style>
-body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
-h1 { text-align: center; margin-bottom: 10px; }
-
-.tabs { display: flex; flex-wrap: wrap; border-bottom: 2px solid #ccc; margin-bottom: 15px; }
-.tab { padding: 10px 15px; cursor: pointer; border: 1px solid #ccc; border-bottom: none; background: #f7f7f7; margin-right: 5px; border-radius: 8px 8px 0 0; }
+body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 0; }
+h1 { text-align: center; padding: 20px; }
+.tabs { display: flex; flex-wrap: wrap; background: #fff; border-bottom: 2px solid #ccc; }
+.tab { padding: 10px 20px; cursor: pointer; border-right: 1px solid #ccc; background: #eee; }
 .tab.active { background: #fff; font-weight: bold; }
-
-.tab-content { display: none; }
+.tab-content { display: none; padding: 20px; }
 .tab-content.active { display: block; }
-
-.job-date { font-size: 1.2em; margin-top: 20px; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
-.job { margin: 10px 0; padding: 10px; border: 1px dashed #ccc; border-radius: 8px; background: #fff; }
-.divider { text-align: center; margin: 10px 0; color: #888; }
+.job-block { border: 1px dashed #ccc; margin-bottom: 10px; padding: 10px; background: #fff; white-space: pre-wrap; }
+.date-header { font-weight: bold; margin-top: 20px; font-size: 16px; }
 </style>
 </head>
 <body>
 
-<h1>📢 My Job Hunt</h1>
+<h1>My Job Hunt</h1>
+<hr>
+<div class="tabs">
+  <div class="tab active" data-tab="Admin">Admin</div>
+  <div class="tab" data-tab="Finance">Finance</div>
+  <div class="tab" data-tab="IT">IT</div>
+  <div class="tab" data-tab="Engineering">Engineering</div>
+  <div class="tab" data-tab="Safety">Safety</div>
+  <div class="tab" data-tab="Healthcare">Healthcare</div>
+  <div class="tab" data-tab="Sales">Sales</div>
+  <div class="tab" data-tab="Drivers">Drivers</div>
+</div>
 
-<!-- Tabs -->
-<div class="tabs" id="tabsContainer"></div>
-
-<!-- Tab Contents -->
-<div id="tabContents"></div>
+<div id="tab-Admin" class="tab-content"></div>
+<div id="tab-Finance" class="tab-content"></div>
+<div id="tab-IT" class="tab-content"></div>
+<div id="tab-Engineering" class="tab-content"></div>
+<div id="tab-Safety" class="tab-content"></div>
+<div id="tab-Healthcare" class="tab-content"></div>
+<div id="tab-Sales" class="tab-content"></div>
+<div id="tab-Drivers" class="tab-content"></div>
 
 <script>
-const categories = ["Admin", "Finance", "IT", "Engineering", "Safety", "Healthcare", "Sales", "Drivers"];
-
-function createTabs() {
-  const tabsContainer = document.getElementById("tabsContainer");
-  const tabContents = document.getElementById("tabContents");
-
-  categories.forEach((cat, i) => {
-    // Create tab button
-    const tabBtn = document.createElement("div");
-    tabBtn.className = "tab" + (i===0 ? " active" : "");
-    tabBtn.textContent = cat;
-    tabBtn.dataset.tab = cat;
-    tabsContainer.appendChild(tabBtn);
-
-    // Create tab content container
-    const tabDiv = document.createElement("div");
-    tabDiv.id = cat;
-    tabDiv.className = "tab-content" + (i===0 ? " active" : "");
-    tabContents.appendChild(tabDiv);
+const tabs = document.querySelectorAll('.tab');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelector('.tab.active').classList.remove('active');
+    tab.classList.add('active');
+    document.querySelector('.tab-content.active').classList.remove('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
   });
+});
 
-  // Tab click logic
-  document.querySelectorAll(".tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-      tab.classList.add("active");
-      document.getElementById(tab.dataset.tab).classList.add("active");
+// Load jobs.json dynamically
+fetch('jobs.json')
+.then(res => res.json())
+.then(data => {
+  const categories = ["Admin","Finance","IT","Engineering","Safety","Healthcare","Sales","Drivers"];
+  const sortedDates = Object.keys(data).sort((a,b) => new Date(b)-new Date(a)); // newest first
+  categories.forEach(cat => {
+    const container = document.getElementById('tab-' + cat);
+    sortedDates.forEach(date => {
+      if(data[date][cat] && data[date][cat].length>0){
+        const dateDiv = document.createElement('div');
+        dateDiv.className = 'date-header';
+        dateDiv.textContent = date;
+        container.appendChild(dateDiv);
+        data[date][cat].forEach(job => {
+          const jobDiv = document.createElement('div');
+          jobDiv.className = 'job-block';
+          jobDiv.textContent = job;
+          container.appendChild(jobDiv);
+        });
+      }
     });
   });
-}
-
-async function loadJobs() {
-  try {
-    const response = await fetch('jobs.json');
-    const data = await response.json();
-
-    categories.forEach(cat => {
-      const container = document.getElementById(cat);
-      container.innerHTML = ""; // clear
-
-      // Get all dates for this category
-      const dates = Object.keys(data).sort((a,b)=> new Date(b) - new Date(a)); // newest first
-      dates.forEach(date => {
-        // Filter jobs by category
-        if(data[date][cat] && data[date][cat].length > 0){
-          container.innerHTML += `<h2 class="job-date">${date}</h2>`;
-          data[date][cat].forEach(job => {
-            container.innerHTML += `
-              <div class="job"><p>${job}</p></div>
-              <div class="divider">━━━━━━━━━━━━✦✿✦━━━━━━━━━━━━</div>
-            `;
-          });
-        }
-      });
-    });
-
-  } catch(e) {
-    console.error("Failed to load jobs.json", e);
-  }
-}
-
-createTabs();
-loadJobs();
+  document.getElementById('tab-Admin').classList.add('active'); // default visible tab
+});
 </script>
+
 </body>
 </html>

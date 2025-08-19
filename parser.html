@@ -12,7 +12,7 @@ button { margin-top: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer;
 <body>
 
 <h2>📌 Job Parser</h2>
-<p>Paste all new jobs below. Use format <code>Category: job details</code> (e.g., Admin: 📌 Secretary – Flower Shop...). Click <b>Save JSON</b> to download <code>jobs.json</code>.</p>
+<p>Paste all new jobs below. Click <b>Save JSON</b> to download <code>jobs.json</code>. Old jobs will be preserved.</p>
 
 <textarea id="input" placeholder="Paste jobs here..."></textarea>
 <br>
@@ -24,41 +24,46 @@ document.getElementById("save").addEventListener("click", function () {
   if(!text) return alert("No jobs to save!");
 
   const today = new Date().toISOString().split("T")[0];
-  const lines = text.split("\n").filter(line => line.trim() !== "");
-  const categories = ["Admin", "Finance", "IT", "Engineering", "Safety", "Healthcare", "Sales", "Drivers"];
+  const categories = {
+    "Admin": ["Secretary","Admin","Assistant","Operations"],
+    "Finance": ["Finance","Accounting","Manager","CFO","Accountant"],
+    "IT": ["IT","Developer","Technician","Odoo","CRM","Network"],
+    "Engineering": ["Engineer","Mechanical","Civil","Electrical","HVAC","Estimator","Technical"],
+    "Safety": ["Safety","NEBOSH","Security","Supervisor","Officer"],
+    "Healthcare": ["Doctor","Nurse","Medical","Optometrist","Dietitian","Laboratory","Vet","Clinic"],
+    "Sales": ["Sales","Marketing","Retail","Store","Representative","Supervisor"],
+    "Drivers": ["Driver","Delivery","Transport","Heavy","Light"]
+  };
 
-  fetch("jobs.json")
-    .then(r => r.json())
-    .catch(() => ({}))
-    .then(data => {
-      if(!data[today]) data[today] = {};
-      // Ensure all categories exist
-      categories.forEach(cat => { if(!data[today][cat]) data[today][cat] = []; });
+  fetch("jobs.json").then(r => r.json()).catch(()=>({})).then(data=>{
+    if(!data[today]) data[today] = {};
+    Object.keys(categories).forEach(cat=>{ if(!data[today][cat]) data[today][cat]=[]; });
 
-      lines.forEach(line => {
-        let matched = false;
-        categories.forEach(cat => {
-          const prefix = cat + ":";
-          if(line.startsWith(prefix) || line.startsWith(prefix + " ")) {
-            data[today][cat].push(line.slice(prefix.length).trim());
-            matched = true;
-          }
-        });
-        if(!matched){
-          console.warn("Skipped line (category not found):", line);
+    // Split job blocks by double newlines
+    const jobBlocks = text.split(/\n{2,}/).map(j=>j.trim()).filter(j=>j!=="");
+
+    jobBlocks.forEach(job=>{
+      let added=false;
+      for(const cat in categories){
+        if(categories[cat].some(keyword=>job.toLowerCase().includes(keyword.toLowerCase()))){
+          data[today][cat].push(job);
+          added=true;
+          break;
         }
-      });
-
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "jobs.json";
-      a.click();
-      URL.revokeObjectURL(url);
-
-      alert("✅ jobs.json downloaded successfully!");
+      }
+      if(!added) console.warn("Category not found for job:", job);
     });
+
+    const blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href=url;
+    a.download="jobs.json";
+    a.click();
+    URL.revokeObjectURL(url);
+
+    alert("✅ jobs.json downloaded successfully!");
+  });
 });
 </script>
 
