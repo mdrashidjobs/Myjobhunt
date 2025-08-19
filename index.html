@@ -36,7 +36,7 @@ crossorigin="anonymous"></script>
 </div>
 
 <h1>MY JOB HUNT</h1>
-<p style="text-align:center;">Date-wise jobs loaded from JSON</p>
+<p style="text-align:center;">Date-wise jobs loaded dynamically</p>
 <hr>
 
 <div class="tabs">
@@ -60,7 +60,6 @@ crossorigin="anonymous"></script>
 <div id="drivers" class="tab-content"></div>
 
 <script>
-// Tabs
 const tabButtons = document.querySelectorAll('.tab-button');
 const tabContents = document.querySelectorAll('.tab-content');
 
@@ -73,38 +72,46 @@ tabButtons.forEach(button => {
   });
 });
 
-// Load jobs from JSON
-fetch('jobs.json')
-.then(res => res.json())
-.then(data => {
-  const categories = ["Admin","Finance","IT","Engineering","Safety","Healthcare","Sales","Drivers"];
-  const sortedDates = Object.keys(data).sort((a,b)=>new Date(b)-new Date(a)); // newest first
+async function loadJobs() {
+  try {
+    const response = await fetch('jobs.json?' + new Date().getTime()); // prevent caching
+    const data = await response.json();
+    const categories = ["Admin","Finance","IT","Engineering","Safety","Healthcare","Sales","Drivers"];
+    const sortedDates = Object.keys(data).sort((a,b)=>new Date(b)-new Date(a));
 
-  categories.forEach(cat => {
-    const container = document.getElementById(cat.toLowerCase());
-    sortedDates.forEach(date => {
-      if(data[date][cat] && data[date][cat].length > 0){
-        const dateDiv = document.createElement('div');
-        dateDiv.style.fontWeight = 'bold';
-        dateDiv.style.marginTop = '20px';
-        dateDiv.textContent = date;
-        container.appendChild(dateDiv);
+    categories.forEach(cat => {
+      const container = document.getElementById(cat.toLowerCase());
+      container.innerHTML = ''; // clear old content
+      sortedDates.forEach(date => {
+        if(data[date][cat] && data[date][cat].length > 0){
+          const dateDiv = document.createElement('div');
+          dateDiv.style.fontWeight = 'bold';
+          dateDiv.style.marginTop = '20px';
+          dateDiv.textContent = date;
+          container.appendChild(dateDiv);
 
-        data[date][cat].forEach((job, index) => {
-          const jobDiv = document.createElement('div');
-          jobDiv.className = 'job-block';
-          jobDiv.id = `${cat.toLowerCase()}_${date}_${index}`;
-          jobDiv.innerHTML = job.replace(/\n/g,'<br>'); // preserve line breaks
-          container.appendChild(jobDiv);
-        });
-      }
+          data[date][cat].forEach((job, index) => {
+            const jobDiv = document.createElement('div');
+            jobDiv.className = 'job-block';
+            jobDiv.id = `${cat.toLowerCase()}_${date}_${index}`;
+            jobDiv.innerHTML = job.replace(/\n/g,'<br>');
+            container.appendChild(jobDiv);
+          });
+        }
+      });
     });
-  });
+  } catch(err) {
+    console.error('Error loading jobs:', err);
+  }
+}
 
-  document.getElementById('admin').classList.add('active');
-});
+// Load jobs on page load
+loadJobs();
 
-// Support bookmark linking
+// Optional: Auto-refresh every 60 seconds (you can change the interval)
+setInterval(loadJobs, 60000);
+
+// Bookmark support
 window.addEventListener('load', () => {
   if(window.location.hash){
     const hash = window.location.hash.substring(1);
