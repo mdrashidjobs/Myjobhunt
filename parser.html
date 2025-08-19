@@ -12,9 +12,9 @@ button { margin-top: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer;
 <body>
 
 <h2>📌 Job Parser</h2>
-<p>Paste all new jobs below. Use format <code>Category: job details</code>. Click <b>Save JSON</b> to download <code>jobs.json</code>.</p>
+<p>Paste all new jobs below. Use format <code>Category: job details</code> (e.g., Admin: 📌 Secretary – Flower Shop...). Click <b>Save JSON</b> to download <code>jobs.json</code>.</p>
 
-<textarea id="input" placeholder="Example: Admin: 📌 Secretary – Flower Shop, Farwaniya, Al-Rai..."></textarea>
+<textarea id="input" placeholder="Paste jobs here..."></textarea>
 <br>
 <button id="save">Save JSON</button>
 
@@ -32,14 +32,21 @@ document.getElementById("save").addEventListener("click", function () {
     .catch(() => ({}))
     .then(data => {
       if(!data[today]) data[today] = {};
+      // Ensure all categories exist
       categories.forEach(cat => { if(!data[today][cat]) data[today][cat] = []; });
 
       lines.forEach(line => {
-        const splitIndex = line.indexOf(":");
-        if(splitIndex === -1) return;
-        const cat = line.slice(0, splitIndex).trim();
-        const job = line.slice(splitIndex + 1).trim();
-        if(categories.includes(cat)) data[today][cat].push(job);
+        let matched = false;
+        categories.forEach(cat => {
+          const prefix = cat + ":";
+          if(line.startsWith(prefix) || line.startsWith(prefix + " ")) {
+            data[today][cat].push(line.slice(prefix.length).trim());
+            matched = true;
+          }
+        });
+        if(!matched){
+          console.warn("Skipped line (category not found):", line);
+        }
       });
 
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
