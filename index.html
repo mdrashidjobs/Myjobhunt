@@ -1,91 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Job Listings</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    h1 { text-align: center; }
+<meta charset="UTF-8">
+<title>My Job Hunt</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+h1 { text-align: center; margin-bottom: 10px; }
 
-    /* Tabs */
-    .tabs { display: flex; border-bottom: 2px solid #ccc; margin-bottom: 15px; }
-    .tab { padding: 10px 20px; cursor: pointer; border: 1px solid #ccc; border-bottom: none; background: #f7f7f7; margin-right: 5px; border-radius: 8px 8px 0 0; }
-    .tab.active { background: #fff; font-weight: bold; }
+.tabs { display: flex; flex-wrap: wrap; border-bottom: 2px solid #ccc; margin-bottom: 15px; }
+.tab { padding: 10px 15px; cursor: pointer; border: 1px solid #ccc; border-bottom: none; background: #f7f7f7; margin-right: 5px; border-radius: 8px 8px 0 0; }
+.tab.active { background: #fff; font-weight: bold; }
 
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
 
-    .job-date { font-size: 1.2em; margin-top: 20px; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
-    .job { margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #fafafa; }
-    .divider { text-align: center; margin: 10px 0; color: #888; }
-  </style>
+.job-date { font-size: 1.2em; margin-top: 20px; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+.job { margin: 10px 0; padding: 10px; border: 1px dashed #ccc; border-radius: 8px; background: #fff; }
+.divider { text-align: center; margin: 10px 0; color: #888; }
+</style>
 </head>
 <body>
-  <h1>📢 Job Listings</h1>
 
-  <!-- Tabs -->
-  <div class="tabs">
-    <div class="tab active" data-tab="latest">Latest</div>
-    <div class="tab" data-tab="archive">Archive</div>
-  </div>
+<h1>📢 My Job Hunt</h1>
 
-  <!-- Content -->
-  <div id="latest" class="tab-content active"></div>
-  <div id="archive" class="tab-content"></div>
+<!-- Tabs -->
+<div class="tabs" id="tabsContainer"></div>
 
-  <script>
-    async function loadJobs() {
-      try {
-        const response = await fetch('jobs.json');
-        const data = await response.json();
+<!-- Tab Contents -->
+<div id="tabContents"></div>
 
-        const latestContainer = document.getElementById('latest');
-        const archiveContainer = document.getElementById('archive');
+<script>
+const categories = ["Admin", "Finance", "IT", "Engineering", "Safety", "Healthcare", "Sales", "Drivers"];
 
-        // Sort dates (newest first)
-        const sortedDates = Object.keys(data).sort((a, b) => new Date(b) - new Date(a));
-        const latestDate = sortedDates[0];
+function createTabs() {
+  const tabsContainer = document.getElementById("tabsContainer");
+  const tabContents = document.getElementById("tabContents");
 
-        // Render latest jobs
-        latestContainer.innerHTML = `<h2 class="job-date">${latestDate}</h2>`;
-        data[latestDate].forEach(job => {
-          latestContainer.innerHTML += `
-            <div class="job">
-              <p>${job}</p>
-            </div>
-            <div class="divider">━━━━━━━━━━━━✦✿✦━━━━━━━━━━━━</div>
-          `;
-        });
+  categories.forEach((cat, i) => {
+    // Create tab button
+    const tabBtn = document.createElement("div");
+    tabBtn.className = "tab" + (i===0 ? " active" : "");
+    tabBtn.textContent = cat;
+    tabBtn.dataset.tab = cat;
+    tabsContainer.appendChild(tabBtn);
 
-        // Render archive (expanded with all previous dates)
-        archiveContainer.innerHTML = "";
-        sortedDates.slice(1).forEach(date => {
-          archiveContainer.innerHTML += `<h2 class="job-date">${date}</h2>`;
-          data[date].forEach(job => {
-            archiveContainer.innerHTML += `
-              <div class="job">
-                <p>${job}</p>
-              </div>
+    // Create tab content container
+    const tabDiv = document.createElement("div");
+    tabDiv.id = cat;
+    tabDiv.className = "tab-content" + (i===0 ? " active" : "");
+    tabContents.appendChild(tabDiv);
+  });
+
+  // Tab click logic
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+      tab.classList.add("active");
+      document.getElementById(tab.dataset.tab).classList.add("active");
+    });
+  });
+}
+
+async function loadJobs() {
+  try {
+    const response = await fetch('jobs.json');
+    const data = await response.json();
+
+    categories.forEach(cat => {
+      const container = document.getElementById(cat);
+      container.innerHTML = ""; // clear
+
+      // Get all dates for this category
+      const dates = Object.keys(data).sort((a,b)=> new Date(b) - new Date(a)); // newest first
+      dates.forEach(date => {
+        // Filter jobs by category
+        if(data[date][cat] && data[date][cat].length > 0){
+          container.innerHTML += `<h2 class="job-date">${date}</h2>`;
+          data[date][cat].forEach(job => {
+            container.innerHTML += `
+              <div class="job"><p>${job}</p></div>
               <div class="divider">━━━━━━━━━━━━✦✿✦━━━━━━━━━━━━</div>
             `;
           });
-        });
-      } catch (error) {
-        console.error("Error loading jobs.json:", error);
-      }
-    }
-
-    // Tabs
-    document.querySelectorAll(".tab").forEach(tab => {
-      tab.addEventListener("click", () => {
-        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-        document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-        tab.classList.add("active");
-        document.getElementById(tab.dataset.tab).classList.add("active");
+        }
       });
     });
 
-    loadJobs();
-  </script>
+  } catch(e) {
+    console.error("Failed to load jobs.json", e);
+  }
+}
+
+createTabs();
+loadJobs();
+</script>
 </body>
 </html>
