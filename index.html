@@ -15,7 +15,8 @@ hr { border:1px solid #ccc; margin:10px 0; }
 .tab-content.active { display:block; }
 .job-block { border-bottom:1px dashed #aaa; padding:10px 0; margin-bottom:10px; }
 .job-block:last-child { border:none; }
-h3 { scroll-margin-top:80px; }
+h3 { scroll-margin-top:80px; margin-bottom:5px; }
+.job-block p { margin:3px 0; }
 #adContainer { text-align:center; margin:20px 0; }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001" crossorigin="anonymous"></script>
@@ -87,7 +88,10 @@ fetch('jobs.json')
                     jobDiv.className='job-block';
                     jobDiv.id=`${cat}_${date}_${i}`;
                     const jobLines = job.split('\n');
-                    jobDiv.innerHTML = jobLines.map(line=>`<p>${line}</p>`).join('');
+                    if(jobLines.length>0){
+                        // Bold first line as job title
+                        jobDiv.innerHTML = `<h3>${jobLines[0]}</h3>` + jobLines.slice(1).map(line=>`<p>${line}</p>`).join('');
+                    }
                     contentDiv.appendChild(jobDiv);
                 });
             }
