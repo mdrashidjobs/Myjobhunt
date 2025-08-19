@@ -5,57 +5,70 @@
 <title>Job Parser</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background:#f9f9f9; }
-    textarea { width:100%; height:300px; margin-bottom:10px; font-family: monospace; }
-    button { padding:10px 20px; font-size:16px; cursor:pointer; }
+body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+textarea { width: 100%; height: 300px; }
+button { margin-top: 10px; padding: 10px 20px; cursor: pointer; }
 </style>
 </head>
 <body>
-<h2>WhatsApp Job Parser</h2>
-<textarea id="jobInput" placeholder="Paste WhatsApp jobs here..."></textarea>
+<h1>Job Parser</h1>
+<p>Paste your WhatsApp jobs text below:</p>
+<textarea id="jobInput"></textarea>
 <br>
 <button onclick="parseJobs()">Parse & Download JSON</button>
 
 <script>
-function parseJobs(){
-    const text = document.getElementById('jobInput').value.trim();
-    if(!text) { alert('Paste the WhatsApp jobs first!'); return; }
+function parseJobs() {
+    const rawText = document.getElementById('jobInput').value.trim();
+    if(!rawText) { alert('Paste job data first!'); return; }
 
-    const lines = text.split('\n');
-    const data = {};
-    let currentDate = '';
-    let currentCategory = '';
+    const lines = rawText.split('\n');
+    const today = new Date().toISOString().slice(0,10);
+    const categories = ["Admin","Finance","IT","Engineering","Safety","Healthcare","Sales","Drivers"];
+    let jobsJSON = {};
+    
+    // If existing JSON exists, try loading from localStorage
+    if(localStorage.getItem('jobsJSON')){
+        jobsJSON = JSON.parse(localStorage.getItem('jobsJSON'));
+    }
 
+    if(!jobsJSON[today]) {
+        jobsJSON[today] = {};
+        categories.forEach(cat => jobsJSON[today][cat] = []);
+    }
+
+    let currentCategory = null;
     lines.forEach(line => {
         line = line.trim();
-        if(!line) return;
-
-        // Detect date line
-        if(line.startsWith('Date:')){
-            currentDate = line.replace('Date:','').trim();
-            if(!data[currentDate]) data[currentDate] = {Admin:[], Finance:[], IT:[], Engineering:[], Safety:[], Healthcare:[], Sales:[], Drivers:[]};
-        }
-        // Detect category
-        else if(line.startsWith('📌 Administrative')) currentCategory='Admin';
-        else if(line.startsWith('📌 Finance')) currentCategory='Finance';
-        else if(line.startsWith('📌 IT')) currentCategory='IT';
-        else if(line.startsWith('📌 Engineering')) currentCategory='Engineering';
-        else if(line.startsWith('📌 Safety')) currentCategory='Safety';
-        else if(line.startsWith('📌 Healthcare')) currentCategory='Healthcare';
-        else if(line.startsWith('📌 Sales')) currentCategory='Sales';
-        else if(line.startsWith('📌 Drivers')) currentCategory='Drivers';
-        else {
-            // Append to current category for current date
-            if(currentDate && currentCategory) data[currentDate][currentCategory].push(line);
+        if(line.startsWith('📌')) {
+            // Detect category based on keywords
+            if(/secretary|admin|office/i.test(line)) currentCategory = "Admin";
+            else if(/finance|account/i.test(line)) currentCategory = "Finance";
+            else if(/it|technician|developer/i.test(line)) currentCategory = "IT";
+            else if(/engineer|technical|supervisor/i.test(line)) currentCategory = "Engineering";
+            else if(/safety/i.test(line)) currentCategory = "Safety";
+            else if(/clinic|medical|health/i.test(line)) currentCategory = "Healthcare";
+            else if(/sales|marketing/i.test(line)) currentCategory = "Sales";
+            else if(/driver|logistics/i.test(line)) currentCategory = "Drivers";
+            
+            if(currentCategory) jobsJSON[today][currentCategory].push(line);
+        } else if(currentCategory && line.length > 0) {
+            jobsJSON[today][currentCategory][jobsJSON[today][currentCategory].length-1] += '\n' + line;
         }
     });
 
-    const jsonStr = JSON.stringify(data, null, 2);
-    const blob = new Blob([jsonStr], {type: 'application/json'});
+    // Save to localStorage for preview (optional)
+    localStorage.setItem('jobsJSON', JSON.stringify(jobsJSON, null, 2));
+
+    // Download JSON file
+    const blob = new Blob([JSON.stringify(jobsJSON, null, 2)], {type: "application/json"});
+    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'jobs.json';
+    a.href = url;
+    a.download = "jobs.json";
     a.click();
+    URL.revokeObjectURL(url);
+    alert('JSON downloaded! Upload to GitHub along with index.html.');
 }
 </script>
 </body>
