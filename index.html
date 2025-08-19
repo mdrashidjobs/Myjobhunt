@@ -3,77 +3,125 @@
 <head>
 <meta charset="UTF-8">
 <title>My Job Hunt</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 0; }
-h1 { text-align: center; padding: 20px; }
-.tabs { display: flex; flex-wrap: wrap; background: #fff; border-bottom: 2px solid #ccc; }
-.tab { padding: 10px 20px; cursor: pointer; border-right: 1px solid #ccc; background: #eee; }
-.tab.active { background: #fff; font-weight: bold; }
-.tab-content { display: none; padding: 20px; }
-.tab-content.active { display: block; }
-.job-block { border: 1px dashed #ccc; margin-bottom: 10px; padding: 10px; background: #fff; white-space: pre-wrap; }
-.date-header { font-weight: bold; margin-top: 20px; font-size: 16px; }
+body { font-family: Arial, sans-serif; background:#f9f9f9; margin:0; padding:0; }
+h1 { text-align:center; margin-top:20px; }
+hr { border:1px solid #ccc; margin:10px 0; }
+.tabs { display:flex; justify-content:center; margin:20px 0; flex-wrap:wrap; }
+.tab-button { padding:10px 15px; margin:5px; cursor:pointer; border:1px solid #ccc; border-radius:5px; background:#fff; }
+.tab-button.active { background:#007bff; color:#fff; }
+.tab-content { display:none; padding:20px; background:#fff; margin:0 10px 20px 10px; border-radius:5px; }
+.tab-content.active { display:block; }
+.job-block { border-bottom:1px dashed #aaa; padding:10px 0; margin-bottom:10px; white-space: pre-wrap; }
+.job-block:last-child { border:none; }
+h3 { scroll-margin-top:80px; }
+#adContainer { text-align:center; margin:20px 0; }
 </style>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001"
+crossorigin="anonymous"></script>
 </head>
 <body>
 
-<h1>My Job Hunt</h1>
-<hr>
-<div class="tabs">
-  <div class="tab active" data-tab="Admin">Admin</div>
-  <div class="tab" data-tab="Finance">Finance</div>
-  <div class="tab" data-tab="IT">IT</div>
-  <div class="tab" data-tab="Engineering">Engineering</div>
-  <div class="tab" data-tab="Safety">Safety</div>
-  <div class="tab" data-tab="Healthcare">Healthcare</div>
-  <div class="tab" data-tab="Sales">Sales</div>
-  <div class="tab" data-tab="Drivers">Drivers</div>
+<div id="adContainer">
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center; margin: 10px auto;"
+         data-ad-client="ca-pub-3037151964199001"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
+         data-adtest="on"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
-<div id="tab-Admin" class="tab-content"></div>
-<div id="tab-Finance" class="tab-content"></div>
-<div id="tab-IT" class="tab-content"></div>
-<div id="tab-Engineering" class="tab-content"></div>
-<div id="tab-Safety" class="tab-content"></div>
-<div id="tab-Healthcare" class="tab-content"></div>
-<div id="tab-Sales" class="tab-content"></div>
-<div id="tab-Drivers" class="tab-content"></div>
+<h1>MY JOB HUNT</h1>
+<p style="text-align:center;">Date-wise jobs loaded from JSON</p>
+<hr>
+
+<div class="tabs">
+  <div class="tab-button active" data-tab="admin">Admin / Office</div>
+  <div class="tab-button" data-tab="finance">Finance / Accounting</div>
+  <div class="tab-button" data-tab="it">IT / Technical</div>
+  <div class="tab-button" data-tab="engineering">Engineering / Technical</div>
+  <div class="tab-button" data-tab="safety">Safety</div>
+  <div class="tab-button" data-tab="healthcare">Healthcare</div>
+  <div class="tab-button" data-tab="sales">Sales / Marketing</div>
+  <div class="tab-button" data-tab="drivers">Drivers / Logistics</div>
+</div>
+
+<div id="admin" class="tab-content"></div>
+<div id="finance" class="tab-content"></div>
+<div id="it" class="tab-content"></div>
+<div id="engineering" class="tab-content"></div>
+<div id="safety" class="tab-content"></div>
+<div id="healthcare" class="tab-content"></div>
+<div id="sales" class="tab-content"></div>
+<div id="drivers" class="tab-content"></div>
 
 <script>
-const tabs = document.querySelectorAll('.tab');
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelector('.tab.active').classList.remove('active');
-    tab.classList.add('active');
-    document.querySelector('.tab-content.active').classList.remove('active');
-    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+// Tabs
+const tabButtons = document.querySelectorAll('.tab-button');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    tabButtons.forEach(b => b.classList.remove('active'));
+    button.classList.add('active');
+    tabContents.forEach(tc => tc.classList.remove('active'));
+    document.getElementById(button.dataset.tab).classList.add('active');
   });
 });
 
-// Load jobs.json dynamically
+// Load jobs from JSON
 fetch('jobs.json')
 .then(res => res.json())
 .then(data => {
   const categories = ["Admin","Finance","IT","Engineering","Safety","Healthcare","Sales","Drivers"];
-  const sortedDates = Object.keys(data).sort((a,b) => new Date(b)-new Date(a)); // newest first
+  const sortedDates = Object.keys(data).sort((a,b)=>new Date(b)-new Date(a)); // newest first
+
   categories.forEach(cat => {
-    const container = document.getElementById('tab-' + cat);
+    const container = document.getElementById(cat.toLowerCase());
     sortedDates.forEach(date => {
-      if(data[date][cat] && data[date][cat].length>0){
+      if(data[date][cat] && data[date][cat].length > 0){
         const dateDiv = document.createElement('div');
-        dateDiv.className = 'date-header';
+        dateDiv.style.fontWeight = 'bold';
+        dateDiv.style.marginTop = '20px';
         dateDiv.textContent = date;
         container.appendChild(dateDiv);
-        data[date][cat].forEach(job => {
+
+        data[date][cat].forEach((job, index) => {
           const jobDiv = document.createElement('div');
           jobDiv.className = 'job-block';
-          jobDiv.textContent = job;
+          jobDiv.id = `${cat.toLowerCase()}_${date}_${index}`;
+          jobDiv.innerHTML = job.replace(/\n/g,'<br>'); // preserve line breaks
           container.appendChild(jobDiv);
         });
       }
     });
   });
-  document.getElementById('tab-Admin').classList.add('active'); // default visible tab
+
+  document.getElementById('admin').classList.add('active');
+});
+
+// Support bookmark linking
+window.addEventListener('load', () => {
+  if(window.location.hash){
+    const hash = window.location.hash.substring(1);
+    const jobElement = document.getElementById(hash);
+    if(jobElement){
+      const parentTab = jobElement.closest('.tab-content');
+      if(parentTab){
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        parentTab.classList.add('active');
+        tabButtons.forEach(b => {
+          b.classList.remove('active');
+          if(b.dataset.tab === parentTab.id) b.classList.add('active');
+        });
+        jobElement.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    }
+  }
 });
 </script>
 

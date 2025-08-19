@@ -2,70 +2,149 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Job Parser Download</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Job Hunt - CMS Parser</title>
 <style>
-body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
-textarea { width: 100%; height: 300px; font-family: monospace; font-size: 14px; padding: 10px; }
-button { margin-top: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+body { font-family: Arial, sans-serif; background:#f9f9f9; margin:0; padding:0; }
+h1 { text-align:center; margin:20px 0; }
+hr { border:1px solid #ccc; margin:10px 0; }
+.tabs { display:flex; justify-content:center; flex-wrap:wrap; margin:10px 0; }
+.tab-button { padding:8px 12px; margin:5px; cursor:pointer; border:1px solid #ccc; border-radius:5px; background:#fff; }
+.tab-button.active { background:#007bff; color:#fff; }
+.tab-content { display:none; padding:15px; background:#fff; margin:0 10px 20px 10px; border-radius:5px; }
+.tab-content.active { display:block; }
+.job-block { border-bottom:1px dashed #aaa; padding:8px 0; margin-bottom:10px; }
+.job-block:last-child { border:none; }
+h3 { scroll-margin-top:80px; }
+textarea { width:90%; height:150px; margin:10px auto; display:block; }
+#parseButton { display:block; margin:10px auto; padding:8px 16px; }
+#adContainer { text-align:center; margin:15px 0; }
+.job-section { margin:5px 0; }
+a { color:#007bff; text-decoration:none; }
+a:hover { text-decoration:underline; }
 </style>
+<!-- AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001"
+crossorigin="anonymous"></script>
 </head>
 <body>
 
-<h2>📌 Job Parser</h2>
-<p>Paste all new jobs below. Click <b>Save JSON</b> to download <code>jobs.json</code>. Old jobs will be preserved.</p>
+<h1>MY JOB HUNT</h1>
+<p style="text-align:center;">Paste WhatsApp job text below and click "Parse Jobs"</p>
 
-<textarea id="input" placeholder="Paste jobs here..."></textarea>
-<br>
-<button id="save">Save JSON</button>
+<textarea id="jobInput" placeholder="Paste WhatsApp job messages here..."></textarea>
+<button id="parseButton">Parse Jobs</button>
+<hr>
+
+<!-- Inline Ad -->
+<div id="adContainer">
+<ins class="adsbygoogle"
+     style="display:block; text-align:center; margin:0 auto;"
+     data-ad-client="ca-pub-3037151964199001"
+     data-ad-slot="1234567890"
+     data-ad-format="auto"
+     data-full-width-responsive="true"
+     data-adtest="on"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<!-- Tabs -->
+<div class="tabs" id="tabsContainer"></div>
+<div id="tabsContent"></div>
 
 <script>
-document.getElementById("save").addEventListener("click", function () {
-  let text = document.getElementById("input").value.trim();
-  if(!text) return alert("No jobs to save!");
+const categories = ["admin","finance","it","engineering","safety","healthcare","sales","drivers"];
+const categoryLabels = {
+    admin:"Admin / Office",
+    finance:"Finance / Accounting",
+    it:"IT / Technical",
+    engineering:"Engineering / Technical",
+    safety:"Safety",
+    healthcare:"Healthcare",
+    sales:"Sales / Marketing",
+    drivers:"Drivers / Logistics"
+};
 
-  const today = new Date().toISOString().split("T")[0];
-  const categories = {
-    "Admin": ["Secretary","Admin","Assistant","Operations"],
-    "Finance": ["Finance","Accounting","Manager","CFO","Accountant"],
-    "IT": ["IT","Developer","Technician","Odoo","CRM","Network"],
-    "Engineering": ["Engineer","Mechanical","Civil","Electrical","HVAC","Estimator","Technical"],
-    "Safety": ["Safety","NEBOSH","Security","Supervisor","Officer"],
-    "Healthcare": ["Doctor","Nurse","Medical","Optometrist","Dietitian","Laboratory","Vet","Clinic"],
-    "Sales": ["Sales","Marketing","Retail","Store","Representative","Supervisor"],
-    "Drivers": ["Driver","Delivery","Transport","Heavy","Light"]
-  };
+// Function to auto-link WhatsApp/email
+function autoLink(text){
+    // WhatsApp numbers (8 digits)
+    text = text.replace(/(\b\d{8}\b)/g, `<a href="https://wa.me/$1" target="_blank">$1</a>`);
+    // Emails
+    text = text.replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,})/gi, `<a href="mailto:$1">$1</a>`);
+    return text;
+}
 
-  fetch("jobs.json").then(r => r.json()).catch(()=>({})).then(data=>{
-    if(!data[today]) data[today] = {};
-    Object.keys(categories).forEach(cat=>{ if(!data[today][cat]) data[today][cat]=[]; });
+document.getElementById("parseButton").addEventListener("click",()=>{
+    const rawText = document.getElementById("jobInput").value;
+    if(!rawText.trim()){ alert("Please paste job text."); return; }
 
-    // Split job blocks by double newlines
-    const jobBlocks = text.split(/\n{2,}/).map(j=>j.trim()).filter(j=>j!=="");
+    // Clear previous content
+    document.getElementById("tabsContainer").innerHTML="";
+    document.getElementById("tabsContent").innerHTML="";
 
-    jobBlocks.forEach(job=>{
-      let added=false;
-      for(const cat in categories){
-        if(categories[cat].some(keyword=>job.toLowerCase().includes(keyword.toLowerCase()))){
-          data[today][cat].push(job);
-          added=true;
-          break;
-        }
-      }
-      if(!added) console.warn("Category not found for job:", job);
+    // Create tabs
+    categories.forEach(cat=>{
+        const btn = document.createElement("div");
+        btn.className="tab-button"+(cat==="admin"?" active":"");
+        btn.dataset.tab=cat;
+        btn.textContent = categoryLabels[cat];
+        document.getElementById("tabsContainer").appendChild(btn);
+
+        const contentDiv = document.createElement("div");
+        contentDiv.className="tab-content"+(cat==="admin"?" active":"");
+        contentDiv.id=cat;
+        document.getElementById("tabsContent").appendChild(contentDiv);
     });
 
-    const blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href=url;
-    a.download="jobs.json";
-    a.click();
-    URL.revokeObjectURL(url);
+    // Parse jobs
+    const lines = rawText.split("\n").filter(l=>l.trim());
+    let currentCategory = "admin";
+    let jobBlock = null;
+    let jobIdCounter = 1;
 
-    alert("✅ jobs.json downloaded successfully!");
-  });
+    lines.forEach(line=>{
+        line = line.trim();
+        // Detect category keywords
+        if(line.match(/Administrative|Admin|Secretarial/i)) currentCategory="admin";
+        else if(line.match(/Finance|Accounting/i)) currentCategory="finance";
+        else if(line.match(/IT|Technical/i)) currentCategory="it";
+        else if(line.match(/Engineering|Technical/i)) currentCategory="engineering";
+        else if(line.match(/Safety/i)) currentCategory="safety";
+        else if(line.match(/Healthcare|Medical/i)) currentCategory="healthcare";
+        else if(line.match(/Sales|Marketing/i)) currentCategory="sales";
+        else if(line.match(/Driver|Logistics/i)) currentCategory="drivers";
+
+        // Detect job start
+        if(line.startsWith("📌")){
+            if(jobBlock){ document.getElementById(currentCategory).appendChild(jobBlock);}
+            jobBlock = document.createElement("div");
+            jobBlock.className="job-block";
+            jobBlock.id=currentCategory+jobIdCounter++;
+            jobBlock.innerHTML=`<h3>${line.replace("📌","").trim()}</h3>`;
+        }
+        else if(jobBlock){
+            jobBlock.innerHTML += `<div class="job-section">${autoLink(line)}</div>`;
+        }
+    });
+    if(jobBlock){ document.getElementById(currentCategory).appendChild(jobBlock); }
+
+    // Tab switching
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const target = button.dataset.tab;
+            tabButtons.forEach(b => b.classList.remove('active'));
+            button.classList.add('active');
+            tabContents.forEach(tc => {
+                tc.classList.remove('active');
+                if(tc.id === target) tc.classList.add('active');
+            });
+        });
+    });
 });
 </script>
-
 </body>
 </html>
