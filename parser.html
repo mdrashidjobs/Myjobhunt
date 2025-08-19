@@ -2,149 +2,61 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Job Parser</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Job Hunt - CMS Parser</title>
 <style>
-body { font-family: Arial, sans-serif; background:#f9f9f9; margin:0; padding:0; }
-h1 { text-align:center; margin:20px 0; }
-hr { border:1px solid #ccc; margin:10px 0; }
-.tabs { display:flex; justify-content:center; flex-wrap:wrap; margin:10px 0; }
-.tab-button { padding:8px 12px; margin:5px; cursor:pointer; border:1px solid #ccc; border-radius:5px; background:#fff; }
-.tab-button.active { background:#007bff; color:#fff; }
-.tab-content { display:none; padding:15px; background:#fff; margin:0 10px 20px 10px; border-radius:5px; }
-.tab-content.active { display:block; }
-.job-block { border-bottom:1px dashed #aaa; padding:8px 0; margin-bottom:10px; }
-.job-block:last-child { border:none; }
-h3 { scroll-margin-top:80px; }
-textarea { width:90%; height:150px; margin:10px auto; display:block; }
-#parseButton { display:block; margin:10px auto; padding:8px 16px; }
-#adContainer { text-align:center; margin:15px 0; }
-.job-section { margin:5px 0; }
-a { color:#007bff; text-decoration:none; }
-a:hover { text-decoration:underline; }
+    body { font-family: Arial, sans-serif; padding: 20px; background:#f9f9f9; }
+    textarea { width:100%; height:300px; margin-bottom:10px; font-family: monospace; }
+    button { padding:10px 20px; font-size:16px; cursor:pointer; }
 </style>
-<!-- AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001"
-crossorigin="anonymous"></script>
 </head>
 <body>
-
-<h1>MY JOB HUNT</h1>
-<p style="text-align:center;">Paste WhatsApp job text below and click "Parse Jobs"</p>
-
-<textarea id="jobInput" placeholder="Paste WhatsApp job messages here..."></textarea>
-<button id="parseButton">Parse Jobs</button>
-<hr>
-
-<!-- Inline Ad -->
-<div id="adContainer">
-<ins class="adsbygoogle"
-     style="display:block; text-align:center; margin:0 auto;"
-     data-ad-client="ca-pub-3037151964199001"
-     data-ad-slot="1234567890"
-     data-ad-format="auto"
-     data-full-width-responsive="true"
-     data-adtest="on"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
-<!-- Tabs -->
-<div class="tabs" id="tabsContainer"></div>
-<div id="tabsContent"></div>
+<h2>WhatsApp Job Parser</h2>
+<textarea id="jobInput" placeholder="Paste WhatsApp jobs here..."></textarea>
+<br>
+<button onclick="parseJobs()">Parse & Download JSON</button>
 
 <script>
-const categories = ["admin","finance","it","engineering","safety","healthcare","sales","drivers"];
-const categoryLabels = {
-    admin:"Admin / Office",
-    finance:"Finance / Accounting",
-    it:"IT / Technical",
-    engineering:"Engineering / Technical",
-    safety:"Safety",
-    healthcare:"Healthcare",
-    sales:"Sales / Marketing",
-    drivers:"Drivers / Logistics"
-};
+function parseJobs(){
+    const text = document.getElementById('jobInput').value.trim();
+    if(!text) { alert('Paste the WhatsApp jobs first!'); return; }
 
-// Function to auto-link WhatsApp/email
-function autoLink(text){
-    // WhatsApp numbers (8 digits)
-    text = text.replace(/(\b\d{8}\b)/g, `<a href="https://wa.me/$1" target="_blank">$1</a>`);
-    // Emails
-    text = text.replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,})/gi, `<a href="mailto:$1">$1</a>`);
-    return text;
-}
+    const lines = text.split('\n');
+    const data = {};
+    let currentDate = '';
+    let currentCategory = '';
 
-document.getElementById("parseButton").addEventListener("click",()=>{
-    const rawText = document.getElementById("jobInput").value;
-    if(!rawText.trim()){ alert("Please paste job text."); return; }
-
-    // Clear previous content
-    document.getElementById("tabsContainer").innerHTML="";
-    document.getElementById("tabsContent").innerHTML="";
-
-    // Create tabs
-    categories.forEach(cat=>{
-        const btn = document.createElement("div");
-        btn.className="tab-button"+(cat==="admin"?" active":"");
-        btn.dataset.tab=cat;
-        btn.textContent = categoryLabels[cat];
-        document.getElementById("tabsContainer").appendChild(btn);
-
-        const contentDiv = document.createElement("div");
-        contentDiv.className="tab-content"+(cat==="admin"?" active":"");
-        contentDiv.id=cat;
-        document.getElementById("tabsContent").appendChild(contentDiv);
-    });
-
-    // Parse jobs
-    const lines = rawText.split("\n").filter(l=>l.trim());
-    let currentCategory = "admin";
-    let jobBlock = null;
-    let jobIdCounter = 1;
-
-    lines.forEach(line=>{
+    lines.forEach(line => {
         line = line.trim();
-        // Detect category keywords
-        if(line.match(/Administrative|Admin|Secretarial/i)) currentCategory="admin";
-        else if(line.match(/Finance|Accounting/i)) currentCategory="finance";
-        else if(line.match(/IT|Technical/i)) currentCategory="it";
-        else if(line.match(/Engineering|Technical/i)) currentCategory="engineering";
-        else if(line.match(/Safety/i)) currentCategory="safety";
-        else if(line.match(/Healthcare|Medical/i)) currentCategory="healthcare";
-        else if(line.match(/Sales|Marketing/i)) currentCategory="sales";
-        else if(line.match(/Driver|Logistics/i)) currentCategory="drivers";
+        if(!line) return;
 
-        // Detect job start
-        if(line.startsWith("📌")){
-            if(jobBlock){ document.getElementById(currentCategory).appendChild(jobBlock);}
-            jobBlock = document.createElement("div");
-            jobBlock.className="job-block";
-            jobBlock.id=currentCategory+jobIdCounter++;
-            jobBlock.innerHTML=`<h3>${line.replace("📌","").trim()}</h3>`;
+        // Detect date line
+        if(line.startsWith('Date:')){
+            currentDate = line.replace('Date:','').trim();
+            if(!data[currentDate]) data[currentDate] = {Admin:[], Finance:[], IT:[], Engineering:[], Safety:[], Healthcare:[], Sales:[], Drivers:[]};
         }
-        else if(jobBlock){
-            jobBlock.innerHTML += `<div class="job-section">${autoLink(line)}</div>`;
+        // Detect category
+        else if(line.startsWith('📌 Administrative')) currentCategory='Admin';
+        else if(line.startsWith('📌 Finance')) currentCategory='Finance';
+        else if(line.startsWith('📌 IT')) currentCategory='IT';
+        else if(line.startsWith('📌 Engineering')) currentCategory='Engineering';
+        else if(line.startsWith('📌 Safety')) currentCategory='Safety';
+        else if(line.startsWith('📌 Healthcare')) currentCategory='Healthcare';
+        else if(line.startsWith('📌 Sales')) currentCategory='Sales';
+        else if(line.startsWith('📌 Drivers')) currentCategory='Drivers';
+        else {
+            // Append to current category for current date
+            if(currentDate && currentCategory) data[currentDate][currentCategory].push(line);
         }
     });
-    if(jobBlock){ document.getElementById(currentCategory).appendChild(jobBlock); }
 
-    // Tab switching
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabContents = document.querySelectorAll('.tab-content');
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const target = button.dataset.tab;
-            tabButtons.forEach(b => b.classList.remove('active'));
-            button.classList.add('active');
-            tabContents.forEach(tc => {
-                tc.classList.remove('active');
-                if(tc.id === target) tc.classList.add('active');
-            });
-        });
-    });
-});
+    const jsonStr = JSON.stringify(data, null, 2);
+    const blob = new Blob([jsonStr], {type: 'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'jobs.json';
+    a.click();
+}
 </script>
 </body>
 </html>

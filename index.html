@@ -13,14 +13,12 @@ hr { border:1px solid #ccc; margin:10px 0; }
 .tab-button.active { background:#007bff; color:#fff; }
 .tab-content { display:none; padding:20px; background:#fff; margin:0 10px 20px 10px; border-radius:5px; }
 .tab-content.active { display:block; }
-.job-block { border-bottom:1px dashed #aaa; padding:10px 0; margin-bottom:10px; white-space: pre-wrap; }
+.job-block { border-bottom:1px dashed #aaa; padding:10px 0; margin-bottom:10px; }
 .job-block:last-child { border:none; }
 h3 { scroll-margin-top:80px; }
 #adContainer { text-align:center; margin:20px 0; }
 </style>
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001"
-crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -36,101 +34,105 @@ crossorigin="anonymous"></script>
 </div>
 
 <h1>MY JOB HUNT</h1>
-<p style="text-align:center;">Date-wise jobs loaded dynamically</p>
+<p style="text-align:center;" id="currentDate"></p>
 <hr>
 
-<div class="tabs">
-  <div class="tab-button active" data-tab="admin">Admin / Office</div>
-  <div class="tab-button" data-tab="finance">Finance / Accounting</div>
-  <div class="tab-button" data-tab="it">IT / Technical</div>
-  <div class="tab-button" data-tab="engineering">Engineering / Technical</div>
-  <div class="tab-button" data-tab="safety">Safety</div>
-  <div class="tab-button" data-tab="healthcare">Healthcare</div>
-  <div class="tab-button" data-tab="sales">Sales / Marketing</div>
-  <div class="tab-button" data-tab="drivers">Drivers / Logistics</div>
-</div>
-
-<div id="admin" class="tab-content"></div>
-<div id="finance" class="tab-content"></div>
-<div id="it" class="tab-content"></div>
-<div id="engineering" class="tab-content"></div>
-<div id="safety" class="tab-content"></div>
-<div id="healthcare" class="tab-content"></div>
-<div id="sales" class="tab-content"></div>
-<div id="drivers" class="tab-content"></div>
+<div class="tabs" id="tabsContainer"></div>
+<div id="tabContentsContainer"></div>
 
 <script>
-const tabButtons = document.querySelectorAll('.tab-button');
-const tabContents = document.querySelectorAll('.tab-content');
+// Categories
+const categories = ["Admin","Finance","IT","Engineering","Safety","Healthcare","Sales","Drivers"];
+const categoryNames = {
+    Admin:"Admin / Office",
+    Finance:"Finance / Accounting",
+    IT:"IT / Technical",
+    Engineering:"Engineering / Technical",
+    Safety:"Safety",
+    Healthcare:"Healthcare",
+    Sales:"Sales / Marketing",
+    Drivers:"Drivers / Logistics"
+};
 
-tabButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    tabButtons.forEach(b => b.classList.remove('active'));
-    button.classList.add('active');
-    tabContents.forEach(tc => tc.classList.remove('active'));
-    document.getElementById(button.dataset.tab).classList.add('active');
-  });
-});
+// Fetch JSON dynamically
+fetch('jobs.json')
+.then(res => res.json())
+.then(data => {
+    const tabsContainer = document.getElementById('tabsContainer');
+    const tabContentsContainer = document.getElementById('tabContentsContainer');
 
-async function loadJobs() {
-  try {
-    const response = await fetch('jobs.json?' + new Date().getTime()); // prevent caching
-    const data = await response.json();
-    const categories = ["Admin","Finance","IT","Engineering","Safety","Healthcare","Sales","Drivers"];
-    const sortedDates = Object.keys(data).sort((a,b)=>new Date(b)-new Date(a));
+    categories.forEach((cat, index) => {
+        // Tab buttons
+        const btn = document.createElement('div');
+        btn.className = 'tab-button' + (index===0?' active':'');
+        btn.dataset.tab = cat;
+        btn.innerText = categoryNames[cat];
+        tabsContainer.appendChild(btn);
 
-    categories.forEach(cat => {
-      const container = document.getElementById(cat.toLowerCase());
-      container.innerHTML = ''; // clear old content
-      sortedDates.forEach(date => {
-        if(data[date][cat] && data[date][cat].length > 0){
-          const dateDiv = document.createElement('div');
-          dateDiv.style.fontWeight = 'bold';
-          dateDiv.style.marginTop = '20px';
-          dateDiv.textContent = date;
-          container.appendChild(dateDiv);
+        // Tab content
+        const contentDiv = document.createElement('div');
+        contentDiv.id = cat;
+        contentDiv.className = 'tab-content' + (index===0?' active':'');
+        
+        // Sort dates descending
+        const dates = Object.keys(data).sort((a,b)=>new Date(b)-new Date(a));
+        dates.forEach(date=>{
+            if(data[date][cat].length){
+                const dateHeader = document.createElement('h2');
+                dateHeader.innerText = `📌 ${date}`;
+                contentDiv.appendChild(dateHeader);
 
-          data[date][cat].forEach((job, index) => {
-            const jobDiv = document.createElement('div');
-            jobDiv.className = 'job-block';
-            jobDiv.id = `${cat.toLowerCase()}_${date}_${index}`;
-            jobDiv.innerHTML = job.replace(/\n/g,'<br>');
-            container.appendChild(jobDiv);
-          });
-        }
-      });
-    });
-  } catch(err) {
-    console.error('Error loading jobs:', err);
-  }
-}
-
-// Load jobs on page load
-loadJobs();
-
-// Optional: Auto-refresh every 60 seconds (you can change the interval)
-setInterval(loadJobs, 60000);
-
-// Bookmark support
-window.addEventListener('load', () => {
-  if(window.location.hash){
-    const hash = window.location.hash.substring(1);
-    const jobElement = document.getElementById(hash);
-    if(jobElement){
-      const parentTab = jobElement.closest('.tab-content');
-      if(parentTab){
-        tabContents.forEach(tc => tc.classList.remove('active'));
-        parentTab.classList.add('active');
-        tabButtons.forEach(b => {
-          b.classList.remove('active');
-          if(b.dataset.tab === parentTab.id) b.classList.add('active');
+                data[date][cat].forEach((job, i)=>{
+                    const jobDiv = document.createElement('div');
+                    jobDiv.className='job-block';
+                    jobDiv.id=`${cat}_${date}_${i}`;
+                    const jobLines = job.split('\n');
+                    jobDiv.innerHTML = jobLines.map(line=>`<p>${line}</p>`).join('');
+                    contentDiv.appendChild(jobDiv);
+                });
+            }
         });
-        jobElement.scrollIntoView({behavior:'smooth', block:'start'});
-      }
-    }
-  }
-});
-</script>
 
+        tabContentsContainer.appendChild(contentDiv);
+    });
+
+    document.getElementById('currentDate').innerText = `Last Updated: ${dates[0]}`;
+    
+    // Tab switching
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabButtons.forEach(button=>{
+        button.addEventListener('click', ()=>{
+            const target = button.dataset.tab;
+            tabButtons.forEach(b=>b.classList.remove('active'));
+            button.classList.add('active');
+            tabContents.forEach(tc=>{
+                tc.classList.remove('active');
+                if(tc.id===target) tc.classList.add('active');
+            });
+        });
+    });
+    
+    // Bookmark linking
+    if(window.location.hash){
+        const hash = window.location.hash.substring(1);
+        const jobElement = document.getElementById(hash);
+        if(jobElement){
+            const parentTab = jobElement.closest('.tab-content');
+            if(parentTab){
+                tabContents.forEach(tc=>tc.classList.remove('active'));
+                parentTab.classList.add('active');
+                tabButtons.forEach(b=>{
+                    b.classList.remove('active');
+                    if(b.dataset.tab===parentTab.id) b.classList.add('active');
+                });
+                jobElement.scrollIntoView({behavior:'smooth', block:'start'});
+            }
+        }
+    }
+
+})
+.catch(err=>console.error('Error loading jobs.json:', err));
+</script>
 </body>
 </html>
