@@ -1,135 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Job Hunt</title>
-<style>
-  body { font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0; }
-  header { text-align: center; padding: 20px; background-color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
-  h1 { margin: 0; font-size: 2em; }
-  .tabs { display: flex; flex-wrap: wrap; justify-content: center; background: #fff; margin-top: 10px; }
-  .tab { padding: 10px 20px; cursor: pointer; border-bottom: 2px solid transparent; }
-  .tab.active { border-bottom: 2px solid #007BFF; font-weight: bold; }
-  .tab-content { display: none; padding: 20px; background: #fff; margin: 10px auto; max-width: 1000px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-  .job { border-bottom: 1px dashed #ccc; padding: 10px 0; }
-  .job h3 { margin: 5px 0; }
-  .job p { margin: 3px 0; }
-  .apply-link { color: #007BFF; text-decoration: none; font-weight: bold; }
-  .date-section { margin-top: 30px; }
-  .prev-date { cursor: pointer; color: #007BFF; margin-bottom: 10px; display: inline-block; }
-  .prev-content { display: none; padding: 10px; border: 1px solid #ccc; background: #fff; margin-bottom: 20px; }
-  @media(max-width:600px){ .tabs { flex-direction: column; } .tab { width: 100%; text-align: center; } }
-</style>
-
-<!-- Google AdSense Placeholder -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001"
-     crossorigin="anonymous"></script>
-
+  <meta charset="UTF-8">
+  <title>Job Ads Viewer</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+    .tab {
+      padding: 8px 15px;
+      background: #eee;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .tab.active { background: #333; color: #fff; }
+    .jobs { display: none; }
+    .jobs.active { display: block; }
+    .job {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      white-space: pre-line;
+    }
+  </style>
 </head>
 <body>
+  <h1>📌 My Job Ads</h1>
+  <div class="tabs" id="tabs"></div>
+  <div id="content"></div>
 
-<header>
-  <h1>My Job Hunt</h1>
-  <p id="date"></p>
-</header>
+  <script>
+    async function loadJobs() {
+      try {
+        const response = await fetch("jobs.json?nocache=" + new Date().getTime());
+        const data = await response.json();
 
-<!-- Tabs -->
-<div class="tabs" id="tabs"></div>
+        const tabsContainer = document.getElementById("tabs");
+        const contentContainer = document.getElementById("content");
 
-<!-- Tab content container -->
-<div id="tab-contents"></div>
+        tabsContainer.innerHTML = "";
+        contentContainer.innerHTML = "";
 
-<!-- Previous Dates Section -->
-<div class="date-section" id="prev-dates"></div>
+        const dates = Object.keys(data).sort((a, b) => new Date(b) - new Date(a));
 
-<script>
-// Set today's date
-const todayStr = new Date().toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
-document.getElementById('date').textContent = todayStr;
+        dates.forEach((date, index) => {
+          // Create tab
+          const tab = document.createElement("div");
+          tab.className = "tab" + (index === 0 ? " active" : "");
+          tab.innerText = date;
+          tab.onclick = () => {
+            document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+            document.querySelectorAll(".jobs").forEach(c => c.classList.remove("active"));
+            tab.classList.add("active");
+            document.getElementById("jobs-" + date).classList.add("active");
+          };
+          tabsContainer.appendChild(tab);
 
-// Fetch jobs.json dynamically
-fetch('jobs.json')
-  .then(response => response.json())
-  .then(data => {
-    const tabsContainer = document.getElementById('tabs');
-    const tabContentsContainer = document.getElementById('tab-contents');
-    const prevDatesContainer = document.getElementById('prev-dates');
+          // Create content
+          const jobsDiv = document.createElement("div");
+          jobsDiv.className = "jobs" + (index === 0 ? " active" : "");
+          jobsDiv.id = "jobs-" + date;
 
-    // Separate today vs previous
-    const todayJobs = data[todayStr] || {};
-    const prevJobs = Object.keys(data).filter(d => d !== todayStr);
+          data[date].forEach(job => {
+            const jobDiv = document.createElement("div");
+            jobDiv.className = "job";
+            jobDiv.innerText = job;
+            jobsDiv.appendChild(jobDiv);
+          });
 
-    function createTabsAndContent(jobsObj, containerTabs, containerContent) {
-      const categories = Object.keys(jobsObj);
-      categories.forEach((category, index) => {
-        // Create tab
-        const tab = document.createElement('div');
-        tab.className = 'tab';
-        if(index === 0) tab.classList.add('active');
-        tab.textContent = category.charAt(0).toUpperCase() + category.slice(1);
-        containerTabs.appendChild(tab);
-
-        // Create tab content
-        const tabContent = document.createElement('div');
-        tabContent.className = 'tab-content';
-        if(index === 0) tabContent.style.display = 'block';
-        tabContent.id = `tab-${category}`;
-
-        jobsObj[category].forEach(job => {
-          const jobDiv = document.createElement('div');
-          jobDiv.className = 'job';
-
-          let jobHTML = `<h3>${job.title}</h3>`;
-          if(job.location) jobHTML += `<p><strong>Location:</strong> ${job.location}</p>`;
-          if(job.details) jobHTML += `<p><strong>Details:</strong> ${job.details}</p>`;
-          if(job.requirements) jobHTML += `<p><strong>Requirements:</strong> ${job.requirements}</p>`;
-          if(job.salary) jobHTML += `<p><strong>Salary:</strong> ${job.salary}</p>`;
-          if(job.apply) jobHTML += `<p><a class="apply-link" href="${job.apply}" target="_blank">Apply Here</a></p>`;
-
-          jobDiv.innerHTML = jobHTML;
-          tabContent.appendChild(jobDiv);
+          contentContainer.appendChild(jobsDiv);
         });
 
-        containerContent.appendChild(tabContent);
-
-        // Tab click event
-        tab.addEventListener('click', () => {
-          containerTabs.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-          containerContent.querySelectorAll('.tab-content').forEach(tc => tc.style.display = 'none');
-          tabContent.style.display = 'block';
-        });
-      });
+      } catch (err) {
+        console.error("Error loading jobs:", err);
+      }
     }
 
-    // Create today's jobs tabs
-    createTabsAndContent(todayJobs, tabsContainer, tabContentsContainer);
-
-    // Create previous dates sections
-    prevJobs.forEach(date => {
-      const dateDiv = document.createElement('div');
-      const dateTitle = document.createElement('div');
-      dateTitle.className = 'prev-date';
-      dateTitle.textContent = date;
-      dateDiv.appendChild(dateTitle);
-
-      const prevContent = document.createElement('div');
-      prevContent.className = 'prev-content';
-      dateDiv.appendChild(prevContent);
-
-      createTabsAndContent(data[date], document.createElement('div'), prevContent);
-
-      dateTitle.addEventListener('click', () => {
-        prevContent.style.display = prevContent.style.display === 'none' ? 'block' : 'none';
-      });
-
-      prevDatesContainer.appendChild(dateDiv);
-    });
-
-  })
-  .catch(err => console.error("Failed to load jobs.json:", err));
-</script>
-
+    loadJobs();
+  </script>
 </body>
 </html>
