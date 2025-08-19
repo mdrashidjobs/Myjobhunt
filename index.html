@@ -1,210 +1,345 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Job Hunt</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
-    h1 { font-size: 32px; font-weight: bold; text-align: center; margin-bottom: 10px; }
-    hr { border: none; border-top: 2px solid #333; margin: 10px 0; }
-    .date { text-align: center; font-size: 1.1em; margin-bottom: 20px; }
-    .tabs { display: flex; cursor: pointer; margin-bottom: 20px; border-bottom: 2px solid #ccc; flex-wrap: wrap; }
-    .tab { padding: 10px 20px; border: 1px solid #ccc; border-bottom: none; background: #f4f4f4; margin-right: 5px; margin-bottom: 5px; border-radius: 8px 8px 0 0; }
-    .tab.active { background: white; font-weight: bold; border-bottom: 2px solid white; }
-    .tab-content { display: none; border: 1px solid #ccc; padding: 20px; border-radius: 0 8px 8px 8px; background: white; }
-    .tab-content.active { display: block; }
-    .job { margin-bottom: 15px; padding: 10px; border-bottom: 1px dashed #aaa; }
-    .job h3 { margin: 0; font-size: 18px; color: #333; }
-    .job p { margin: 5px 0; }
-    .job a { color: blue; text-decoration: none; }
-    .job a:hover { text-decoration: underline; }
-    .adsense { margin: 15px 0; text-align: center; }
-  </style>
-  <script>
-    function openTab(evt, tabId) {
-      var i, tabcontent, tablinks;
-      tabcontent = document.getElementsByClassName("tab-content");
-      for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
-      tablinks = document.getElementsByClassName("tab");
-      for (i = 0; i < tablinks.length; i++) { tablinks[i].classList.remove("active"); }
-      document.getElementById(tabId).style.display = "block";
-      evt.currentTarget.classList.add("active");
-    }
-    window.onload = function() { document.querySelector(".tab").click(); }
-  </script>
-
-  <!-- Google AdSense script -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001"
-     crossorigin="anonymous"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Job Hunt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+        header h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 0;
+        }
+        header p {
+            font-size: 16px;
+            margin: 5px 0 15px 0;
+        }
+        hr {
+            border: 0;
+            border-top: 2px solid #ccc;
+            margin: 10px 0;
+        }
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab-button {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px 20px;
+            margin: 2px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .tab-button.active {
+            background-color: #007BFF;
+            color: #fff;
+        }
+        .tab-content {
+            display: none;
+            max-width: 900px;
+            margin: auto;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .job-block {
+            border: 1px dashed #ccc;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+        .job-block h3 {
+            margin: 0 0 5px 0;
+        }
+        .job-block p {
+            margin: 3px 0;
+        }
+        .apply-link a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .apply-link a:hover {
+            text-decoration: underline;
+        }
+        /* Responsive */
+        @media (max-width: 600px) {
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>My Job Hunt</h1>
-  <hr>
-  <div class="date">📅 Date: 18 August 2025</div>
-  <hr>
 
-  <div class="tabs">
-    <div class="tab" onclick="openTab(event, 'admin')">Admin / Office</div>
-    <div class="tab" onclick="openTab(event, 'engineering')">Engineering / Technical</div>
-    <div class="tab" onclick="openTab(event, 'safety')">Safety</div>
-    <div class="tab" onclick="openTab(event, 'medical')">Medical / Healthcare</div>
-    <div class="tab" onclick="openTab(event, 'fnb')">F&B / Restaurant</div>
-    <div class="tab" onclick="openTab(event, 'sales')">Sales / Retail</div>
-    <div class="tab" onclick="openTab(event, 'skilled')">Skilled Trades</div>
-    <div class="tab" onclick="openTab(event, 'drivers')">Drivers / Logistics</div>
-  </div>
+<header>
+    <h1>MY JOB HUNT</h1>
+    <p>━━━━━━━━━━━━✦✿✦━━━━━━━━━━━━<br>
+    Date: 19-August-2025<br>
+    ━━━━━━━━━━━✦✿✦━━━━━━━━━━━━</p>
+    <hr>
+</header>
 
-  <!-- Admin / Office -->
-  <div id="admin" class="tab-content">
-    <div class="adsense">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-3037151964199001"
-           data-ad-slot="1111111111"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-    <!-- Jobs list -->
-    <div class="job">
-      <h3>Executive Secretary</h3>
-      <p>📍 Jabriya | ⏰ 9:00 AM – 4:00 PM | Sun–Thu</p>
-      <p>3–5 yrs experience, English & Arabic fluency, calendar & client coordination, invoices, clinic support</p>
-      <p>📌 Visa 18 (Local Transferable)</p>
-      <p><a href="https://wa.me/96566961228" target="_blank">📲 Apply via WhatsApp</a></p>
-    </div>
-    <!-- Add remaining jobs in this tab similarly -->
-  </div>
+<!-- Google AdSense Placeholder -->
+<!-- Paste AdSense code here -->
 
-  <!-- Engineering / Technical -->
-  <div id="engineering" class="tab-content">
-    <div class="adsense">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-3037151964199001"
-           data-ad-slot="2222222222"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-    <!-- Jobs list -->
-    <div class="job">
-      <h3>Operations Manager</h3>
-      <p>Location: Kuwait City | 3–4 yrs managing teams | Tagalog speakers</p>
-      <p>Delegate tasks, manage SOPs, lead fast-paced luxury team</p>
-      <p><a href="https://wa.me/96566961228" target="_blank">📲 Apply via WhatsApp</a></p>
-    </div>
-    <!-- Add remaining jobs in this tab similarly -->
-  </div>
+<div class="tabs">
+    <button class="tab-button active" data-tab="admin">Admin / Office</button>
+    <button class="tab-button" data-tab="finance">Finance / Accounting</button>
+    <button class="tab-button" data-tab="it">IT / Technical</button>
+    <button class="tab-button" data-tab="engineering">Engineering / Technical</button>
+    <button class="tab-button" data-tab="safety">Safety</button>
+    <button class="tab-button" data-tab="healthcare">Healthcare</button>
+    <button class="tab-button" data-tab="sales">Sales / Marketing</button>
+    <button class="tab-button" data-tab="drivers">Drivers / Transportation</button>
+</div>
 
-  <!-- Safety -->
-  <div id="safety" class="tab-content">
-    <div class="adsense">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-3037151964199001"
-           data-ad-slot="3333333333"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+<!-- Admin / Office Tab -->
+<div id="admin" class="tab-content active">
+    <div class="job-block">
+        <h3>Secretary – Flower Shop</h3>
+        <p>Location: Farwaniya - Al-Rai Area - Block 1, Kuwait</p>
+        <p>Details: Competent secretary for upscale flower shop. Handle orders efficiently with 1–2 years experience.</p>
+        <p>Tasks: Receive & supervise orders, excellent customer service, use WhatsApp/Instagram.</p>
+        <p>Apply via WhatsApp: <span class="apply-link"><a href="https://wa.me/96550825582" target="_blank">50825582</a></span></p>
     </div>
-    <div class="job">
-      <h3>Safety Officer</h3>
-      <p>Location: Kuwait | Ensure site safety compliance, manage risk assessments, conduct toolbox talks</p>
-      <p><a href="https://wa.me/96560012345" target="_blank">📲 Apply via WhatsApp</a></p>
-    </div>
-  </div>
 
-  <!-- Medical / Healthcare -->
-  <div id="medical" class="tab-content">
-    <div class="adsense">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-3037151964199001"
-           data-ad-slot="4444444444"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <div class="job-block">
+        <h3>Front Office Lead – NOC Operations – Shabakkat</h3>
+        <p>Location: Kuwait</p>
+        <p>Requirements: 5+ yrs experience in telecom NOC/FO roles, OSS/NMS tools proficiency, immediate joiner.</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:shabakkat.hr@shabakkat.com">shabakkat.hr@shabakkat.com</a></span></p>
     </div>
-    <div class="job">
-      <h3>Hospitality Coordinator – International Hospital</h3>
-      <p>Location: Kuwait | Experience in hotel/hospital | Strong communication & organizational skills</p>
-      <p><a href="mailto:careers@internationalhospital-kw.com" target="_blank">📧 Apply via Email</a></p>
-    </div>
-  </div>
 
-  <!-- F&B / Restaurant -->
-  <div id="fnb" class="tab-content">
-    <div class="adsense">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-3037151964199001"
-           data-ad-slot="5555555555"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <div class="job-block">
+        <h3>Executive Business Secretary – AI & IT Startups</h3>
+        <p>Details: Manage executive schedules, correspondence, reports, proposals, presentations, coordinate with clients & partners, support decision-making.</p>
+        <p>Requirements: 5+ yrs experience as executive secretary, strong business management skills, Levant nationality only, remote work possible, Article 18 residence.</p>
+        <p>Apply via WhatsApp CV: <span class="apply-link"><a href="https://wa.me/96560972794" target="_blank">60972794</a></span></p>
     </div>
-    <div class="job">
-      <h3>Accountant – Nejoud Restaurant Management Company</h3>
-      <p>Location: Kuwait | Bachelor’s degree, 2 yrs accounting experience, transferable 18 visa</p>
-      <p><a href="https://kw.indeed.com/cmp/Nejoud-Restaurant-Management-Company/jobs?jk=43f77715b21ffa28&start=0&clearPrefilter=1#cmp-skip-header-desktop" target="_blank">🌐 Apply Online</a></p>
-    </div>
-  </div>
 
-  <!-- Sales / Retail -->
-  <div id="sales" class="tab-content">
-    <div class="adsense">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-3037151964199001"
-           data-ad-slot="6666666666"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <div class="job-block">
+        <h3>Female Roles – Leading Company</h3>
+        <p>Location: Kuwait</p>
+        <p>Details: Secretary (1), Personal Assistant (1), Sales & Marketing (2)</p>
+        <p>Requirements: Female, Arab nationals, good English, professional skills.</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:anushkakuwait22@gmail.com">anushkakuwait22@gmail.com</a></span> (include recent photo)</p>
     </div>
-    <div class="job">
-      <h3>Model</h3>
-      <p>Location: Kuwait | Arab/Asian females | Full-size photo required</p>
-      <p><a href="mailto:jobrecruit.marita@gmail.com" target="_blank">📧 Apply via Email</a></p>
-    </div>
-  </div>
 
-  <!-- Skilled Trades -->
-  <div id="skilled" class="tab-content">
-    <div class="adsense">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-3037151964199001"
-           data-ad-slot="7777777777"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <div class="job-block">
+        <h3>Multiple Engineering & Support Roles – Leading Companies (Admin subset)</h3>
+        <p>Roles: Site Secretary, Registration Officer, Call Centre Executive</p>
+        <p>Requirements: Relevant experience/qualifications per role, residents of Kuwait, transferable visa (where applicable).</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:hrd.vacancies1984@gmail.com">hrd.vacancies1984@gmail.com</a></span></p>
     </div>
-    <div class="job">
-      <h3>Fabricator</h3>
-      <p>Fahaheel, Mangaf, Mahaboula | 185–310 KD/month, 8 hrs/day, transportation available</p>
-      <p><a href="tel:96597961420">📞 Apply via Call</a></p>
-    </div>
-  </div>
 
-  <!-- Drivers / Logistics -->
-  <div id="drivers" class="tab-content">
-    <div class="adsense">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-3037151964199001"
-           data-ad-slot="8888888888"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <!-- Optional Google AdSense inside tab -->
+</div>
+
+<!-- Finance / Accounting Tab -->
+<div id="finance" class="tab-content">
+    <div class="job-block">
+        <h3>Finance Manager – Light Fields</h3>
+        <p>Location: Kuwait</p>
+        <p>Responsibilities: Manage accounting, treasury, cost control, payroll, budgeting, forecasting, product pricing, financial analysis.</p>
+        <p>Requirements: Experience in Odoo ERP, CFA certification a plus.</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:careers@lightfields.co">careers@lightfields.co</a></span></p>
     </div>
-    <div class="job">
-      <h3>Delivery Driver / Logistics</h3>
-      <p>Location: Kuwait | Experience preferred | Transferable Visa 18</p>
-      <p><a href="https://wa.me/96560012345" target="_blank">📲 Apply via WhatsApp</a></p>
+
+    <div class="job-block">
+        <h3>Senior & Junior Accountant – Provenance Company</h3>
+        <p>Location: Kuwait</p>
+        <p>Requirements: Senior: 10+ yrs exp, Junior: 2 yrs exp. Logistics/transportation background preferred. Transferable residency.</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:vacancies.jobkw26@gmail.com">vacancies.jobkw26@gmail.com</a></span></p>
     </div>
-  </div>
+
+    <div class="job-block">
+        <h3>Senior Risk Management Analyst – Mezzan Holding Co.</h3>
+        <p>Location: Kuwait</p>
+        <p>5–8 yrs experience in risk, audit, financial planning.</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:careers.mezzan.com">careers.mezzan.com</a></span></p>
+    </div>
+
+    <div class="job-block">
+        <h3>Finance Manager – F&B & Electronics</h3>
+        <p>Details: Oversee financial planning, budgeting, reporting, manage finance teams, support strategic decisions.</p>
+        <p>Requirements: 10+ yrs experience, transferable visa 18, available in Kuwait.</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:hr@chayahgroup.com">hr@chayahgroup.com</a></span></p>
+    </div>
+</div>
+
+<!-- IT / Technical Tab -->
+<div id="it" class="tab-content">
+    <div class="job-block">
+        <h3>IT Technician – Omar Co.</h3>
+        <p>Location: Kuwait</p>
+        <p>Networking & PC troubleshooting, independent & team work, strong technical skills.</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:rao@coaxialit.com">rao@coaxialit.com</a></span></p>
+    </div>
+
+    <div class="job-block">
+        <h3>Odoo Developer – Kuwait</h3>
+        <p>2–5 yrs Odoo experience, Python, PostgreSQL, CRM, custom modules.</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:applynow2023@gmail.com">applynow2023@gmail.com</a></span></p>
+    </div>
+
+    <div class="job-block">
+        <h3>Intern / Fresher Graphic Designer – Digital Endurance</h3>
+        <p>Assist in creating visual content, support senior designers, follow brand guidelines, collaborate on design concepts.</p>
+        <p>Requirements: Freshers/interns in graphic design, willingness to learn, creativity, adaptability.</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:hello@digitalendurance.digital">hello@digitalendurance.digital</a></span></p>
+    </div>
+
+    <div class="job-block">
+        <h3>Client Success Executive – E3LANATQ8i</h3>
+        <p>Location: Kuwait</p>
+        <p>2+ yrs experience, client management, content creation, marketing plans.</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:e3lanatq8i@gmail.com">e3lanatq8i@gmail.com</a></span></p>
+    </div>
+</div>
+
+<!-- Engineering / Technical Tab -->
+<div id="engineering" class="tab-content">
+    <div class="job-block">
+        <h3>Estimation Engineer – Turnkey Projects</h3>
+        <p>Location: Kuwait</p>
+        <p>3–8 yrs experience in BOQ, MTO, costing, project planning.</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:hr@aigccgroup.com">hr@aigccgroup.com</a></span></p>
+    </div>
+
+    <div class="job-block">
+        <h3>Lead Technical Engineers (Mechanical/Civil/Electrical) – EPC Company</h3>
+        <p>Location: Kuwait (Saudi Branch Project)</p>
+        <p>10–15 yrs total exp, 4–6 yrs boilers & turbines. Salary: 13000–17000 SAR/month (food & accommodation included).</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:sanchita.rzindia@gmail.com">sanchita.rzindia@gmail.com</a></span></p>
+    </div>
+
+    <div class="job-block">
+        <h3>HVAC Supervisor – Liberty KW</h3>
+        <p>Location: Kuwait</p>
+        <p>Supervise installation, maintenance, troubleshooting of Ducted/Package AC systems, coordinate projects, monitor equipment, ensure safety compliance.</p>
+        <p>Requirements: 5+ yrs Kuwait experience, diploma/degree in Mechanical/Electrical Engineering, transferable visa (No. 18), English & Arabic proficiency, driving license.</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:info@liberty-kwt.com">info@liberty-kwt.com</a></span></p>
+    </div>
+</div>
+
+<!-- Safety Tab -->
+<div id="safety" class="tab-content">
+    <div class="job-block">
+        <h3>Safety Officer – Oil & Gas / Construction</h3>
+        <p>Location: Kuwait</p>
+        <p>Implement & maintain safety policies, conduct audits/inspections, lead training programs.</p>
+        <p>Requirements: B.Tech (Mechanical/Civil/Electrical/Instrumentation), 5+ yrs experience in oil & gas/construction, NEBOSH Lead Auditor & ISO certifications, knowledge of safety regulations & NEBOSH OSHA.</p>
+        <p>Apply via WhatsApp: <span class="apply-link"><a href="https://wa.me/96569019270" target="_blank">69019270</a></span></p>
+    </div>
+</div>
+
+<!-- Healthcare Tab -->
+<div id="healthcare" class="tab-content">
+    <div class="job-block">
+        <h3>Clinical Dietitian – WeCare</h3>
+        <p>Location: Kuwait</p>
+        <p>Bachelor's/Master’s in Nutrition, MOH license, Arabic & English, currently in Kuwait.</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:info@wecarekuwait.com">info@wecarekuwait.com</a></span></p>
+    </div>
+
+    <div class="job-block">
+        <h3>Optometrist – MD Clinic</h3>
+        <p>Location: Kuwait</p>
+        <p>Bilingual, prior experience in clinics, valid license.</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:careers@md-clinic.co">careers@md-clinic.co</a></span></p>
+    </div>
+
+    <div class="job-block">
+        <h3>Female Laboratory Technician – Salmiya Clinic</h3>
+        <p>Conduct lab tests, maintain equipment, support medical staff.</p>
+        <p>Requirements: Female, Kuwaiti MOH license, NOC, immediate start.</p>
+        <p>Salary: 450 KD</p>
+        <p>Apply via WhatsApp: <span class="apply-link"><a href="https://wa.me/96565597294" target="_blank">65597294</a></span></p>
+    </div>
+
+    <div class="job-block">
+        <h3>Bovine Farm Veterinarian – United Dairy Company</h3>
+        <p>Location: Kuwait</p>
+        <p>Clinical care, herd health programs, reproduction & nutrition, emergency interventions, staff training.</p>
+        <p>Requirements: DVM, 3+ yrs experience in large-scale dairy, farm management software familiarity, strong communication, English fluent (Arabic a plus).</p>
+        <p>Salary: 1000 KD</p>
+        <p>Apply: <span class="apply-link">Link</span></p>
+    </div>
+</div>
+
+<!-- Sales / Marketing Tab -->
+<div id="sales" class="tab-content">
+    <div class="job-block">
+        <h3>Sales Representative – Sable International</h3>
+        <p>Location: Kuwait</p>
+        <p>Experience with cooperatives & supermarkets, transferable visa, immediate joining.</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:hr@sabelgroup.net">hr@sabelgroup.net</a></span> / WhatsApp: <a href="https://wa.me/96598003485" target="_blank">98003485</a></p>
+    </div>
+
+    <div class="job-block">
+        <h3>Store Supervisor / Outdoor Sales Executive / Kitchen Operations Manager – Wathif</h3>
+        <p>Location: Kuwait</p>
+        <p>Immediate joining, regular visa, experience 3–7 yrs depending on role.</p>
+        <p>Apply via WhatsApp: <span class="apply-link"><a href="https://wa.me/96566961228" target="_blank">+965 66961228</a></span></p>
+    </div>
+
+    <div class="job-block">
+        <h3>Sales Representative – Solitaire Aluminium Works</h3>
+        <p>Experience in WPC interior doors, fixed salary + commission.</p>
+        <p>Apply via WhatsApp: <span class="apply-link"><a href="https://wa.me/96555518147" target="_blank">55518147</a></span></p>
+    </div>
+</div>
+
+<!-- Drivers / Transportation Tab -->
+<div id="drivers" class="tab-content">
+    <div class="job-block">
+        <h3>Light Driver – Oil & Gas Company</h3>
+        <p>Safely operate vehicles, timely transport of personnel & materials, vehicle maintenance.</p>
+        <p>Requirements: Transferable visa 18, experience in oil & gas preferred, English fluent.</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:recruitment.kwt05@gmail.com">recruitment.kwt05@gmail.com</a></span></p>
+    </div>
+
+    <div class="job-block">
+        <h3>Heavy Driver with Sales Skills – FMCG</h3>
+        <p>Sell products in retail outlets, plan daily sales routes, report market feedback.</p>
+        <p>Requirements: Heavy driving license, 3+ yrs sales experience in FMCG, transferable Article 18 visa.</p>
+        <p>Salary: 250 KD + 200 KD incentives</p>
+        <p>Apply: <span class="apply-link"><a href="mailto:Careers@al-dhow.com">Careers@al-dhow.com</a></span> / WhatsApp: <a href="https://wa.me/96560636133" target="_blank">60636133</a></p>
+    </div>
+</div>
+
+<script>
+    // Tab switching logic
+    const tabs = document.querySelectorAll('.tab-button');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            contents.forEach(c => c.classList.remove('active'));
+            document.getElementById(tab.dataset.tab).classList.add('active');
+        });
+    });
+</script>
 
 </body>
 </html>
