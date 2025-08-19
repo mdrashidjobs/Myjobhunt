@@ -1,35 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Job Parser Tool</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    textarea { width: 100%; height: 200px; margin-bottom: 10px; }
-    button { padding: 10px 20px; background: #4285f4; color: white; border: none; border-radius: 5px; cursor: pointer; }
-    button:hover { background: #3367d6; }
-    pre { background: #f4f4f4; padding: 10px; border: 1px solid #ccc; max-height: 300px; overflow-y: auto; }
-  </style>
-</head>
-<body>
-  <h1>⚙️ Job Parser Tool</h1>
-  <textarea id="input" placeholder="Paste raw WhatsApp ads here..."></textarea>
-  <button onclick="parseJobs()">Parse & Show JSON</button>
-  <h2>Preview JSON</h2>
-  <pre id="output"></pre>
+<script>
+document.getElementById("save").addEventListener("click", function () {
+    let textarea = document.getElementById("input").value.trim();
+    if (!textarea) return alert("No data to save!");
 
-  <script>
-    function parseJobs() {
-      let input = document.getElementById("input").value.trim();
-      let ads = input.split("\n").filter(line => line.trim() !== "");
+    let newJobs = textarea.split("\n").filter(line => line.trim() !== "");
+    let today = new Date().toISOString().split("T")[0];
 
-      let today = new Date().toISOString().split("T")[0]; // yyyy-mm-dd
-      let result = { [today]: ads };
+    fetch("jobs.json")
+        .then(r => r.json())
+        .catch(() => ({})) // if file doesn’t exist, start fresh
+        .then(data => {
+            if (!data[today]) data[today] = [];
+            data[today] = data[today].concat(newJobs);
 
-      document.getElementById("output").textContent = JSON.stringify(result, null, 2);
+            let blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+            let url = URL.createObjectURL(blob);
 
-      alert("👉 Copy this JSON and paste into jobs.json (merge with old data).");
-    }
-  </script>
-</body>
-</html>
+            let a = document.createElement("a");
+            a.href = url;
+            a.download = "jobs.json"; // 👈 forces download
+            a.click();
+
+            URL.revokeObjectURL(url);
+        });
+});
+</script>
