@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-3037151964199001">
+    <title>MY JOB HUNT</title>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001"
+            crossorigin="anonymous"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .separator {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #3498db, transparent);
+            margin: 15px 0;
+            width: 100%;
+        }
+        
+        .date-display {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #ecf0f1;
+            margin: 10px 0;
+        }
+        
+        .generator-section {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .generator-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            resize: vertical;
+        }
+        
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        button:hover {
+            background: #2980b9;
+        }
+        
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            background: #f8f9fa;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .tab:hover {
+            background: #e9ecef;
+        }
+        
+        .tab.active {
+            background: white;
+            border-bottom: 3px solid #3498db;
+            color: #3498db;
+        }
+        
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 25px;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .job-list {
+            list-style: none;
+        }
+        
+        .job-item {
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            background: #f8f9fa;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        
+        .job-item h3 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .archive-date {
+            margin: 20px 0 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #eee;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .archive-date::after {
+            content: '▼';
+            font-size: 0.8rem;
+        }
+        
+        .archive-date.collapsed::after {
+            content: '▲';
+        }
+        
+        .archive-content {
+            padding-left: 20px;
+        }
+        
+        .ad-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .ad-placeholder {
+            background: #f8f9fa;
+            padding: 40px;
+            border: 2px dashed #ddd;
+            border-radius: 6px;
+            color: #6c757d;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                border-bottom: 1px solid #ddd;
+                border-right: none;
+            }
+            
+            .tab.active {
+                border-bottom: 3px solid #3498db;
+                border-right: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MY JOB HUNT</h1>
+            <div class="separator"></div>
+            <div class="date-display" id="currentDate">Loading date...</div>
+            <div class="separator"></div>
+        </header>
+
+        <section class="generator-section">
+            <h2>Job Index Generator</h2>
+            <textarea id="rawJobsInput" placeholder="Paste today's raw WhatsApp-formatted job ads here..."></textarea>
+            <button id="generateButton">Generate and Download Index File</button>
+        </section>
+
+        <div class="ad-container">
+            <div class="ad-placeholder">
+                Google AdSense Advertisement
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="admin">Admin</div>
+            <div class="tab" data-tab="it">IT</div>
+            <div class="tab" data-tab="sales">Sales</div>
+            <div class="tab" data-tab="medical">Medical</div>
+            <div class="tab" data-tab="logistics">Logistics</div>
+            <div class="tab" data-tab="misc">Misc</div>
+            <div class="tab" data-tab="archive">Archive</div>
+        </div>
+
+        <div class="tab-content active" id="admin-content">
+            <ul class="job-list">
+                <li class="job-item">
+                    <h3>Office Administrator</h3>
+                    <p><strong>Company:</strong> ABC Corp</p>
+                    <p><strong>Location:</strong> Downtown</p>
+                    <p><strong>Requirements:</strong> 2+ years experience, MS Office proficiency</p>
+                </li>
+                <li class="job-item">
+                    <h3>Receptionist</h3>
+                    <p><strong>Company:</strong> XYZ Ltd</p>
+                    <p><strong>Location:</strong> City Center</p>
+                    <p><strong>Requirements:</strong> Customer service experience, bilingual preferred</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content" id="it-content">
+            <ul class="job-list">
+                <li class="job-item">
+                    <h3>Frontend Developer</h3>
+                    <p><strong>Company:</strong> Tech Solutions Inc.</p>
+                    <p><strong>Location:</strong> Remote</p>
+                    <p><strong>Requirements:</strong> JavaScript, React, 3+ years experience</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content" id="sales-content">
+            <ul class="job-list">
+                <li class="job-item">
+                    <h3>Sales Representative</h3>
+                    <p><strong>Company:</strong> Best Sales Co.</p>
+                    <p><strong>Location:</strong> Various locations</p>
+                    <p><strong>Requirements:</strong> Proven sales record, driver's license</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content" id="medical-content">
+            <ul class="job-list">
+                <li class="job-item">
+                    <h3>Registered Nurse</h3>
+                    <p><strong>Company:</strong> City Hospital</p>
+                    <p><strong>Location:</strong> Medical District</p>
+                    <p><strong>Requirements:</strong> BSN, active license, 2+ years experience</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content" id="logistics-content">
+            <ul class="job-list">
+                <li class="job-item">
+                    <h3>Logistics Coordinator</h3>
+                    <p><strong>Company:</strong> Global Shipping Ltd.</p>
+                    <p><strong>Location:</strong> Port Area</p>
+                    <p><strong>Requirements:</strong> Supply chain knowledge, organizational skills</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content" id="misc-content">
+            <ul class="job-list">
+                <li class="job-item">
+                    <h3>Customer Service Agent</h3>
+                    <p><strong>Company:</strong> Service Plus</p>
+                    <p><strong>Location:</strong> Business Park</p>
+                    <p><strong>Requirements:</strong> Communication skills, problem-solving ability</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content" id="archive-content">
+            <div class="archive-date">October 15, 2023</div>
+            <div class="archive-content">
+                <ul class="job-list">
+                    <li class="job-item">
+                        <h3>Previous IT Job</h3>
+                        <p><strong>Company:</strong> Old Tech Inc.</p>
+                        <p>This is an archived job listing from a previous day.</p>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="archive-date collapsed">October 10, 2023</div>
+            <div class="archive-content" style="display: none;">
+                <ul class="job-list">
+                    <li class="job-item">
+                        <h3>Previous Admin Job</h3>
+                        <p><strong>Company:</strong> Old Business Ltd.</p>
+                        <p>This is an archived job listing from an earlier date.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="ad-container">
+            <div class="ad-placeholder">
+                Google AdSense Advertisement
+            </div>
+        </div>
+
+        <footer>
+            <p>MY JOB HUNT &copy; 2023 | Uploaded daily to GitHub</p>
+        </footer>
+    </div>
+
+    <script>
+        // Set current date
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', { 
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+        });
+        
+        // Tab functionality
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === `${tabId}-content`) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+        
+        // Archive collapse/expand functionality
+        const archiveDates = document.querySelectorAll('.archive-date');
+        archiveDates.forEach(date => {
+            date.addEventListener('click', () => {
+                const content = date.nextElementSibling;
+                if (content.style.display === 'none') {
+                    content.style.display = 'block';
+                    date.classList.remove('collapsed');
+                } else {
+                    content.style.display = 'none';
+                    date.classList.add('collapsed');
+                }
+            });
+        });
+        
+        // Generate and download index file
+        document.getElementById('generateButton').addEventListener('click', function() {
+            const rawJobs = document.getElementById('rawJobsInput').value;
+            
+            if (!rawJobs.trim()) {
+                alert('Please paste some job ads first!');
+                return;
+            }
+            
+            // Create a blob of the data
+            const blob = new Blob([generateIndexFile(rawJobs)], { type: 'text/html' });
+            
+            // Create a download link and trigger click
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'index.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+        
+        // Function to generate the index file content
+        function generateIndexFile(rawJobs) {
+            // This is a simplified version - in a real implementation, you would parse the rawJobs
+            // and format them into proper HTML structure with categories
+            
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-3037151964199001">
+    <title>MY JOB HUNT</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001"
+            crossorigin="anonymous"></script>
+    <style>
+        /* CSS would be the same as above */
+        ${document.querySelector('style').textContent}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MY JOB HUNT</h1>
+            <div class="separator"></div>
+            <div class="date-display">${new Date().toLocaleDateString('en-US', { 
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+            })}</div>
+            <div class="separator"></div>
+        </header>
+
+        <!-- Ad container -->
+        <div class="ad-container">
+            <div class="ad-placeholder">
+                Google AdSense Advertisement
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="admin">Admin</div>
+            <div class="tab" data-tab="it">IT</div>
+            <div class="tab" data-tab="sales">Sales</div>
+            <div class="tab" data-tab="medical">Medical</div>
+            <div class="tab" data-tab="logistics">Logistics</div>
+            <div class="tab" data-tab="misc">Misc</div>
+            <div class="tab" data-tab="archive">Archive</div>
+        </div>
+
+        <!-- Tab contents would be generated from the rawJobs input -->
+        <div class="tab-content active" id="admin-content">
+            <ul class="job-list">
+                <li class="job-item">
+                    <h3>Generated Job</h3>
+                    <p>This is a sample generated from your input</p>
+                    <p>In a real implementation, the WhatsApp formatted jobs would be parsed and categorized</p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Other tab contents would be similarly generated -->
+
+        <div class="tab-content" id="archive-content">
+            <div class="archive-date">Previous Date</div>
+            <div class="archive-content">
+                <ul class="job-list">
+                    <li class="job-item">
+                        <h3>Archived Job</h3>
+                        <p>This would show previous days' jobs</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Another ad container -->
+        <div class="ad-container">
+            <div class="ad-placeholder">
+                Google AdSense Advertisement
+            </div>
+        </div>
+
+        <footer>
+            <p>MY JOB HUNT &copy; 2023 | Uploaded daily to GitHub</p>
+        </footer>
+    </div>
+
+    <script>
+        // JavaScript would be included here to make the tabs and archive dates functional
+        ${document.querySelector('script').textContent}
+    </script>
+</body>
+</html>`;
+        }
+    </script>
+</body>
+</html>
