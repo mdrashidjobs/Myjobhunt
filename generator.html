@@ -5,34 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Job Index Generator</title>
 <style>
-body { font-family: Arial, sans-serif; background: #f9f9f9; padding: 20px; }
-textarea { width: 100%; height: 400px; font-family: monospace; margin-bottom: 20px; }
-button { padding: 10px 20px; font-size: 16px; cursor: pointer; margin-right: 10px; }
+body { font-family: Arial, sans-serif; background: #f4f4f9; padding: 20px; }
+h2 { text-align:center; color:#333; }
+textarea { width: 100%; height: 400px; font-family: monospace; margin-bottom: 20px; border-radius:8px; border:1px solid #ccc; padding:10px; }
+button { padding: 10px 20px; font-size: 16px; cursor:pointer; margin-right: 10px; border:none; border-radius:5px; background:#3498db; color:white; }
+button:hover { background:#2980b9; }
 </style>
 </head>
 <body>
 
 <h2>WhatsApp Job Index Generator</h2>
-<p>Paste your raw WhatsApp job data below and click “Generate & Download Index”</p>
+<p>Paste your raw WhatsApp jobs below and click “Generate & Download Index”</p>
 <textarea id="rawJobs" placeholder="Paste raw WhatsApp jobs here..."></textarea><br>
 <button onclick="generateIndex()">Generate & Download Index</button>
 
 <script>
-function escapeHTML(text) {
+function escapeHTML(text){
     return text.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 }
 
-function generateIndex() {
+function generateIndex(){
     const raw = document.getElementById('rawJobs').value.trim();
-    if(!raw) { alert("Please paste the raw jobs first."); return; }
+    if(!raw){ alert("Please paste the raw jobs first."); return; }
 
-    // Split jobs by separator
-    const jobs = raw.split(/━━━━━━━━━━━━✦✿✦━━━━━━━━━━━━/).filter(j => j.trim()!=="");
+    const jobs = raw.split(/━━━━━━━━━━━━✦✿✦━━━━━━━━━━━━/).filter(j=>j.trim()!=="");
 
-    // Collect unique categories (first line after 📌)
     let categories = [];
     let categorizedJobs = {};
-    jobs.forEach(job => {
+    jobs.forEach(job=>{
         const firstLineMatch = job.match(/📌\s*(.*)/);
         let cat = firstLineMatch ? firstLineMatch[1].split('–')[0].trim() : "Misc";
         if(!categories.includes(cat)) categories.push(cat);
@@ -40,42 +40,32 @@ function generateIndex() {
         categorizedJobs[cat].push(job.trim());
     });
 
-    // Build tabs HTML
-    let tabsHTML = categories.map((c,i) => 
-        `<button class="tablink" onclick="openTab(event, 'tab${i}')">${c}</button>`
-    ).join(" ");
+    let tabsHTML = categories.map((c,i)=>`<button class="tablink" onclick="openTab(event, 'tab${i}')">${c}</button>`).join(" ");
 
-    // Build tab contents HTML
-    let contentsHTML = categories.map((c,i) => {
-        let jobsHTML = categorizedJobs[c].map(j => `<pre>${escapeHTML(j)}</pre>`).join("<hr>");
+    let contentsHTML = categories.map((c,i)=>{
+        let jobsHTML = categorizedJobs[c].map(j=>`<pre>${escapeHTML(j)}</pre>`).join("<hr>");
         return `<div id="tab${i}" class="tabcontent" style="display:${i===0?'block':'none'}">${jobsHTML}</div>`;
     }).join("");
 
-    // Today's date
     const today = new Date();
     const dateStr = today.toLocaleDateString('en-GB', {day:'2-digit', month:'long', year:'numeric'});
 
-    // Final HTML
     const indexHTML = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-adsense-account" content="ca-pub-3037151964199001">
 <title>MY JOB HUNT</title>
 <style>
-body { font-family: Arial, sans-serif; margin:20px; }
-h1, h2 { text-align:center; }
-button.tablink { padding:10px; margin:5px; cursor:pointer; background:#3498db; color:white; border:none; border-radius:4px; }
+body { font-family: Arial, sans-serif; margin:20px; background:#f4f4f9; }
+h1, h2 { text-align:center; color:#2c3e50; }
+button.tablink { padding:10px 15px; margin:5px; cursor:pointer; background:#3498db; color:white; border:none; border-radius:5px; font-weight:bold; }
 button.tablink:hover { background:#2980b9; }
-div.tabcontent { display:none; padding:10px; border-top:1px solid #ccc; }
-pre { white-space: pre-wrap; word-wrap: break-word; background:#f0f0f0; padding:10px; border-radius:4px; }
-hr { border:none; border-top:1px dashed #aaa; margin:10px 0; }
-/* AdSense placeholder style */
-.adsense { text-align:center; margin:20px 0; }
+div.tabcontent { display:none; padding:15px; border-top:1px solid #ccc; background:white; border-radius:5px; margin-top:10px; }
+pre { white-space: pre-wrap; word-wrap: break-word; background:#ecf0f1; padding:10px; border-radius:5px; }
+hr { border:none; border-top:1px dashed #bbb; margin:10px 0; }
 </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -84,39 +74,19 @@ hr { border:none; border-top:1px dashed #aaa; margin:10px 0; }
 <h2>${dateStr}</h2>
 <hr>
 
-<div style="text-align:center;" class="adsense">
-<!-- Top AdSense -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-3037151964199001"
-     data-ad-slot="1234567890"
-     data-ad-format="auto"></ins>
-<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-
 <div style="text-align:center;">${tabsHTML}</div>
 
 ${contentsHTML}
 
-<div class="adsense">
-<!-- Bottom AdSense -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-3037151964199001"
-     data-ad-slot="1234567890"
-     data-ad-format="auto"></ins>
-<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-
 <script>
-function openTab(evt, tabName) {
+function openTab(evt, tabName){
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+    for(i=0;i<tabcontent.length;i++){ tabcontent[i].style.display="none"; }
     tablinks = document.getElementsByClassName("tablink");
-    for (i = 0; i < tablinks.length; i++) { tablinks[i].style.background = "#3498db"; }
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.style.background = "#2980b9";
+    for(i=0;i<tablinks.length;i++){ tablinks[i].style.background="#3498db"; }
+    document.getElementById(tabName).style.display="block";
+    evt.currentTarget.style.background="#2980b9";
 }
 </script>
 
@@ -124,7 +94,6 @@ function openTab(evt, tabName) {
 </html>
 `;
 
-    // Trigger download
     const blob = new Blob([indexHTML], {type:'text/html'});
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
