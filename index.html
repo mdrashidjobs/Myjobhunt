@@ -2,109 +2,223 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>My Job Hunt</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MY JOB HUNT</title>
 <style>
-body { font-family: Arial, sans-serif; background:#f9f9f9; margin:0; padding:0; }
-h1 { text-align:center; margin-top:20px; }
-h2 { margin-top:20px; font-weight:bold; }
-hr { border:1px solid #ccc; margin:10px 0; }
-.tabs { display:flex; justify-content:center; margin:20px 0; flex-wrap:wrap; }
-.tab-button { padding:10px 15px; margin:5px; cursor:pointer; border:1px solid #ccc; border-radius:5px; background:#fff; }
-.tab-button.active { background:#007bff; color:#fff; }
-.tab-content { display:none; padding:20px; background:#fff; margin:0 10px 20px 10px; border-radius:5px; }
-.tab-content.active { display:block; }
-.job-block { padding:10px 0; margin-bottom:10px; }
-.job-block hr { margin:10px 0; }
-.job-title { font-weight:bold; }
-#adContainer { text-align:center; margin:20px 0; }
+body { font-family: Arial, sans-serif; margin:0; background:#f9f9f9; color:#333;}
+header { text-align:center; padding:20px; background:#1e90ff; color:#fff;}
+header h1 { margin:0; font-size:2em;}
+.date-line { text-align:center; margin:10px 0; font-weight:bold; }
+.tabs { display:flex; justify-content:center; flex-wrap:wrap; margin:10px 0; }
+.tab-button { background:#1e90ff; color:#fff; border:none; padding:10px 20px; margin:2px; cursor:pointer; font-size:1em; border-radius:5px; transition:0.3s;}
+.tab-button:hover, .tab-button.active { background:#104e8b;}
+.tab-content { display:none; padding:20px; max-width:1200px; margin:auto; background:#fff; border-radius:5px; box-shadow:0 0 10px rgba(0,0,0,0.1);}
+.ad-container { text-align:center; margin:20px 0;}
+.job { margin-bottom:25px; border-bottom:1px solid #ccc; padding-bottom:10px; }
+.job h3 { margin:0; color:#1e90ff; }
+.job p, .job span { margin:3px 0; }
 </style>
-<!-- Google AdSense script -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001"
-crossorigin="anonymous"></script>
 </head>
 <body>
 
-<!-- AdSense Container -->
-<div id="adContainer">
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center; margin: 10px auto;"
-         data-ad-client="ca-pub-3037151964199001"
-         data-ad-slot="1234567890"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+<header>
+  <h1>MY JOB HUNT</h1>
+</header>
+
+<div class="date-line">
+━━━━━━━━━━━━✦✿✦━━━━━━━━━━━━<br>
+Date: 20-August-2025<br>
+━━━━━━━━━━━━✦✿✦━━━━━━━━━━━━
 </div>
 
-<h1>MY JOB HUNT</h1>
-<hr>
+<div class="tabs">
+  <button class="tab-button active" onclick="openTab('General')">General</button>
+  <button class="tab-button" onclick="openTab('IT')">IT/Tech</button>
+  <button class="tab-button" onclick="openTab('Engineering')">Engineering</button>
+  <button class="tab-button" onclick="openTab('Logistics')">Logistics</button>
+  <button class="tab-button" onclick="openTab('Hospitality')">Hospitality & Service</button>
+  <button class="tab-button" onclick="openTab('Medical')">Medical & Wellness</button>
+  <button class="tab-button" onclick="openTab('Sales')">Sales & Marketing</button>
+  <button class="tab-button" onclick="openTab('Admin')">Office/Admin</button>
+  <button class="tab-button" onclick="openTab('Archive')">Archive</button>
+</div>
 
-<div class="tabs" id="tabsContainer"></div>
-<div id="contentContainer"></div>
+<div class="ad-container">
+  <!-- Google AdSense Code -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-3037151964199001"
+       data-ad-slot="1234567890"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+<!-- General Jobs -->
+<div id="General" class="tab-content" style="display:block;">
+  <div class="job">
+    <h3>Teacher Assistant (Male)</h3>
+    <p>📍 American Bilingual School, Kuwait – Elementary Department</p>
+    <p>💰 Salary: 300 KD | 🎓 Qualification: Bachelor's of English</p>
+    <p>📩 Apply via messages</p>
+  </div>
+
+  <div class="job">
+    <h3>Instrument Supervisor</h3>
+    <p>📍 EPC Client, Kuwait</p>
+    <p>💰 Salary: 500–550 KD/month (Food & Accommodation included)</p>
+    <p>🎓 Diploma + 8 yrs Oil & Gas experience</p>
+    <p>📩 Apply via email: sanchita.rzindia@gmail.com (CV + Certificates + Passport)</p>
+  </div>
+
+  <div class="job">
+    <h3>Structure Fabricator – Immediate Start (Visa 18)</h3>
+    <p>📍 Location: Kuwait</p>
+    <p>💼 Responsibilities: Fabricate & assemble structural components, Ensure quality & safety standards, Collaborate with engineering team</p>
+    <p>✅ Requirements: Relevant fabrication experience, Valid Visa 18</p>
+    <p>💰 Benefits: Competitive salary, Immediate employment</p>
+    <p>📲 Apply via WhatsApp: 65883371</p>
+  </div>
+
+  <div class="job">
+    <h3>Mechanical Engineer – Leading Company</h3>
+    <p>📍 Location: Kuwait</p>
+    <p>💼 Responsibilities: Mechanical duties (design, maintenance, operation), Collaborate with project teams, Maintain compliance</p>
+    <p>✅ Requirements: Bachelor’s Degree in Mechanical Engineering, 5+ yrs experience, Valid driving license</p>
+    <p>💰 Benefits: Salary 500–550 KD, Career growth</p>
+    <p>📲 Apply via email: recruitmentkuwait194@gmail.com</p>
+  </div>
+</div>
+
+<!-- IT/Tech Jobs -->
+<div id="IT" class="tab-content">
+  <div class="job">
+    <h3>Business Development Manager – Cisco SMB (Logicom)</h3>
+    <p>📍 Location: Kuwait</p>
+    <p>💼 Responsibilities: Manage SMB accounts, Build partner relationships, Execute promotional activities, Forecast & manage payments</p>
+    <p>✅ Requirements: Bachelor’s, 2–4 yrs IT distribution experience, MS Office, Good English</p>
+    <p>💰 Benefits: Professional IT environment</p>
+    <p>📲 Apply via LinkedIn Job Page</p>
+  </div>
+
+  <div class="job">
+    <h3>Web Designer (UI/UX & Responsive HTML) – Suhob Technologies</h3>
+    <p>📍 Location: Kuwait</p>
+    <p>💼 Responsibilities: Design bilingual interfaces, Develop responsive HTML/CSS pages, Usability testing</p>
+    <p>✅ Requirements: 3+ yrs experience, Figma/Adobe XD, Arabic & English, Visa 18</p>
+    <p>💰 Benefits: Competitive salary</p>
+    <p>📩 Apply via email: hr@suhob.net</p>
+  </div>
+
+  <div class="job">
+    <h3>Senior .NET Core Developer – Suhob Technologies</h3>
+    <p>📍 Location: Kuwait</p>
+    <p>💼 Responsibilities: Develop & maintain .NET Core apps & APIs, Optimize performance, Mentor juniors, Implement CI/CD</p>
+    <p>✅ Requirements: 5+ yrs .NET Core, C#, ASP.NET Core MVC/Web API, Databases, Cloud platforms</p>
+    <p>💰 Benefits: Competitive salary</p>
+    <p>📩 Apply via email: hr@suhob.net</p>
+  </div>
+</div>
+
+<!-- Engineering -->
+<div id="Engineering" class="tab-content">
+  <div class="job">
+    <h3>Estimation Engineer</h3>
+    <p>📍 Location: Kuwait</p>
+    <p>💼 Responsibilities: Prepare & review cost estimates, Technical bids, Coordinate with teams</p>
+    <p>✅ Requirements: 6+ yrs experience, AutoCAD, Layouts</p>
+    <p>📩 Apply via email: Rahul@jipkw.com</p>
+  </div>
+
+  <div class="job">
+    <h3>Project Control Engineer</h3>
+    <p>📍 Location: Kuwait</p>
+    <p>💼 Responsibilities: Planning, Costing, Contract Control</p>
+    <p>✅ Requirements: 8+ yrs experience</p>
+    <p>📩 Apply via email: Rahul@jipkw.com</p>
+  </div>
+</div>
+
+<!-- Logistics -->
+<div id="Logistics" class="tab-content">
+  <div class="job">
+    <h3>Procurement and Shipping Officer</h3>
+    <p>📍 Location: Kuwait</p>
+    <p>💼 Responsibilities: Manage procurement, Handle shipping docs, Coordinate logistics</p>
+    <p>✅ Requirements: 2+ yrs experience, Immediate availability</p>
+    <p>💰 Benefits: Dynamic team, Immediate hiring</p>
+    <p>📧 Apply: prajith@aspire.com.kw</p>
+  </div>
+</div>
+
+<!-- Hospitality & Service -->
+<div id="Hospitality" class="tab-content">
+  <div class="job">
+    <h3>Burger Chef / Line Cook</h3>
+    <p>📍 Wathif, Saad Al Abdullah (Jahra), Kuwait</p>
+    <p>⏰ 10 hrs/day, 6 days/week</p>
+    <p>🔥 Skills: Smashed Burgers, Chicken Burgers, Sauces, Prep</p>
+    <p>📌 Visa 18 Only</p>
+    <p>📩 Apply via WhatsApp: +965 66961228</p>
+  </div>
+</div>
+
+<!-- Medical & Wellness -->
+<div id="Medical" class="tab-content">
+  <div class="job">
+    <h3>Facial Therapist – Silkor Laser & Cosmetic Center</h3>
+    <p>📍 Kuwait & GCC Locations</p>
+    <p>✅ Requirements: Experience in aesthetics/wellness, Transferable visa where applicable</p>
+    <p>📩 Apply via email: recruitment@silkor.com</p>
+  </div>
+
+  <div class="job">
+    <h3>Registered Nurse – Silkor</h3>
+    <p>📍 Kuwait & GCC Locations</p>
+    <p>✅ Requirements: Nursing qualifications, Clinical experience</p>
+    <p>📩 Apply via email: recruitment@silkor.com</p>
+  </div>
+</div>
+
+<!-- Sales & Marketing -->
+<div id="Sales" class="tab-content">
+  <div class="job">
+    <h3>Sales Executive – Al-Zayani Company (Female)</h3>
+    <p>📍 Kuwait</p>
+    <p>💰 Competitive salary + incentives</p>
+    <p>📩 Apply: https://www.al-zayani.com/careers.html</p>
+  </div>
+</div>
+
+<!-- Office/Admin -->
+<div id="Admin" class="tab-content">
+  <div class="job">
+    <h3>Office Secretary</h3>
+    <p>📍 Respected Company, Kuwait</p>
+    <p>✅ Arab female preferred, General office admin</p>
+    <p>📩 Apply via email: jobrecruit.marita@gmail.com</p>
+  </div>
+</div>
+
+<!-- Archive -->
+<div id="Archive" class="tab-content">
+  <p>Archived jobs will appear here.</p>
+</div>
 
 <script>
-// Categories
-const categories = ["Admin","Finance","IT","Engineering","Safety","Healthcare","Sales","Drivers"];
-const tabsContainer = document.getElementById('tabsContainer');
-const contentContainer = document.getElementById('contentContainer');
-
-// Create tab buttons
-categories.forEach(cat=>{
-    const btn = document.createElement('div');
-    btn.className = 'tab-button';
-    btn.dataset.tab = cat;
-    btn.innerText = cat;
-    tabsContainer.appendChild(btn);
-});
-
-// Tab switching
-tabsContainer.addEventListener('click', e=>{
-    if(!e.target.classList.contains('tab-button')) return;
-    document.querySelectorAll('.tab-button').forEach(b=>b.classList.remove('active'));
-    e.target.classList.add('active');
-    const selected = e.target.dataset.tab;
-    document.querySelectorAll('.tab-content').forEach(tc=>tc.style.display='none');
-    const tabDiv = document.getElementById('tab-'+selected);
-    if(tabDiv) tabDiv.style.display='block';
-});
-
-// Fetch jobs.json
-fetch('https://raw.githubusercontent.com/YOURUSERNAME/YOURREPO/main/jobs.json')
-.then(res=>res.json())
-.then(data=>{
-    categories.forEach(cat=>{
-        const div = document.createElement('div');
-        div.id = 'tab-'+cat;
-        div.className = 'tab-content';
-        contentContainer.appendChild(div);
-    });
-
-    Object.keys(data).sort((a,b)=> new Date(b) - new Date(a)).forEach(date=>{
-        categories.forEach(cat=>{
-            const tabDiv = document.getElementById('tab-'+cat);
-            const jobs = data[date][cat];
-            if(!jobs || jobs.length===0) return;
-            const dateHeader = document.createElement('h2');
-            dateHeader.innerText = date;
-            tabDiv.appendChild(dateHeader);
-            jobs.forEach(job=>{
-                const jb = document.createElement('div');
-                jb.className = 'job-block';
-                const lines = job.split('\n');
-                jb.innerHTML = '<p class="job-title">'+lines[0]+'</p>' + lines.slice(1).map(l=>'<p>'+l+'</p>').join('') + '<hr>';
-                tabDiv.appendChild(jb);
-            });
-        });
-    });
-
-    // Activate first tab
-    document.querySelectorAll('.tab-button')[0].classList.add('active');
-    document.querySelectorAll('.tab-content')[0].style.display = 'block';
-})
-.catch(err=>{ console.error(err); contentContainer.innerHTML='<p style="color:red;">Failed to load jobs.json. Check URL.</p>'; });
+function openTab(tabName) {
+  var i, tabcontent, tabbuttons;
+  tabcontent = document.getElementsByClassName("tab-content");
+  for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+  tabbuttons = document.getElementsByClassName("tab-button");
+  for (i = 0; i < tabbuttons.length; i++) { tabbuttons[i].className = tabbuttons[i].className.replace(" active", ""); }
+  document.getElementById(tabName).style.display = "block";
+  event.currentTarget.className += " active";
+}
 </script>
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </body>
 </html>
