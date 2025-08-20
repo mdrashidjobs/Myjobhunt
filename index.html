@@ -1,240 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MY JOB HUNT - 20 August 2025</title>
-
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001"
-     crossorigin="anonymous"></script>
-
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background: #f9f9f9;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    background-color: #0b4d91;
-    color: white;
-    padding: 15px 10px;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.date-line {
-    text-align: center;
-    background-color: #f1f1f1;
-    padding: 5px;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.tabs {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 10px 0;
-}
-
-.tab {
-    background-color: #0073e6;
-    color: white;
-    padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.tab.active {
-    background-color: #005bb5;
-}
-
-.content-section {
-    display: none;
-    padding: 10px 20px;
-    background: white;
-    margin: 10px auto;
-    max-width: 1200px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.content-section.active {
-    display: block;
-}
-
-hr {
-    border: 0;
-    border-top: 2px solid #0073e6;
-    margin: 15px 0;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-3037151964199001">
+    <title>MY JOB HUNT - 20 August 2025</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 0; }
+        h1 { text-align: center; color: #1a73e8; margin-top: 20px; }
+        .separator { text-align: center; margin: 10px 0; font-weight: bold; color: #1a73e8; }
+        .tabs { display: flex; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+        .tab { background: #1a73e8; color: #fff; padding: 10px 20px; margin: 5px; border-radius: 5px; cursor: pointer; text-align: center; }
+        .tab:hover { background: #1558b0; }
+        .content { max-width: 900px; margin: 0 auto 50px auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .job { border-bottom: 1px dashed #ccc; padding: 10px 0; }
+        .job:last-child { border-bottom: none; }
+        .adsense { text-align: center; margin: 20px 0; }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001"
+        crossorigin="anonymous"></script>
 </head>
 <body>
 
-<header>MY JOB HUNT</header>
-<div class="date-line">Date: 20-August-2025</div>
-<hr>
+<h1>MY JOB HUNT</h1>
+<div class="separator">━━━━━━━━━━━━✦✿✦━━━━━━━━━━━━</div>
+<div class="separator">Date: 20-August-2025</div>
+<div class="separator">━━━━━━━━━━━━✦✿✦━━━━━━━━━━━━</div>
+
+<!-- Tabs -->
+<div class="tabs">
+    <div class="tab" onclick="showCategory('all')">All Jobs</div>
+    <div class="tab" onclick="showCategory('admin')">Admin</div>
+    <div class="tab" onclick="showCategory('sales')">Sales</div>
+    <div class="tab" onclick="showCategory('engineering')">Engineering</div>
+    <div class="tab" onclick="showCategory('it')">IT</div>
+    <div class="tab" onclick="showCategory('logistics')">Logistics</div>
+    <div class="tab" onclick="showCategory('misc')">Misc</div>
+</div>
 
 <!-- Top AdSense -->
-<div style="text-align:center; margin:20px 0;">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-3037151964199001"
-     data-ad-slot="1234567890"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+<div class="adsense">
+    <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3037151964199001"
+        data-ad-slot="1234567890"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 </div>
 
-<div class="tabs">
-    <div class="tab active" onclick="openTab('admin')">Administrative</div>
-    <div class="tab" onclick="openTab('sales')">Sales</div>
-    <div class="tab" onclick="openTab('engineering')">Engineering</div>
-    <div class="tab" onclick="openTab('logistics')">Logistics</div>
-    <div class="tab" onclick="openTab('hospitality')">Hospitality</div>
-    <div class="tab" onclick="openTab('medical')">Medical</div>
-    <div class="tab" onclick="openTab('misc')">Miscellaneous</div>
-</div>
+<div class="content" id="jobs">
 
-<!-- Top/Middle AdSense -->
-<div style="text-align:center; margin:20px 0;">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-3037151964199001"
-     data-ad-slot="1234567890"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
+    <!-- Job Example -->
+    <div class="job" data-category="admin">
+        📌 Teacher Assistant (Male)<br>
+        📍 American Bilingual School, Kuwait – Elementary Department<br>
+        💰 Salary: 300 KD<br>
+        🎓 Qualification: Bachelor's of English<br>
+        📩 Share CV via messages
+    </div>
 
-<div id="admin" class="content-section active">
-<h3>Administrative Jobs</h3>
-<p>📌 HR Assistant / HR Coordinator – Waho International, Kuwait City<br>
-💰 Salary: 250–280 KD<br>
-⏰ Hours: 9 AM – 5 PM<br>
-🎓 Experience: 3–5 Years<br>
-📩 Apply via email: waho6560@gmail.com / wanob5bu@gmall.com<br>
-📱 Mobile: +965 66596843</p>
+    <div class="job" data-category="engineering">
+        📌 Instrument Supervisor<br>
+        📍 EPC Client, Kuwait<br>
+        💰 Salary: 500–550 KD/month (Food & Accommodation included)<br>
+        🎓 Qualification: Diploma + 8 yrs Oil & Gas experience<br>
+        📩 Apply via email: sanchita.rzindia@gmail.com
+    </div>
 
-<p>📌 Office Staff – Multiple Positions – Prestigious Company, Kuwait<br>
-💰 Competitive Salary<br>
-⏰ Working Hours: As per role<br>
-🎓 Requirements: Marketing Officer, Receptionist<br>
-📩 Apply via email: mbcmanpowerco@gmail.com</p>
-</div>
+    <div class="job" data-category="logistics">
+        📌 Procurement and Shipping Officer<br>
+        📍 Kuwait<br>
+        💼 Responsibilities: Manage procurement & shipping<br>
+        ✅ Minimum 2 yrs experience, Immediate availability<br>
+        📧 Apply: prajith@aspire.com.kw
+    </div>
 
-<div id="sales" class="content-section">
-<h3>Sales Jobs</h3>
-<p>📌 Salesperson – SmartCare (Mobile Accessories)<br>
-📍 Kuwait<br>
-💰 Salary: Based on experience<br>
-📩 Apply via WhatsApp: 90982352 / 90998340</p>
+    <!-- Add all other jobs here using the same format, assign data-category accordingly -->
 
-<p>📌 Sales Coordinator & Accountant – FMCG Company<br>
-📍 Kuwait<br>
-📩 Apply via email: shefna.s@awskuwait.co</p>
+    <!-- Middle AdSense -->
+    <div class="adsense">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-3037151964199001"
+            data-ad-slot="1234567890"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 
-<p>📌 Female Sales Executive – Al-Zayani Company<br>
-📍 Kuwait<br>
-💰 Competitive salary + incentives<br>
-📩 Apply: https://www.al-zayani.com/careers.html</p>
-</div>
+    <!-- Add more jobs below -->
 
-<div id="engineering" class="content-section">
-<h3>Engineering & Technical Jobs</h3>
-<p>📌 Mechanical Engineer – Leading Company<br>
-📍 Kuwait<br>
-💰 Salary: 500–550 KD<br>
-📩 Apply via email: recruitmentkuwait194@gmail.com</p>
+    <!-- Bottom AdSense -->
+    <div class="adsense">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-3037151964199001"
+            data-ad-slot="1234567890"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 
-<p>📌 Estimation Engineer & Project Control Engineer – JIP Kuwait<br>
-📍 Kuwait<br>
-📩 Apply via email: Rahul@jipkw.com</p>
-</div>
-
-<div id="logistics" class="content-section">
-<h3>Logistics & Supply Chain</h3>
-<p>📌 Procurement and Shipping Officer – Aspire<br>
-📍 Kuwait<br>
-💰 Benefits: Immediate hiring, dynamic team<br>
-📩 Apply: prajith@aspire.com.kw</p>
-
-<p>📌 Trainer – Logistics & Supply Chain Management<br>
-📍 Kuwait<br>
-📩 Apply via WhatsApp: +965-95570771 / Email: hr@dreamztree.com</p>
-</div>
-
-<div id="hospitality" class="content-section">
-<h3>Hospitality & Catering Jobs</h3>
-<p>📌 Burger Chef / Line Cook – Wathif, Saad Al Abdullah<br>
-📩 Apply via WhatsApp: +965 66961228</p>
-
-<p>📌 Cook / Kitchen Staff – Leading Catering Company<br>
-📩 Apply via WhatsApp: +965 96721641 / +965 97541049</p>
-
-<p>📌 Kitchen Assistant – Kuwait<br>
-📩 Apply via email: reem.modak@blueseakw.com</p>
-</div>
-
-<div id="medical" class="content-section">
-<h3>Medical Jobs</h3>
-<p>📌 Registered Nurse – Silkor (Kuwait & GCC)<br>
-📩 Apply via email: recruitment@silkor.com</p>
-
-<p>📌 Facial Therapist – Silkor<br>
-📩 Apply via email: recruitment@silkor.com</p>
-</div>
-
-<div id="misc" class="content-section">
-<h3>Miscellaneous Jobs</h3>
-<p>📌 Structure Fabricator – Immediate Start (Visa 18)<br>
-📩 Apply via WhatsApp: 65883371</p>
-
-<p>📌 Heavy Driver with Sales Skills – Kuwait<br>
-📩 Apply via email/WhatsApp: Careers@al-dhow.com / 60636133</p>
-
-<p>📌 Field Salesperson – Hawally (Mobile Accessories)<br>
-📩 Apply via WhatsApp: +965 66984289</p>
-</div>
-
-<!-- Bottom AdSense -->
-<div style="text-align:center; margin:20px 0;">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-3037151964199001"
-     data-ad-slot="1234567890"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 </div>
 
 <script>
-function openTab(tabName) {
-    var i, sections, tabs;
-    sections = document.getElementsByClassName("content-section");
-    for (i = 0; i < sections.length; i++) {
-        sections[i].classList.remove("active");
+    function showCategory(cat) {
+        const jobs = document.querySelectorAll('.job');
+        jobs.forEach(job => {
+            if (cat === 'all' || job.dataset.category === cat) {
+                job.style.display = 'block';
+            } else {
+                job.style.display = 'none';
+            }
+        });
     }
-    tabs = document.getElementsByClassName("tab");
-    for (i = 0; i < tabs.length; i++) {
-        tabs[i].classList.remove("active");
-    }
-    document.getElementById(tabName).classList.add("active");
-    event.currentTarget.classList.add("active");
-}
 </script>
 
 </body>
