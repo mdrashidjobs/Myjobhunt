@@ -3,139 +3,86 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MY JOB HUNT</title>
+<title>MY JOB HUNT - 20 August 2025</title>
 
-<!-- Google AdSense Verification -->
+<!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001"
      crossorigin="anonymous"></script>
 
 <style>
-body { font-family: Arial, sans-serif; background: #f0f8ff; margin:0; padding:0; }
-header { text-align: center; background: #1e90ff; color: white; padding: 20px 0; font-size: 26px; font-weight: bold; }
-.date { text-align: center; margin: 10px 0; font-size: 16px; }
-.separator { border-top: 2px solid #1e90ff; margin: 10px 0; }
-.tab-container { text-align: center; margin: 20px 0; }
-.tab-button { background: #1e90ff; color: white; border: none; padding: 10px 20px; margin: 5px; cursor: pointer; border-radius: 5px; font-size: 16px; }
-.tab-button:hover { background: #104e8b; }
-.tab-content { display: none; padding: 10px 20px; }
-.tab-content.active { display: block; }
-.job { background: #ffffff; padding: 10px; margin: 10px 0; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-.job-title { font-weight: bold; color: #1e90ff; }
-.job-location, .job-salary, .job-experience, .job-contact { margin: 5px 0; }
-.archive { text-align: center; margin: 20px 0; font-size: 14px; }
+body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #0b4d91;
+    color: white;
+    padding: 15px 10px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.date-line {
+    text-align: center;
+    background-color: #f1f1f1;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+
+.tab {
+    background-color: #0073e6;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.tab.active {
+    background-color: #005bb5;
+}
+
+.content-section {
+    display: none;
+    padding: 10px 20px;
+    background: white;
+    margin: 10px auto;
+    max-width: 1200px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.content-section.active {
+    display: block;
+}
+
+hr {
+    border: 0;
+    border-top: 2px solid #0073e6;
+    margin: 15px 0;
+}
 </style>
 </head>
 <body>
 
 <header>MY JOB HUNT</header>
-<div class="date">Date: 20-August-2025</div>
-<div class="separator"></div>
+<div class="date-line">Date: 20-August-2025</div>
+<hr>
 
-<!-- Tabs -->
-<div class="tab-container">
-<button class="tab-button" onclick="openTab('Admin')">Administration</button>
-<button class="tab-button" onclick="openTab('Sales')">Sales & Marketing</button>
-<button class="tab-button" onclick="openTab('Engineering')">Engineering</button>
-<button class="tab-button" onclick="openTab('Medical')">Medical & Wellness</button>
-<button class="tab-button" onclick="openTab('Others')">Other Jobs</button>
-</div>
-
-<!-- Tab Contents -->
-<div id="Admin" class="tab-content active">
-  <div class="job">
-    <div class="job-title">Teacher Assistant (Male)</div>
-    <div class="job-location">American Bilingual School – Elementary Department, Kuwait</div>
-    <div class="job-salary">Salary: 300 KD</div>
-    <div class="job-experience">Qualification: Bachelor's of English</div>
-    <div class="job-contact">Apply: Share CV via WhatsApp/email</div>
-  </div>
-  <div class="job">
-    <div class="job-title">Female Accountant</div>
-    <div class="job-location">Kuwait City</div>
-    <div class="job-salary">450–500 KD</div>
-    <div class="job-experience">Experience: 5–7 Years</div>
-    <div class="job-contact">Apply: careers.royalrichkwt@gmail.com</div>
-  </div>
-  <div class="job">
-    <div class="job-title">Secretary (Female, 1 Month)</div>
-    <div class="job-location">Kuwait City</div>
-    <div class="job-salary">375 KD</div>
-    <div class="job-contact">Apply: careers.royalrichkwt@gmail.com</div>
-  </div>
-</div>
-
-<div id="Sales" class="tab-content">
-  <div class="job">
-    <div class="job-title">Salesperson – SmartCare (Mobile Accessories)</div>
-    <div class="job-location">Kuwait</div>
-    <div class="job-experience">1–2 years sales experience, Visa 18 transferable</div>
-    <div class="job-contact">Apply via WhatsApp: 90982352 / 90998340</div>
-  </div>
-  <div class="job">
-    <div class="job-title">Sales Coordinator & Accountant – FMCG Company</div>
-    <div class="job-location">Kuwait</div>
-    <div class="job-experience">Sales Coordinator: FMCG & ERP experience</div>
-    <div class="job-contact">Apply: shefna.s@awskuwait.co</div>
-  </div>
-</div>
-
-<div id="Engineering" class="tab-content">
-  <div class="job">
-    <div class="job-title">Mechanical Engineer – Leading Company</div>
-    <div class="job-location">Kuwait</div>
-    <div class="job-experience">Bachelor’s Degree, 5+ years experience</div>
-    <div class="job-contact">Apply: recruitmentkuwait194@gmail.com</div>
-  </div>
-  <div class="job">
-    <div class="job-title">Estimation Engineer & Project Control Engineer</div>
-    <div class="job-location">Kuwait</div>
-    <div class="job-contact">Apply: Rahul@jipkw.com</div>
-  </div>
-</div>
-
-<div id="Medical" class="tab-content">
-  <div class="job">
-    <div class="job-title">Registered Nurse – Silkor</div>
-    <div class="job-location">Kuwait, Qatar, Oman, UAE</div>
-    <div class="job-contact">Apply: recruitment@silkor.com</div>
-  </div>
-  <div class="job">
-    <div class="job-title">Facial Therapist – Silkor Laser & Cosmetic Center</div>
-    <div class="job-location">Kuwait, Qatar, Oman, UAE</div>
-    <div class="job-contact">Apply: recruitment@silkor.com</div>
-  </div>
-</div>
-
-<div id="Others" class="tab-content">
-  <div class="job">
-    <div class="job-title">Burger Chef / Line Cook</div>
-    <div class="job-location">Wathif, Saad Al Abdullah, Kuwait</div>
-    <div class="job-experience">Smashed Burgers, Chicken Burgers, Sauces</div>
-    <div class="job-contact">WhatsApp: +965 66961228</div>
-  </div>
-  <div class="job">
-    <div class="job-title">Heavy Equipment & Truck Operators / Auto Electrician</div>
-    <div class="job-location">Oil Field & Construction Logistics, Kuwait</div>
-    <div class="job-contact">Apply: WhatsApp +96569029366 / Email: zia.rahman@jipkw.com</div>
-  </div>
-</div>
-
-<div class="archive">
-<a href="#">View Archive</a>
-</div>
-
-<script>
-function openTab(tabName) {
-  var i, tabcontent, tabbuttons;
-  tabcontent = document.getElementsByClassName("tab-content");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  document.getElementById(tabName).style.display = "block";
-}
-</script>
-
-<!-- AdSense Display -->
+<!-- Top AdSense -->
 <div style="text-align:center; margin:20px 0;">
 <ins class="adsbygoogle"
      style="display:block"
@@ -145,6 +92,149 @@ function openTab(tabName) {
      data-full-width-responsive="true"></ins>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div class="tabs">
+    <div class="tab active" onclick="openTab('admin')">Administrative</div>
+    <div class="tab" onclick="openTab('sales')">Sales</div>
+    <div class="tab" onclick="openTab('engineering')">Engineering</div>
+    <div class="tab" onclick="openTab('logistics')">Logistics</div>
+    <div class="tab" onclick="openTab('hospitality')">Hospitality</div>
+    <div class="tab" onclick="openTab('medical')">Medical</div>
+    <div class="tab" onclick="openTab('misc')">Miscellaneous</div>
+</div>
+
+<!-- Top/Middle AdSense -->
+<div style="text-align:center; margin:20px 0;">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3037151964199001"
+     data-ad-slot="1234567890"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div id="admin" class="content-section active">
+<h3>Administrative Jobs</h3>
+<p>📌 HR Assistant / HR Coordinator – Waho International, Kuwait City<br>
+💰 Salary: 250–280 KD<br>
+⏰ Hours: 9 AM – 5 PM<br>
+🎓 Experience: 3–5 Years<br>
+📩 Apply via email: waho6560@gmail.com / wanob5bu@gmall.com<br>
+📱 Mobile: +965 66596843</p>
+
+<p>📌 Office Staff – Multiple Positions – Prestigious Company, Kuwait<br>
+💰 Competitive Salary<br>
+⏰ Working Hours: As per role<br>
+🎓 Requirements: Marketing Officer, Receptionist<br>
+📩 Apply via email: mbcmanpowerco@gmail.com</p>
+</div>
+
+<div id="sales" class="content-section">
+<h3>Sales Jobs</h3>
+<p>📌 Salesperson – SmartCare (Mobile Accessories)<br>
+📍 Kuwait<br>
+💰 Salary: Based on experience<br>
+📩 Apply via WhatsApp: 90982352 / 90998340</p>
+
+<p>📌 Sales Coordinator & Accountant – FMCG Company<br>
+📍 Kuwait<br>
+📩 Apply via email: shefna.s@awskuwait.co</p>
+
+<p>📌 Female Sales Executive – Al-Zayani Company<br>
+📍 Kuwait<br>
+💰 Competitive salary + incentives<br>
+📩 Apply: https://www.al-zayani.com/careers.html</p>
+</div>
+
+<div id="engineering" class="content-section">
+<h3>Engineering & Technical Jobs</h3>
+<p>📌 Mechanical Engineer – Leading Company<br>
+📍 Kuwait<br>
+💰 Salary: 500–550 KD<br>
+📩 Apply via email: recruitmentkuwait194@gmail.com</p>
+
+<p>📌 Estimation Engineer & Project Control Engineer – JIP Kuwait<br>
+📍 Kuwait<br>
+📩 Apply via email: Rahul@jipkw.com</p>
+</div>
+
+<div id="logistics" class="content-section">
+<h3>Logistics & Supply Chain</h3>
+<p>📌 Procurement and Shipping Officer – Aspire<br>
+📍 Kuwait<br>
+💰 Benefits: Immediate hiring, dynamic team<br>
+📩 Apply: prajith@aspire.com.kw</p>
+
+<p>📌 Trainer – Logistics & Supply Chain Management<br>
+📍 Kuwait<br>
+📩 Apply via WhatsApp: +965-95570771 / Email: hr@dreamztree.com</p>
+</div>
+
+<div id="hospitality" class="content-section">
+<h3>Hospitality & Catering Jobs</h3>
+<p>📌 Burger Chef / Line Cook – Wathif, Saad Al Abdullah<br>
+📩 Apply via WhatsApp: +965 66961228</p>
+
+<p>📌 Cook / Kitchen Staff – Leading Catering Company<br>
+📩 Apply via WhatsApp: +965 96721641 / +965 97541049</p>
+
+<p>📌 Kitchen Assistant – Kuwait<br>
+📩 Apply via email: reem.modak@blueseakw.com</p>
+</div>
+
+<div id="medical" class="content-section">
+<h3>Medical Jobs</h3>
+<p>📌 Registered Nurse – Silkor (Kuwait & GCC)<br>
+📩 Apply via email: recruitment@silkor.com</p>
+
+<p>📌 Facial Therapist – Silkor<br>
+📩 Apply via email: recruitment@silkor.com</p>
+</div>
+
+<div id="misc" class="content-section">
+<h3>Miscellaneous Jobs</h3>
+<p>📌 Structure Fabricator – Immediate Start (Visa 18)<br>
+📩 Apply via WhatsApp: 65883371</p>
+
+<p>📌 Heavy Driver with Sales Skills – Kuwait<br>
+📩 Apply via email/WhatsApp: Careers@al-dhow.com / 60636133</p>
+
+<p>📌 Field Salesperson – Hawally (Mobile Accessories)<br>
+📩 Apply via WhatsApp: +965 66984289</p>
+</div>
+
+<!-- Bottom AdSense -->
+<div style="text-align:center; margin:20px 0;">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3037151964199001"
+     data-ad-slot="1234567890"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<script>
+function openTab(tabName) {
+    var i, sections, tabs;
+    sections = document.getElementsByClassName("content-section");
+    for (i = 0; i < sections.length; i++) {
+        sections[i].classList.remove("active");
+    }
+    tabs = document.getElementsByClassName("tab");
+    for (i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove("active");
+    }
+    document.getElementById(tabName).classList.add("active");
+    event.currentTarget.classList.add("active");
+}
 </script>
 
 </body>
