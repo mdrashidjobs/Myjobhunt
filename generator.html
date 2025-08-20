@@ -3,170 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Job Hunt Index Generator</title>
+<title>Job Index Generator</title>
 <style>
-body { font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:0;}
-h1 { text-align:center; color:#0056b3; margin-top:20px;}
-textarea { width:95%; height:200px; margin:20px auto; display:block; font-family:monospace; font-size:14px;}
-button { display:block; margin:10px auto; padding:10px 20px; font-size:16px; background:#0056b3; color:#fff; border:none; border-radius:5px; cursor:pointer;}
-#tabs { display:flex; justify-content:center; flex-wrap:wrap; margin:10px;}
-.tab-btn { padding:10px 15px; margin:5px; background:#007bff; color:#fff; border:none; border-radius:5px; cursor:pointer;}
-.tab-btn.active { background:#003f7f;}
-.tab-content { display:none; padding:20px; max-width:900px; margin:0 auto; background:#fff; border-radius:5px; box-shadow:0 0 5px rgba(0,0,0,0.2);}
-.tab-content.active { display:block;}
-.separator { border-top:2px solid #0056b3; margin:10px 0;}
-.adsense { text-align:center; margin:20px 0;}
+body { font-family: Arial, sans-serif; background: #f9f9f9; padding: 20px; }
+textarea { width: 100%; height: 400px; font-family: monospace; margin-bottom: 20px; }
+button { padding: 10px 20px; font-size: 16px; cursor: pointer; margin-right: 10px; }
 </style>
-
-<!-- Google AdSense Meta Tag -->
-<meta name="google-adsense-account" content="ca-pub-3037151964199001">
-
-<!-- Google AdSense Script -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001"
-     crossorigin="anonymous"></script>
-
 </head>
 <body>
 
-<h1>MY JOB HUNT</h1>
-<div class="separator"></div>
-<p style="text-align:center;">Date: <span id="todayDate"></span></p>
-<div class="separator"></div>
-
-<textarea id="rawJobs" placeholder="Paste your WhatsApp job ads here..."></textarea>
-<button id="generateBtn">Generate Index & Download</button>
-
-<div id="tabs"></div>
-<div id="tabContents"></div>
+<h2>WhatsApp Job Index Generator</h2>
+<p>Paste your raw WhatsApp job data below and click “Generate & Download Index”</p>
+<textarea id="rawJobs" placeholder="Paste raw WhatsApp jobs here..."></textarea><br>
+<button onclick="generateIndex()">Generate & Download Index</button>
 
 <script>
-// Set today's date
-document.getElementById('todayDate').innerText = new Date().toLocaleDateString('en-GB', {day:'2-digit', month:'long', year:'numeric'});
-
-// Simple category mapping based on job title keywords
-const categoryKeywords = {
-    "Sales": ["Sales", "Marketing", "Salesperson", "Sales Coordinator", "Business Development"],
-    "Admin/HR": ["HR", "Coordinator", "Assistant", "Secretary", "Receptionist", "Admin"],
-    "Engineering/Technical": ["Engineer", "Mechanical", "Electrical", "Project Control", "Planning"],
-    "Kitchen/Hotel": ["Cook", "Chef", "Kitchen", "Waitress", "Florist"],
-    "Others": []
-};
-
-function assignCategory(title) {
-    for (let cat in categoryKeywords) {
-        for (let kw of categoryKeywords[cat]) {
-            if (title.toLowerCase().includes(kw.toLowerCase())) return cat;
-        }
-    }
-    return "Others";
+function escapeHTML(text) {
+    return text.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 }
 
-document.getElementById('generateBtn').addEventListener('click', () => {
+function generateIndex() {
     const raw = document.getElementById('rawJobs').value.trim();
-    if (!raw) { alert("Please paste WhatsApp jobs first!"); return; }
+    if(!raw) { alert("Please paste the raw jobs first."); return; }
 
-    const jobs = raw.split(/\n\n+/); // Separate jobs by double newlines
-    const categorized = {};
+    // Split jobs by separator
+    const jobs = raw.split(/━━━━━━━━━━━━✦✿✦━━━━━━━━━━━━/).filter(j => j.trim()!=="");
 
+    // Collect unique categories (first line after 📌)
+    let categories = [];
+    let categorizedJobs = {};
     jobs.forEach(job => {
-        const titleMatch = job.match(/📌\s*(.+)/);
-        const title = titleMatch ? titleMatch[1] : "Unknown";
-        const category = assignCategory(title);
-        if (!categorized[category]) categorized[category] = [];
-        categorized[category].push(job);
+        const firstLineMatch = job.match(/📌\s*(.*)/);
+        let cat = firstLineMatch ? firstLineMatch[1].split('–')[0].trim() : "Misc";
+        if(!categories.includes(cat)) categories.push(cat);
+        if(!categorizedJobs[cat]) categorizedJobs[cat] = [];
+        categorizedJobs[cat].push(job.trim());
     });
 
-    // Create tabs
-    const tabContainer = document.createElement('div');
-    tabContainer.id = 'tabs';
-    let tabButtons = '';
-    let tabContents = '';
-    let first = true;
+    // Build tabs HTML
+    let tabsHTML = categories.map((c,i) => 
+        `<button class="tablink" onclick="openTab(event, 'tab${i}')">${c}</button>`
+    ).join(" ");
 
-    for (let cat in categorized) {
-        const btnClass = first ? "tab-btn active" : "tab-btn";
-        tabButtons += `<button class="${btnClass}" onclick="openTab('${cat}')">${cat} (${categorized[cat].length})</button>`;
-        let jobsHtml = categorized[cat].map(job => `<div class="job"><p>${job.replace(/\n/g,'<br>')}</p><div class="separator"></div></div>`).join('');
-        // Insert AdSense middle
-        if (categorized[cat].length > 3) {
-            const mid = Math.floor(categorized[cat].length/2);
-            jobsHtml = jobsHtml.split('</div><div class="separator"></div>')[0] + 
-                        `<div class="adsense"><ins class="adsbygoogle"
-                            style="display:block"
-                            data-ad-client="ca-pub-3037151964199001"
-                            data-ad-slot="1234567890"
-                            data-ad-format="auto"
-                            data-full-width-responsive="true"></ins></div>` +
-                        jobsHtml;
-        }
+    // Build tab contents HTML
+    let contentsHTML = categories.map((c,i) => {
+        let jobsHTML = categorizedJobs[c].map(j => `<pre>${escapeHTML(j)}</pre>`).join("<hr>");
+        return `<div id="tab${i}" class="tabcontent" style="display:${i===0?'block':'none'}">${jobsHTML}</div>`;
+    }).join("");
 
-        const contentClass = first ? "tab-content active" : "tab-content";
-        tabContents += `<div id="${cat}" class="${contentClass}"><div class="adsense"><ins class="adsbygoogle"
-                            style="display:block"
-                            data-ad-client="ca-pub-3037151964199001"
-                            data-ad-slot="1234567890"
-                            data-ad-format="auto"
-                            data-full-width-responsive="true"></ins></div>` +
-                        jobsHtml +
-                        `<div class="adsense"><ins class="adsbygoogle"
-                            style="display:block"
-                            data-ad-client="ca-pub-3037151964199001"
-                            data-ad-slot="1234567890"
-                            data-ad-format="auto"
-                            data-full-width-responsive="true"></ins></div></div>`;
-        first = false;
-    }
+    // Today's date
+    const today = new Date();
+    const dateStr = today.toLocaleDateString('en-GB', {day:'2-digit', month:'long', year:'numeric'});
 
-    const indexHtml = `
+    // Final HTML
+    const indexHTML = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MY JOB HUNT</title>
 <meta name="google-adsense-account" content="ca-pub-3037151964199001">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001" crossorigin="anonymous"></script>
+<title>MY JOB HUNT</title>
 <style>
-body { font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:0;}
-h1 { text-align:center; color:#0056b3; margin-top:20px;}
-.separator { border-top:2px solid #0056b3; margin:10px 0;}
-#tabs { display:flex; justify-content:center; flex-wrap:wrap; margin:10px;}
-.tab-btn { padding:10px 15px; margin:5px; background:#007bff; color:#fff; border:none; border-radius:5px; cursor:pointer;}
-.tab-btn.active { background:#003f7f;}
-.tab-content { display:none; padding:20px; max-width:900px; margin:0 auto; background:#fff; border-radius:5px; box-shadow:0 0 5px rgba(0,0,0,0.2);}
-.tab-content.active { display:block;}
-.adsense { text-align:center; margin:20px 0;}
-.job p { margin:5px 0;}
+body { font-family: Arial, sans-serif; margin:20px; }
+h1, h2 { text-align:center; }
+button.tablink { padding:10px; margin:5px; cursor:pointer; background:#3498db; color:white; border:none; border-radius:4px; }
+button.tablink:hover { background:#2980b9; }
+div.tabcontent { display:none; padding:10px; border-top:1px solid #ccc; }
+pre { white-space: pre-wrap; word-wrap: break-word; background:#f0f0f0; padding:10px; border-radius:4px; }
+hr { border:none; border-top:1px dashed #aaa; margin:10px 0; }
+/* AdSense placeholder style */
+.adsense { text-align:center; margin:20px 0; }
 </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001" crossorigin="anonymous"></script>
 </head>
 <body>
+
 <h1>MY JOB HUNT</h1>
-<div class="separator"></div>
-<p style="text-align:center;">Date: ${new Date().toLocaleDateString('en-GB', {day:'2-digit', month:'long', year:'numeric'})}</p>
-<div class="separator"></div>
-<div id="tabs">${tabButtons}</div>
-<div id="tabContents">${tabContents}</div>
+<hr>
+<h2>${dateStr}</h2>
+<hr>
+
+<div style="text-align:center;" class="adsense">
+<!-- Top AdSense -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3037151964199001"
+     data-ad-slot="1234567890"
+     data-ad-format="auto"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div style="text-align:center;">${tabsHTML}</div>
+
+${contentsHTML}
+
+<div class="adsense">
+<!-- Bottom AdSense -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3037151964199001"
+     data-ad-slot="1234567890"
+     data-ad-format="auto"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
 <script>
-function openTab(cat) {
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    document.getElementById(cat).classList.add('active');
-    event.currentTarget.classList.add('active');
-    (adsbygoogle = window.adsbygoogle || []).push({});
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) { tablinks[i].style.background = "#3498db"; }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.style.background = "#2980b9";
 }
-(adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+
 </body>
 </html>
 `;
 
     // Trigger download
-    const blob = new Blob([indexHtml], {type:'text/html'});
+    const blob = new Blob([indexHTML], {type:'text/html'});
+    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'job_index.html';
+    a.href = url;
+    a.download = 'index.html';
+    document.body.appendChild(a);
     a.click();
-});
+    document.body.removeChild(a);
+}
 </script>
+
 </body>
 </html>
