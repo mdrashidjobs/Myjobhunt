@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Job Index Generator – Tabs + AdSense</title>
+  <style>
+    *{box-sizing:border-box}
+    body{font-family:Segoe UI,Tahoma,Arial,sans-serif;background:#f5f7fa;color:#2c3e50;line-height:1.6;margin:0;padding:24px}
+    .app{max-width:1200px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.08);overflow:hidden}
+    header{padding:28px 28px 18px;background:linear-gradient(135deg,#2c3e50,#1a2530);color:#fff}
+    header h1{margin:0;font-size:2rem;letter-spacing:.5px}
+    .subhead{display:flex;gap:16px;align-items:center;margin-top:10px;opacity:.9;font-weight:500}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:22px}
+    textarea{width:100%;min-height:340px;padding:16px;border:2px solid #e5e7eb;border-radius:12px;font-size:14px;resize:vertical}
+    textarea:focus{outline:none;border-color:#3498db;box-shadow:0 0 0 3px rgba(52,152,219,.2)}
+    .controls{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field input{padding:10px 12px;border:1.5px solid #e5e7eb;border-radius:10px}
+    .btns{display:flex;gap:12px;margin-top:14px}
+    button{background:linear-gradient(90deg,#3498db,#2980b9);border:none;color:#fff;padding:12px 18px;border-radius:999px;cursor:pointer;font-weight:600}
+    button:disabled{background:#95a5a6}
+    .card{border:1.5px solid #eaecef;border-radius:12px;overflow:hidden;background:#fff}
+    .card-head{padding:14px 16px;border-bottom:1px solid #eef0f4;background:#fafbfc;font-weight:600}
+    .preview{max-height:560px;overflow:auto}
+    .tabs{display:flex;flex-wrap:wrap}
+    .tab{padding:10px 14px;cursor:pointer;background:#f4f6f8;border-bottom:3px solid transparent;transition:.2s;font-weight:600}
+    .tab.active{background:#fff;border-bottom-color:#3498db;color:#3498db}
+    .pane{display:none;padding:16px}
+    .pane.active{display:block}
+    .job{background:#f8f9fb;border-left:4px solid #3498db;padding:12px;border-radius:8px;margin:0 0 14px;white-space:pre-wrap}
+    footer{padding:14px 20px;border-top:1px solid #eef0f4;background:#fafbfc;color:#6b7280;text-align:center}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>MY JOB HUNT</h1>
+      <div class="subhead">
+        <span id="todayStr"></span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Left: input -->
+      <div class="card">
+        <div class="card-head">Paste WhatsApp Jobs (use separator: ━━━━━━━━━━━━✦✿✦━━━━━━━━━━━━)</div>
+        <div style="padding:16px">
+          <textarea id="src" placeholder="Paste your jobs here..."></textarea>
+
+          <div class="controls">
+            <div class="field">
+              <label>AdSense Client (ca-pub-…)</label>
+              <input id="adsClient" placeholder="ca-pub-3037151964199001" value="ca-pub-3037151964199001" />
+            </div>
+            <div class="field">
+              <label>Ad Slot (Header, optional)</label>
+              <input id="slotTop" placeholder="e.g. 1234567890" />
+            </div>
+            <div class="field">
+              <label>Ad Slot (Middle, optional)</label>
+              <input id="slotMid" placeholder="e.g. 1234567891" />
+            </div>
+            <div class="field">
+              <label>Ad Slot (Footer, optional)</label>
+              <input id="slotBot" placeholder="e.g. 1234567892" />
+            </div>
+          </div>
+
+          <div class="btns">
+            <button id="gen">Generate Preview</button>
+            <button id="dl" disabled>Download index.html</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: preview -->
+      <div class="card">
+        <div class="card-head">Preview</div>
+        <div id="preview" class="preview"></div>
+      </div>
+    </div>
+
+    <footer>MY JOB HUNT © 2K25</footer>
+  </div>
+
+  <script>
+    // date
+    const today = new Date();
+    const dateStr = today.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+    document.getElementById('todayStr').textContent = dateStr;
+
+    // helpers
+    const SEP = '━━━━━━━━━━━━✦✿✦━━━━━━━━━━━━';
+
+    function splitBlocks(text){
+      return text.split(SEP).map(x => x.trim()).filter(Boolean);
+    }
+
+    // keyword buckets (auto-categorize)
+    const CATS = [
+      { key:'admin', label:'Admin', kw:/\b(admin|reception|clerk|government affairs|office staff)\b/i },
+      { key:'it', label:'IT', kw:/\b(IT|developer|network|technician|shopify|server|synology|website|software|system)\b/i },
+      { key:'sales', label:'Sales', kw:/\b(sales|store manager|visual merch|marketing|service advisor|call center|receptionist - automotive)\b/i },
+      { key:'medical', label:'Medical', kw:/\b(nurse|medical|registrar|healthcare|dent(al|ist)|pharmac|radiology|lab tech|optician|therap)\b/i },
+      { key:'logistics', label:'Logistics', kw:/\b(logistics|warehouse|inventory|driver|lorry|bicycle|procurement|supply chain)\b/i },
+      { key:'fnb', label:'F&B', kw:/\b(chef|cook|kitchen|pastry|commi|restaurant|BOH|food truck|f&b)\b/i },
+      { key:'eng', label:'Engineering', kw:/\b(oil|gas|KOC|HSE|safety|mechanical|civil|scaffold|rigging|hydrojet|qc|inspector|engineer|supervisor|maintenance)\b/i },
+      { key:'misc', label:'Misc', kw:/.*/ } // catch-all
+    ];
+
+    function bucketize(blocks){
+      const map = { all: blocks, admin:[], it:[], sales:[], medical:[], logistics:[], fnb:[], eng:[], misc:[] };
+      blocks.forEach(b => {
+        const hit = CATS.find(c => c.kw.test(b)) || CATS[CATS.length-1];
+        map[hit.key].push(b);
+      });
+      return map;
+    }
+
+    function tabsHTML(buckets){
+      const tabBtns = [
+        ['all','All'],
+        ...CATS.map(c => [c.key, c.label])
+      ].map(([k,l],i)=>`<div class="tab ${i===0?'active':''}" data-k="${k}">${l}</div>`).join('');
+
+      const panes = [
+        ['all','All']
+      ].concat(CATS.map(c=>[c.key,c.label]))
+       .map(([k])=>{
+          const jobs = (buckets[k]||[]).map(b=>`<div class="job">${b}</div>`).join('') || `<div class="job">No items in this tab.</div>`;
+          return `<div class="pane ${k==='all'?'active':''}" id="pane-${k}">${jobs}</div>`;
+       }).join('');
+
+      return `
+        <div class="tabs">${tabBtns}</div>
+        ${panes}
+      `;
+    }
+
+    function wireTabs(container){
+      const tabs = container.querySelectorAll('.tab');
+      const panes = container.querySelectorAll('.pane');
+      tabs.forEach(t=>{
+        t.addEventListener('click',()=>{
+          tabs.forEach(x=>x.classList.remove('active'));
+          panes.forEach(p=>p.classList.remove('active'));
+          t.classList.add('active');
+          container.querySelector('#pane-'+t.dataset.k).classList.add('active');
+        });
+      });
+    }
+
+    // AdSense helpers for generated file (avoid closing outer script)
+    function adsHead(client){
+      if(!client) return '';
+      const opener = '<scr'+'ipt async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client='+client+'" crossorigin="anonymous"></scr'+'ipt>';
+      const meta = '<meta name="google-adsense-account" content="'+client+'">';
+      return meta + '\n' + opener;
+    }
+
+    function adsUnit(client, slot){
+      if(!client || !slot) return '';
+      const ins = `
+<ins class="adsbygoogle" style="display:block"
+     data-ad-client="${client}" data-ad-slot="${slot}"
+     data-ad-format="auto" data-full-width-responsive="true"></ins>`;
+      const init = '<scr'+'ipt>(adsbygoogle=window.adsbygoogle||[]).push({});</scr'+'ipt>';
+      return ins + '\n' + init;
+    }
+
+    function buildPreviewHTML(buckets){
+      return tabsHTML(buckets);
+    }
+
+    function buildDownloadHTML(buckets, client, slotTop, slotMid, slotBot){
+      const allJobs = (buckets.all||[]);
+      const midIndex = Math.floor(allJobs.length/2);
+
+      // Build per-tab panes for downloaded file
+      function panesForDownload(){
+        const allPane = `<div class="pane active" id="pane-all">${
+          allJobs.map((b,i)=>{
+            let x = `<div class="job">${b}</div>`;
+            if (i===0 && slotTop) x = adsUnit(client,slotTop) + '\n' + x;
+            if (i===midIndex && slotMid) x += '\n' + adsUnit(client,slotMid);
+            return x;
+          }).join('') + (slotBot ? '\n'+adsUnit(client,slotBot) : '')
+        }</div>`;
+
+        const others = CATS.map(c=>{
+          const arr = buckets[c.key]||[];
+          const html = arr.length
+            ? arr.map(b=>`<div class="job">${b}</div>`).join('')
+            : `<div class="job">No items in this tab.</div>`;
+          return `<div class="pane" id="pane-${c.key}">${html}</div>`;
+        }).join('');
+
+        return allPane + others;
+      }
+
+      const tabs = `
+        <div class="tabs">
+          <div class="tab active" data-k="all">All</div>
+          ${CATS.map(c=>`<div class="tab" data-k="${c.key}">${c.label}</div>`).join('')}
+        </div>`;
+
+      // small script to wire tabs (split closing tag to avoid breaking generator)
+      const tabJS =
+`<scr`+`ipt>
+const t=document.querySelectorAll('.tab'),p=document.querySelectorAll('.pane');
+t.forEach(x=>x.addEventListener('click',()=>{t.forEach(a=>a.classList.remove('active'));p.forEach(b=>b.classList.remove('active'));x.classList.add('active');document.querySelector('#pane-'+x.dataset.k).classList.add('active');}));
+</scr`+`ipt>`;
+
+      return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MY JOB HUNT</title>
+${adsHead(client)}
+<style>
+body{font-family:Segoe UI,Tahoma,Arial,sans-serif;background:#f5f7fa;color:#2c3e50;line-height:1.6;margin:0;padding:18px}
+.container{max-width:960px;margin:0 auto;background:#fff;border-radius:12px;box-shadow:0 10px 26px rgba(0,0,0,.06);overflow:hidden}
+header{padding:22px;background:#2c3e50;color:#fff}
+header h1{margin:0}
+.date{opacity:.9;margin-top:6px}
+.tabs{display:flex;flex-wrap:wrap;background:#fafbfc;border-bottom:1px solid #eef0f4}
+.tab{padding:10px 14px;cursor:pointer;background:#f4f6f8;border-bottom:3px solid transparent;font-weight:600}
+.tab.active{background:#fff;border-bottom-color:#3498db;color:#3498db}
+.pane{display:none;padding:16px}
+.pane.active{display:block}
+.job{background:#f8f9fb;border-left:4px solid #3498db;padding:12px;border-radius:8px;margin:0 0 14px;white-space:pre-wrap}
+footer{padding:12px 16px;border-top:1px solid #eef0f4;background:#fafbfc;color:#6b7280;text-align:center}
+</style>
+</head>
+<body>
+<div class="container">
+<header><h1>MY JOB HUNT</h1><div class="date">${dateStr}</div></header>
+${tabs}
+${panesForDownload()}
+<footer>MY JOB HUNT © 2K25</footer>
+</div>
+${tabJS}
+</body>
+</html>`;
+    }
+
+    // actions
+    let downloadHTML = '';
+
+    document.getElementById('gen').addEventListener('click', ()=>{
+      const raw = document.getElementById('src').value || '';
+      const client = (document.getElementById('adsClient').value || '').trim();
+      const sTop = (document.getElementById('slotTop').value || '').trim();
+      const sMid = (document.getElementById('slotMid').value || '').trim();
+      const sBot = (document.getElementById('slotBot').value || '').trim();
+
+      if(!raw.trim()){ alert('Paste your WhatsApp jobs first.'); return; }
+
+      const blocks = splitBlocks(raw);
+      const buckets = bucketize(blocks);
+
+      // PREVIEW
+      const wrap = document.createElement('div');
+      wrap.innerHTML = buildPreviewHTML(buckets);
+      const preview = document.getElementById('preview');
+      preview.innerHTML = '';
+      preview.appendChild(wrap);
+      wireTabs(preview);
+
+      // DOWNLOAD
+      downloadHTML = buildDownloadHTML(buckets, client, sTop, sMid, sBot);
+      document.getElementById('dl').disabled = false;
+    });
+
+    document.getElementById('dl').addEventListener('click', ()=>{
+      if(!downloadHTML){ alert('Generate first.'); return; }
+      const blob = new Blob([downloadHTML], {type:'text/html'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'index.html';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    });
+  </script>
+</body>
+</html>
