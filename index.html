@@ -1,1062 +1,505 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MY JOB HUNT</title>
-<meta name="google-adsense-account" content="ca-pub-3037151964199001">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001" crossorigin="anonymous"></script>
-<style>
-body{font-family:Segoe UI,Tahoma,Arial,sans-serif;background:#f5f7fa;color:#2c3e50;line-height:1.6;margin:0;padding:18px}
-.container{max-width:960px;margin:0 auto;background:#fff;border-radius:12px;box-shadow:0 10px 26px rgba(0,0,0,.06);overflow:hidden}
-header{padding:22px;background:#2c3e50;color:#fff}
-header h1{margin:0}
-.date{opacity:.9;margin-top:6px}
-.tabs{display:flex;flex-wrap:wrap;background:#fafbfc;border-bottom:1px solid #eef0f4}
-.tab{padding:10px 14px;cursor:pointer;background:#f4f6f8;border-bottom:3px solid transparent;font-weight:600}
-.tab.active{background:#fff;border-bottom-color:#3498db;color:#3498db}
-.pane{display:none;padding:16px}
-.pane.active{display:block}
-.job{background:#f8f9fb;border-left:4px solid #3498db;padding:12px;border-radius:8px;margin:0 0 14px;white-space:pre-wrap}
-footer{padding:12px 16px;border-top:1px solid #eef0f4;background:#fafbfc;color:#6b7280;text-align:center}
-</style>
-</head>
-<body>
-<div class="container">
-<header><h1>MY JOB HUNT</h1><div class="date">Thursday, August 21, 2025</div></header>
-
-        <div class="tabs">
-          <div class="tab active" data-k="all">All</div>
-          <div class="tab" data-k="admin">Admin</div><div class="tab" data-k="it">IT</div><div class="tab" data-k="sales">Sales</div><div class="tab" data-k="medical">Medical</div><div class="tab" data-k="logistics">Logistics</div><div class="tab" data-k="fnb">F&B</div><div class="tab" data-k="eng">Engineering</div><div class="tab" data-k="misc">Misc</div>
-        </div>
-<div class="pane active" id="pane-all">
-<ins class="adsbygoogle" style="display:block"
-     data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890"
-     data-ad-format="auto" data-full-width-responsive="true"></ins>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MY JOB HUNT</title><meta name="google-adsense-account" content="ca-pub-3037151964199001"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001" crossorigin="anonymous"></script><style>
+    *{box-sizing:border-box}
+    body{font-family:Segoe UI,Tahoma,Arial,sans-serif;background:#f5f7fa;color:#2c3e50;line-height:1.6;margin:0;padding:24px}
+    .app{max-width:1200px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.08);overflow:hidden}
+    header{padding:28px;background:linear-gradient(135deg,#2c3e50,#1a2530);color:#fff;text-align:center}
+    header h1{margin:0;font-size:2.2rem;letter-spacing:.5px;font-weight:700}
+    .subhead{margin-top:10px;opacity:.9;font-weight:500;font-size:1.1rem}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:22px}
+    textarea{width:100%;min-height:340px;padding:16px;border:2px solid #e5e7eb;border-radius:12px;font-size:14px;resize:vertical;transition:all 0.3s ease}
+    textarea:focus{outline:none;border-color:#3498db;box-shadow:0 0 0 3px rgba(52,152,219,.2)}
+    .controls{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+    .field{display:flex;flex-direction:column;gap:6px;flex:1}
+    .field input{padding:10px 12px;border:1.5px solid #e5e7eb;border-radius:10px;transition:all 0.3s ease}
+    .field input:focus{border-color:#3498db;box-shadow:0 0 0 2px rgba(52,152,219,.1)}
+    .btns{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
+    button{background:linear-gradient(90deg,#3498db,#2980b9);border:none;color:#fff;padding:12px 18px;border-radius:999px;cursor:pointer;font-weight:600;transition:all 0.2s ease}
+    button:hover{transform:translateY(-2px);box-shadow:0 4px 8px rgba(0,0,0,0.1)}
+    button:disabled{background:#95a5a6;transform:none;box-shadow:none}
+    .card{border:1.5px solid #eaecef;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,0.05)}
+    .card-head{padding:14px 16px;border-bottom:1px solid #eef0f4;background:linear-gradient(90deg, #fafbfc, #f0f4f8);font-weight:600;font-size:1.1rem}
+    .preview{max-height:560px;overflow:auto;padding:10px}
+    footer{padding:14px 20px;border-top:1px solid #eef0f4;background:#fafbfc;color:#6b7280;text-align:center}
+    .instructions{margin-top:20px;font-size:14px;color:#444;background:#fafbfc;padding:16px;border-radius:10px;line-height:1.5}
+    .layout{display:flex;min-height:600px}
+    .menu{width:220px;background:#fafbfc;border-right:1px solid #eef0f4;display:flex;flex-direction:column}
+    .menu-item{padding:12px 16px;cursor:pointer;border-bottom:1px solid #eef0f4;font-weight:600;transition:all 0.2s ease;display:flex;align-items:center}
+    .menu-item:hover{background:#f0f4f8}
+    .menu-item.active{background:#fff;color:#3498db;border-left:4px solid #3498db}
+    .menu-item::before{content:"";display:inline-block;width:12px;height:12px;margin-right:10px;border-radius:50%;background:#ddd}
+    .menu-item.active::before{background:#3498db}
+    .content{flex:1;padding:16px;overflow-y:auto;background:#fafbfc}
+    .job{background:#fff;border-left:4px solid #3498db;padding:14px;border-radius:8px;margin:0 0 16px;white-space:pre-wrap;box-shadow:0 2px 6px rgba(0,0,0,0.05);transition:all 0.2s ease}
+    .job:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,0.08)}
+    .archive-list ul{list-style:none;padding-left:20px}
+    .archive-toggle{cursor:pointer;color:#3498db;font-weight:600;margin-bottom:10px;display:inline-block}
+    .category-count{font-size:0.8rem;background:#eef0f4;padding:2px 8px;border-radius:10px;margin-left:8px}
+    .highlight{background-color:#fff8e1;padding:2px 4px;border-radius:4px;font-weight:600}
+  </style></head><body><div class="container"><header><h1>MY JOB HUNT</h1><div class="date">Saturday, August 23, 2025</div></header><div class="layout"><div class="menu"><div class="menu-item active" data-k="all">All <span class="category-count">82</span></div><div class="menu-item " data-k="admin">Admin <span class="category-count">10</span></div><div class="menu-item " data-k="it">IT <span class="category-count">10</span></div><div class="menu-item " data-k="sales">Sales <span class="category-count">17</span></div><div class="menu-item " data-k="medical">Medical <span class="category-count">4</span></div><div class="menu-item " data-k="logistics">Logistics <span class="category-count">7</span></div><div class="menu-item " data-k="fnb">F&amp;B <span class="category-count">4</span></div><div class="menu-item " data-k="eng">Engineering <span class="category-count">10</span></div><div class="menu-item " data-k="education">Education <span class="category-count">0</span></div><div class="menu-item " data-k="driver">Driver <span class="category-count">0</span></div><div class="menu-item " data-k="misc">Misc <span class="category-count">20</span></div><div class="menu-item " data-k="archive">Archive <span class="category-count">1</span></div></div><div class="content"><div class="content-pane " id="pane-all" style=""><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
-<div class="job">📌 Administrative / Secretarial Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Secretary – Flower Shop
+<div class="job">📌 Administrative / Secretarial Roles</div><div class="job">📌 Secretary – Flower Shop
 Location: Farwaniya - Al-Rai Area - Block 1, Kuwait
 🌸 Details: Competent secretary for upscale flower shop. Handle orders efficiently with 1–2 years experience.
-✅ Tasks: Receive & supervise orders, excellent customer service, use WhatsApp/Instagram.
-📱 Apply via WhatsApp: 50825582
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Front Office Lead – NOC Operations – Shabakkat
+✅ Tasks: Receive &amp; supervise orders, excellent customer service, use WhatsApp/Instagram.
+📱 Apply via WhatsApp: 50825582</div><div class="job">📌 Front Office Lead – NOC Operations – Shabakkat
 Location: Kuwait
 ✅ Requirements: 5+ yrs experience in telecom NOC/FO roles, OSS/NMS tools proficiency, immediate joiner.
-📩 Apply: shabakkat.hr@shabakkat.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Executive Business Secretary – AI & IT Startups
-💼 Details: Manage executive schedules, correspondence, reports, proposals, presentations, coordinate with clients & partners, support decision-making.
+📩 Apply: shabakkat.hr@shabakkat.com</div><div class="job">📌 Executive Business Secretary – AI &amp; IT Startups
+💼 Details: Manage executive schedules, correspondence, reports, proposals, presentations, coordinate with clients &amp; partners, support decision-making.
 ✅ Requirements: 5+ yrs experience as executive secretary, strong business management skills, Levant nationality only, remote work possible, Article 18 residence.
-📩 Apply: WhatsApp CV: 60972794
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Female Roles – Leading Company
+📩 Apply: WhatsApp CV: 60972794</div><div class="job">📌 Female Roles – Leading Company
 Location: Kuwait
-💼 Details: Secretary (1), Personal Assistant (1), Sales & Marketing (2)
+💼 Details: Secretary (1), Personal Assistant (1), Sales &amp; Marketing (2)
 ✅ Requirements: Female, Arab nationals, good English, professional skills.
 📩 Apply: anushkakuwait22@gmail.com
- (include recent photo)
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Multiple Engineering & Support Roles – Leading Companies (Admin subset: Site Secretary, Registration Officer, Call Centre Executive)
+ (include recent photo)</div><div class="job">📌 Multiple Engineering &amp; Support Roles – Leading Companies (Admin subset: Site Secretary, Registration Officer, Call Centre Executive)
 ✅ Requirements: Relevant experience/qualifications per role, residents of Kuwait, transferable visa (where applicable).
-📩 Apply: Engineering: hrd.vacancies1984@gmail.com
-
-📌 Finance / Accounting Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Finance Manager – Light Fields
+📩 Apply: Engineering: hrd.vacancies1984@gmail.com</div><div class="job">📌 Finance / Accounting Roles</div><div class="job">📌 Finance Manager – Light Fields
 Location: Kuwait
 💼 Responsibilities: Manage accounting, treasury, cost control, payroll, budgeting, forecasting, product pricing, financial analysis.
 ✅ Requirements: Experience in Odoo ERP, CFA certification a plus.
-📩 Apply: careers@lightfields.co
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Senior & Junior Accountant – Provenance Company
+📩 Apply: careers@lightfields.co</div><div class="job">📌 Senior &amp; Junior Accountant – Provenance Company
 Location: Kuwait
 ✅ Requirements: Senior: 10+ yrs exp, Junior: 2 yrs exp. Logistics/transportation background preferred. Transferable residency.
-📩 Apply: vacancies.jobkw26@gmail.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Senior Risk Management Analyst – Mezzan Holding Co.
+📩 Apply: vacancies.jobkw26@gmail.com</div><div class="job">📌 Senior Risk Management Analyst – Mezzan Holding Co.
 Location: Kuwait
 ✅ 5–8 yrs experience in risk, audit, financial planning.
-📩 Apply: careers.mezzan.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Finance Manager – F&B & Electronics
+📩 Apply: careers.mezzan.com</div><div class="job">📌 Finance Manager – F&amp;B &amp; Electronics
 💼 Details: Oversee financial planning, budgeting, reporting, manage finance teams, support strategic decisions.
 ✅ Requirements: 10+ yrs experience, transferable visa 18, available in Kuwait.
-📩 Apply: hr@chayahgroup.com
-
-📌 IT / Technical Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 IT Technician – Omar Co.
+📩 Apply: hr@chayahgroup.com</div><div class="job">📌 IT / Technical Roles</div><div class="job">📌 IT Technician – Omar Co.
 Location: Kuwait
-✅ Networking & PC troubleshooting, independent & team work, strong technical skills.
-📩 Apply: rao@coaxialit.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Odoo Developer – Kuwait
+✅ Networking &amp; PC troubleshooting, independent &amp; team work, strong technical skills.
+📩 Apply: rao@coaxialit.com</div><div class="job">📌 Odoo Developer – Kuwait
 ✅ 2–5 yrs Odoo experience, Python, PostgreSQL, CRM, custom modules.
-📩 Apply: applynow2023@gmail.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Intern / Fresher Graphic Designer – Digital Endurance
+📩 Apply: applynow2023@gmail.com</div><div class="job">📌 Intern / Fresher Graphic Designer – Digital Endurance
 💼 Details: Assist in creating visual content, support senior designers, follow brand guidelines, collaborate on design concepts.
 ✅ Requirements: Freshers/interns in graphic design, willingness to learn, creativity, adaptability.
-📩 Apply: hello@digitalendurance.digital
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Client Success Executive – E3LANATQ8i
+📩 Apply: hello@digitalendurance.digital</div><div class="job">📌 Client Success Executive – E3LANATQ8i
 Location: Kuwait
 ✅ 2+ yrs experience, client management, content creation, marketing plans.
-📩 Apply: e3lanatq8i@gmail.com
-
-📌 Engineering / Technical Supervisory Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Estimation Engineer – Turnkey Projects
+📩 Apply: e3lanatq8i@gmail.com</div><div class="job">📌 Engineering / Technical Supervisory Roles</div><div class="job">📌 Estimation Engineer – Turnkey Projects
 Location: Kuwait
 ✅ 3–8 yrs experience in BOQ, MTO, costing, project planning.
-📩 Apply: hr@aigccgroup.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Lead Technical Engineers (Mechanical/Civil/Electrical) – EPC Company
+📩 Apply: hr@aigccgroup.com</div><div class="job">📌 Lead Technical Engineers (Mechanical/Civil/Electrical) – EPC Company
 Location: Kuwait (Saudi Branch Project)
-✅ 10–15 yrs total exp, 4–6 yrs boilers & turbines. Salary: 13000–17000 SAR/month (food & accommodation included).
-📩 Apply: sanchita.rzindia@gmail.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 HVAC Supervisor – Liberty KW
+✅ 10–15 yrs total exp, 4–6 yrs boilers &amp; turbines. Salary: 13000–17000 SAR/month (food &amp; accommodation included).
+📩 Apply: sanchita.rzindia@gmail.com</div><div class="job">📌 HVAC Supervisor – Liberty KW
 Location: Kuwait
 💼 Details: Supervise installation, maintenance, troubleshooting of Ducted/Package AC systems, coordinate projects, monitor equipment, ensure safety compliance.
-✅ Requirements: 5+ yrs Kuwait experience, diploma/degree in Mechanical/Electrical Engineering, transferable visa (No. 18), English & Arabic proficiency, driving license.
-📩 Apply: info@liberty-kwt.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Safety Officer – Oil & Gas / Construction
+✅ Requirements: 5+ yrs Kuwait experience, diploma/degree in Mechanical/Electrical Engineering, transferable visa (No. 18), English &amp; Arabic proficiency, driving license.
+📩 Apply: info@liberty-kwt.com</div><div class="job">📌 Safety Officer – Oil &amp; Gas / Construction
 Location: Kuwait
-💼 Details: Implement & maintain safety policies, conduct audits/inspections, lead training programs.
-✅ Requirements: B.Tech (Mechanical/Civil/Electrical/Instrumentation), 5+ yrs experience in oil & gas/construction, NEBOSH Lead Auditor & ISO certifications, knowledge of safety regulations & NEBOSH OSHA.
-📩 Apply: WhatsApp CV: 69019270
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Packaging Engineer – FMCG
+💼 Details: Implement &amp; maintain safety policies, conduct audits/inspections, lead training programs.
+✅ Requirements: B.Tech (Mechanical/Civil/Electrical/Instrumentation), 5+ yrs experience in oil &amp; gas/construction, NEBOSH Lead Auditor &amp; ISO certifications, knowledge of safety regulations &amp; NEBOSH OSHA.
+📩 Apply: WhatsApp CV: 69019270</div><div class="job">📌 Packaging Engineer – FMCG
 Location: Kuwait
 ✅ 3+ yrs experience in packaging, CAD tools, sustainability, project management.
-📩 Apply via WhatsApp: 67700514
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Store Keeper – Maximator Manufacturing / Royal Technic
+📩 Apply via WhatsApp: 67700514</div><div class="job">📌 Store Keeper – Maximator Manufacturing / Royal Technic
 Location: Mangaf, Kuwait
 💼 Details: Manage inventory, stock records, receive/store/issue materials, coordinate with suppliers.
 ✅ Requirements: Transferable residency (Article 18), valid Kuwait driving license, organized, reliable, immediate availability preferred.
 📩 Apply: sales@royaltechnic.com
- / WhatsApp: 97325577
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Logistics Company – Procurement, Warehouse Supervisor, Maintenance Coordinator
+ / WhatsApp: 97325577</div><div class="job">📌 Logistics Company – Procurement, Warehouse Supervisor, Maintenance Coordinator
 💼 Details: Manage procurement, oversee warehouse operations, coordinate maintenance.
-✅ Requirements: 2–3 yrs relevant experience, organizational & communication skills, familiar with logistics operations.
-📩 Apply: raeda@sabafreigth.com
-
-📌 Healthcare Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Clinical Dietitian – WeCare
+✅ Requirements: 2–3 yrs relevant experience, organizational &amp; communication skills, familiar with logistics operations.
+📩 Apply: raeda@sabafreigth.com</div><div class="job">📌 Healthcare Roles</div><div class="job">📌 Clinical Dietitian – WeCare
 Location: Kuwait
-✅ Bachelor's/Master’s in Nutrition, MOH license, Arabic & English, currently in Kuwait.
-📩 Apply: info@wecarekuwait.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Optometrist – MD Clinic
+✅ Bachelor's/Master’s in Nutrition, MOH license, Arabic &amp; English, currently in Kuwait.
+📩 Apply: info@wecarekuwait.com</div><div class="job">📌 Optometrist – MD Clinic
 Location: Kuwait
 ✅ Bilingual, prior experience in clinics, valid license.
-📩 Apply: careers@md-clinic.co
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Female Laboratory Technician – Salmiya Clinic
+📩 Apply: careers@md-clinic.co</div><div class="job">📌 Female Laboratory Technician – Salmiya Clinic
 💼 Details: Conduct lab tests, maintain equipment, support medical staff.
 ✅ Requirements: Female, Kuwaiti MOH license, NOC, immediate start.
 💰 Salary: 450 KD
-📩 Apply: WhatsApp 65597294
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Bovine Farm Veterinarian – United Dairy Company
+📩 Apply: WhatsApp 65597294</div><div class="job">📌 Bovine Farm Veterinarian – United Dairy Company
 Location: Kuwait
-💼 Details: Clinical care, herd health programs, reproduction & nutrition, emergency interventions, staff training.
+💼 Details: Clinical care, herd health programs, reproduction &amp; nutrition, emergency interventions, staff training.
 ✅ Requirements: DVM, 3+ yrs experience in large-scale dairy, farm management software familiarity, strong communication, English fluent (Arabic a plus).
 💰 Salary: 1000 KD
-📩 Apply: Link
-
-📌 Sales / Marketing Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Sales Representative – Sable International
+📩 Apply: Link</div><div class="job">📌 Sales / Marketing Roles</div><div class="job">📌 Sales Representative – Sable International
 Location: Kuwait
-✅ Experience with cooperatives & supermarkets, transferable visa, immediate joining.
+✅ Experience with cooperatives &amp; supermarkets, transferable visa, immediate joining.
 📩 Apply: hr@sabelgroup.net
- / WhatsApp: 98003485
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Store Supervisor / Outdoor Sales Executive / Kitchen Operations Manager – Wathif
+ / WhatsApp: 98003485</div><div class="job">📌 Store Supervisor / Outdoor Sales Executive / Kitchen Operations Manager – Wathif
 Location: Kuwait
 ✅ Immediate joining, regular visa, experience 3–7 yrs depending on role.
-📩 Apply via WhatsApp: +965 66961228
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Sales Representative – Solitaire Aluminium Works
+📩 Apply via WhatsApp: +965 66961228</div><div class="job">📌 Sales Representative – Solitaire Aluminium Works
 ✅ Experience in WPC interior doors, fixed salary + commission.
-📩 Apply via WhatsApp: 55518147
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Alghanim Automotive – Sales / Service Advisors / Call Center / Receptionists / Delivery / Marketing
-📩 Apply: malnoubi@alghanim.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 JOURY FLOWER – Beauty & Spa Staff
+📩 Apply via WhatsApp: 55518147</div><div class="job">📌 Alghanim Automotive – Sales / Service Advisors / Call Center / Receptionists / Delivery / Marketing
+📩 Apply: malnoubi@alghanim.com</div><div class="job">📌 JOURY FLOWER – Beauty &amp; Spa Staff
 ✅ Filipino, transferable visa, fixed salary + commission.
-📱 Apply: 55832213 / O@jouryflowersalons
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Pastry Staff – Blob KW
-✅ 1+ yr experience in cookies & molten desserts, transferable visa, local hiring.
-📩 Apply: ck@blobkwt.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Walk-in Interviews – Multiple Retail/FMCG Positions
-Location: Kuwait & Tirur (Brothers International & ETC Fresh Food)
+📱 Apply: 55832213 / O@jouryflowersalons</div><div class="job">📌 Pastry Staff – Blob KW
+✅ 1+ yr experience in cookies &amp; molten desserts, transferable visa, local hiring.
+📩 Apply: ck@blobkwt.com</div><div class="job">📌 Walk-in Interviews – Multiple Retail/FMCG Positions
+Location: Kuwait &amp; Tirur (Brothers International &amp; ETC Fresh Food)
 📆 20–21 August 2025
 🕘 09:30 AM – 12:30 PM
-📱 Contact: 8921773390 / 8921773393 / 9567899853
-
-📌 Drivers / Transportation Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Light Driver – Oil & Gas Company
-💼 Details: Safely operate vehicles, timely transport of personnel & materials, vehicle maintenance.
-✅ Requirements: Transferable visa 18, experience in oil & gas preferred, English fluent.
-📩 Apply: recruitment.kwt05@gmail.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Heavy Driver with Sales Skills – FMCG
+📱 Contact: 8921773390 / 8921773393 / 9567899853</div><div class="job">📌 Drivers / Transportation Roles</div><div class="job">📌 Light Driver – Oil &amp; Gas Company
+💼 Details: Safely operate vehicles, timely transport of personnel &amp; materials, vehicle maintenance.
+✅ Requirements: Transferable visa 18, experience in oil &amp; gas preferred, English fluent.
+📩 Apply: recruitment.kwt05@gmail.com</div><div class="job">📌 Heavy Driver with Sales Skills – FMCG
 💼 Details: Sell products in retail outlets, plan daily sales routes, report market feedback.
 ✅ Requirements: Heavy driving license, 3+ yrs sales experience in FMCG, transferable Article 18 visa.
 💰 Salary: 250 KD + 200 KD incentives
 📩 Apply: Careers@al-dhow.com
- / WhatsApp 60636133
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-MY JOB HUNT</div><div class="job">Date: 19-August-2025</div>
-
-<ins class="adsbygoogle" style="display:block"
-     data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567893"
-     data-ad-format="auto" data-full-width-responsive="true"></ins>
-<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Administrative / Secretarial Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Secretary – Flower Shop
+ / WhatsApp 60636133</div><div class="job">MY JOB HUNT</div><div class="job">Date: 19-August-2025</div>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Administrative / Secretarial Roles</div><div class="job">📌 Secretary – Flower Shop
 Location: Farwaniya - Al-Rai Area - Block 1, Kuwait
 🌸 Details: Competent secretary for upscale flower shop. Handle orders efficiently with 1–2 years experience.
-✅ Tasks: Receive & supervise orders, excellent customer service, use WhatsApp/Instagram.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Front Office Lead – NOC Operations – Shabakkat
+✅ Tasks: Receive &amp; supervise orders, excellent customer service, use WhatsApp/Instagram.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Front Office Lead – NOC Operations – Shabakkat
 Location: Kuwait
 ✅ Requirements: 5+ yrs experience in telecom NOC/FO roles, OSS/NMS tools proficiency, immediate joiner.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Executive Business Secretary – AI & IT Startups
-💼 Details: Manage executive schedules, correspondence, reports, proposals, presentations, coordinate with clients & partners, support decision-making.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Executive Business Secretary – AI &amp; IT Startups
+💼 Details: Manage executive schedules, correspondence, reports, proposals, presentations, coordinate with clients &amp; partners, support decision-making.
 ✅ Requirements: 5+ yrs experience as executive secretary, strong business management skills, Levant nationality only, remote work possible, Article 18 residence.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Female Roles – Leading Company
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Female Roles – Leading Company
 Location: Kuwait
-💼 Details: Secretary (1), Personal Assistant (1), Sales & Marketing (2)
+💼 Details: Secretary (1), Personal Assistant (1), Sales &amp; Marketing (2)
 ✅ Requirements: Female, Arab nationals, good English, professional skills.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Multiple Engineering & Support Roles – Leading Companies (Admin subset: Site Secretary, Registration Officer, Call Centre Executive)
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Multiple Engineering &amp; Support Roles – Leading Companies (Admin subset: Site Secretary, Registration Officer, Call Centre Executive)
 ✅ Requirements: Relevant experience/qualifications per role, residents of Kuwait, transferable visa (where applicable).
-📩 Apply here: https://bit.ly/47z2aQw
-
-📌 Finance / Accounting Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Finance Manager – Light Fields
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Finance / Accounting Roles</div><div class="job">📌 Finance Manager – Light Fields
 Location: Kuwait
 💼 Responsibilities: Manage accounting, treasury, cost control, payroll, budgeting, forecasting, product pricing, financial analysis.
 ✅ Requirements: Experience in Odoo ERP, CFA certification a plus.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Senior & Junior Accountant – Provenance Company
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Senior &amp; Junior Accountant – Provenance Company
 Location: Kuwait
 ✅ Requirements: Senior: 10+ yrs exp, Junior: 2 yrs exp. Logistics/transportation background preferred. Transferable residency.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Senior Risk Management Analyst – Mezzan Holding Co.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Senior Risk Management Analyst – Mezzan Holding Co.
 Location: Kuwait
 ✅ 5–8 yrs experience in risk, audit, financial planning.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Finance Manager – F&B & Electronics
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Finance Manager – F&amp;B &amp; Electronics
 💼 Details: Oversee financial planning, budgeting, reporting, manage finance teams, support strategic decisions.
 ✅ Requirements: 10+ yrs experience, transferable visa 18, available in Kuwait.
-📩 Apply here: https://bit.ly/47z2aQw
-
-📌 IT / Technical Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 IT Technician – Omar Co.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 IT / Technical Roles</div><div class="job">📌 IT Technician – Omar Co.
 Location: Kuwait
-✅ Networking & PC troubleshooting, independent & team work, strong technical skills.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Odoo Developer – Kuwait
+✅ Networking &amp; PC troubleshooting, independent &amp; team work, strong technical skills.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Odoo Developer – Kuwait
 ✅ 2–5 yrs Odoo experience, Python, PostgreSQL, CRM, custom modules.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Intern / Fresher Graphic Designer – Digital Endurance
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Intern / Fresher Graphic Designer – Digital Endurance
 💼 Details: Assist in creating visual content, support senior designers, follow brand guidelines, collaborate on design concepts.
 ✅ Requirements: Freshers/interns in graphic design, willingness to learn, creativity, adaptability.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Client Success Executive – E3LANATQ8i
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Client Success Executive – E3LANATQ8i
 Location: Kuwait
 ✅ 2+ yrs experience, client management, content creation, marketing plans.
-📩 Apply here: https://bit.ly/47z2aQw
-
-📌 Engineering / Technical Supervisory Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Estimation Engineer – Turnkey Projects
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Engineering / Technical Supervisory Roles</div><div class="job">📌 Estimation Engineer – Turnkey Projects
 Location: Kuwait
 ✅ 3–8 yrs experience in BOQ, MTO, costing, project planning.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Lead Technical Engineers (Mechanical/Civil/Electrical) – EPC Company
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Lead Technical Engineers (Mechanical/Civil/Electrical) – EPC Company
 Location: Kuwait (Saudi Branch Project)
-✅ 10–15 yrs total exp, 4–6 yrs boilers & turbines. Salary: 13000–17000 SAR/month (food & accommodation included).
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 HVAC Supervisor – Liberty KW
+✅ 10–15 yrs total exp, 4–6 yrs boilers &amp; turbines. Salary: 13000–17000 SAR/month (food &amp; accommodation included).
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 HVAC Supervisor – Liberty KW
 Location: Kuwait
 💼 Details: Supervise installation, maintenance, troubleshooting of Ducted/Package AC systems, coordinate projects, monitor equipment, ensure safety compliance.
-✅ Requirements: 5+ yrs Kuwait experience, diploma/degree in Mechanical/Electrical Engineering, transferable visa (No. 18), English & Arabic proficiency, driving license.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Safety Officer – Oil & Gas / Construction
+✅ Requirements: 5+ yrs Kuwait experience, diploma/degree in Mechanical/Electrical Engineering, transferable visa (No. 18), English &amp; Arabic proficiency, driving license.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Safety Officer – Oil &amp; Gas / Construction
 Location: Kuwait
-💼 Details: Implement & maintain safety policies, conduct audits/inspections, lead training programs.
-✅ Requirements: B.Tech (Mechanical/Civil/Electrical/Instrumentation), 5+ yrs experience in oil & gas/construction, NEBOSH Lead Auditor & ISO certifications, knowledge of safety regulations & NEBOSH OSHA.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Packaging Engineer – FMCG
+💼 Details: Implement &amp; maintain safety policies, conduct audits/inspections, lead training programs.
+✅ Requirements: B.Tech (Mechanical/Civil/Electrical/Instrumentation), 5+ yrs experience in oil &amp; gas/construction, NEBOSH Lead Auditor &amp; ISO certifications, knowledge of safety regulations &amp; NEBOSH OSHA.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Packaging Engineer – FMCG
 Location: Kuwait
 ✅ 3+ yrs experience in packaging, CAD tools, sustainability, project management.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Store Keeper – Maximator Manufacturing / Royal Technic
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Store Keeper – Maximator Manufacturing / Royal Technic
 Location: Mangaf, Kuwait
 💼 Details: Manage inventory, stock records, receive/store/issue materials, coordinate with suppliers.
 ✅ Requirements: Transferable residency (Article 18), valid Kuwait driving license, organized, reliable, immediate availability preferred.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Logistics Company – Procurement, Warehouse Supervisor, Maintenance Coordinator
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Logistics Company – Procurement, Warehouse Supervisor, Maintenance Coordinator
 💼 Details: Manage procurement, oversee warehouse operations, coordinate maintenance.
-✅ Requirements: 2–3 yrs relevant experience, organizational & communication skills, familiar with logistics operations.
-📩 Apply here: https://bit.ly/47z2aQw
-
-📌 Healthcare Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Clinical Dietitian – WeCare
+✅ Requirements: 2–3 yrs relevant experience, organizational &amp; communication skills, familiar with logistics operations.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Healthcare Roles</div><div class="job">📌 Clinical Dietitian – WeCare
 Location: Kuwait
-✅ Bachelor's/Master’s in Nutrition, MOH license, Arabic & English, currently in Kuwait.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Optometrist – MD Clinic
+✅ Bachelor's/Master’s in Nutrition, MOH license, Arabic &amp; English, currently in Kuwait.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Optometrist – MD Clinic
 Location: Kuwait
 ✅ Bilingual, prior experience in clinics, valid license.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Female Laboratory Technician – Salmiya Clinic
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Female Laboratory Technician – Salmiya Clinic
 💼 Details: Conduct lab tests, maintain equipment, support medical staff.
 ✅ Requirements: Female, Kuwaiti MOH license, NOC, immediate start.
 💰 Salary: 450 KD
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Bovine Farm Veterinarian – United Dairy Company
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Bovine Farm Veterinarian – United Dairy Company
 Location: Kuwait
-💼 Details: Clinical care, herd health programs, reproduction & nutrition, emergency interventions, staff training.
+💼 Details: Clinical care, herd health programs, reproduction &amp; nutrition, emergency interventions, staff training.
 ✅ Requirements: DVM, 3+ yrs experience in large-scale dairy, farm management software familiarity, strong communication, English fluent (Arabic a plus).
 💰 Salary: 1000 KD
-📩 Apply here: https://bit.ly/47z2aQw
-
-📌 Sales / Marketing Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Sales Representative – Sable International
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Sales / Marketing Roles</div><div class="job">📌 Sales Representative – Sable International
 Location: Kuwait
-✅ Experience with cooperatives & supermarkets, transferable visa, immediate joining.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Store Supervisor / Outdoor Sales Executive / Kitchen Operations Manager – Wathif
+✅ Experience with cooperatives &amp; supermarkets, transferable visa, immediate joining.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Store Supervisor / Outdoor Sales Executive / Kitchen Operations Manager – Wathif
 Location: Kuwait
 ✅ Immediate joining, regular visa, experience 3–7 yrs depending on role.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Sales Representative – Solitaire Aluminium Works
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Sales Representative – Solitaire Aluminium Works
 ✅ Experience in WPC interior doors, fixed salary + commission.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Alghanim Automotive – Sales / Service Advisors / Call Center / Receptionists / Delivery / Marketing
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 JOURY FLOWER – Beauty & Spa Staff
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Alghanim Automotive – Sales / Service Advisors / Call Center / Receptionists / Delivery / Marketing
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 JOURY FLOWER – Beauty &amp; Spa Staff
 ✅ Filipino, transferable visa, fixed salary + commission.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Pastry Staff – Blob KW
-✅ 1+ yr experience in cookies & molten desserts, transferable visa, local hiring.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Walk-in Interviews – Multiple Retail/FMCG Positions
-Location: Kuwait & Tirur (Brothers International & ETC Fresh Food)
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Pastry Staff – Blob KW
+✅ 1+ yr experience in cookies &amp; molten desserts, transferable visa, local hiring.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Walk-in Interviews – Multiple Retail/FMCG Positions
+Location: Kuwait &amp; Tirur (Brothers International &amp; ETC Fresh Food)
 📆 20–21 August 2025
 🕘 09:30 AM – 12:30 PM
-📩 Apply here: https://bit.ly/47z2aQw
-
-📌 Drivers / Transportation Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Light Driver – Oil & Gas Company
-💼 Details: Safely operate vehicles, timely transport of personnel & materials, vehicle maintenance.
-✅ Requirements: Transferable visa 18, experience in oil & gas preferred, English fluent.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Heavy Driver with Sales Skills – FMCG
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Drivers / Transportation Roles</div><div class="job">📌 Light Driver – Oil &amp; Gas Company
+💼 Details: Safely operate vehicles, timely transport of personnel &amp; materials, vehicle maintenance.
+✅ Requirements: Transferable visa 18, experience in oil &amp; gas preferred, English fluent.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Heavy Driver with Sales Skills – FMCG
 💼 Details: Sell products in retail outlets, plan daily sales routes, report market feedback.
 ✅ Requirements: Heavy driving license, 3+ yrs sales experience in FMCG, transferable Article 18 visa.
 💰 Salary: 250 KD + 200 KD incentives
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━</div>
-
-<ins class="adsbygoogle" style="display:block"
-     data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567891"
-     data-ad-format="auto" data-full-width-responsive="true"></ins>
-<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="pane" id="pane-admin"><div class="job">━━━━━━━━
-
-📌 Multiple Engineering & Support Roles – Leading Companies (Admin subset: Site Secretary, Registration Officer, Call Centre Executive)
-✅ Requirements: Relevant experience/qualifications per role, residents of Kuwait, transferable visa (where applicable).
-📩 Apply: Engineering: hrd.vacancies1984@gmail.com
-
-📌 Finance / Accounting Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Multiple Engineering & Support Roles – Leading Companies (Admin subset: Site Secretary, Registration Officer, Call Centre Executive)
-✅ Requirements: Relevant experience/qualifications per role, residents of Kuwait, transferable visa (where applicable).
-📩 Apply here: https://bit.ly/47z2aQw
-
-📌 Finance / Accounting Roles
-
-━━━━━━━━</div></div><div class="pane" id="pane-it"><div class="job">━━━━━━━━
-
-📌 Executive Business Secretary – AI & IT Startups
-💼 Details: Manage executive schedules, correspondence, reports, proposals, presentations, coordinate with clients & partners, support decision-making.
+📩 Apply here: https://bit.ly/47z2aQw</div><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-admin" style="display:none"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+<div class="job">📌 Administrative / Secretarial Roles</div><div class="job">📌 Secretary – Flower Shop
+Location: Farwaniya - Al-Rai Area - Block 1, Kuwait
+🌸 Details: Competent secretary for upscale flower shop. Handle orders efficiently with 1–2 years experience.
+✅ Tasks: Receive &amp; supervise orders, excellent customer service, use WhatsApp/Instagram.
+📱 Apply via WhatsApp: 50825582</div><div class="job">📌 Executive Business Secretary – AI &amp; IT Startups
+💼 Details: Manage executive schedules, correspondence, reports, proposals, presentations, coordinate with clients &amp; partners, support decision-making.
 ✅ Requirements: 5+ yrs experience as executive secretary, strong business management skills, Levant nationality only, remote work possible, Article 18 residence.
-📩 Apply: WhatsApp CV: 60972794
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Finance Manager – F&B & Electronics
-💼 Details: Oversee financial planning, budgeting, reporting, manage finance teams, support strategic decisions.
-✅ Requirements: 10+ yrs experience, transferable visa 18, available in Kuwait.
-📩 Apply: hr@chayahgroup.com
-
-📌 IT / Technical Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 IT Technician – Omar Co.
+📩 Apply: WhatsApp CV: 60972794</div><div class="job">📌 Female Roles – Leading Company
 Location: Kuwait
-✅ Networking & PC troubleshooting, independent & team work, strong technical skills.
-📩 Apply: rao@coaxialit.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Odoo Developer – Kuwait
-✅ 2–5 yrs Odoo experience, Python, PostgreSQL, CRM, custom modules.
-📩 Apply: applynow2023@gmail.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Female Laboratory Technician – Salmiya Clinic
-💼 Details: Conduct lab tests, maintain equipment, support medical staff.
-✅ Requirements: Female, Kuwaiti MOH license, NOC, immediate start.
-💰 Salary: 450 KD
-📩 Apply: WhatsApp 65597294
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Bovine Farm Veterinarian – United Dairy Company
-Location: Kuwait
-💼 Details: Clinical care, herd health programs, reproduction & nutrition, emergency interventions, staff training.
-✅ Requirements: DVM, 3+ yrs experience in large-scale dairy, farm management software familiarity, strong communication, English fluent (Arabic a plus).
-💰 Salary: 1000 KD
-📩 Apply: Link
-
-📌 Sales / Marketing Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Executive Business Secretary – AI & IT Startups
-💼 Details: Manage executive schedules, correspondence, reports, proposals, presentations, coordinate with clients & partners, support decision-making.
-✅ Requirements: 5+ yrs experience as executive secretary, strong business management skills, Levant nationality only, remote work possible, Article 18 residence.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Finance Manager – F&B & Electronics
-💼 Details: Oversee financial planning, budgeting, reporting, manage finance teams, support strategic decisions.
-✅ Requirements: 10+ yrs experience, transferable visa 18, available in Kuwait.
-📩 Apply here: https://bit.ly/47z2aQw
-
-📌 IT / Technical Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 IT Technician – Omar Co.
-Location: Kuwait
-✅ Networking & PC troubleshooting, independent & team work, strong technical skills.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Odoo Developer – Kuwait
-✅ 2–5 yrs Odoo experience, Python, PostgreSQL, CRM, custom modules.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Female Laboratory Technician – Salmiya Clinic
-💼 Details: Conduct lab tests, maintain equipment, support medical staff.
-✅ Requirements: Female, Kuwaiti MOH license, NOC, immediate start.
-💰 Salary: 450 KD
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Bovine Farm Veterinarian – United Dairy Company
-Location: Kuwait
-💼 Details: Clinical care, herd health programs, reproduction & nutrition, emergency interventions, staff training.
-✅ Requirements: DVM, 3+ yrs experience in large-scale dairy, farm management software familiarity, strong communication, English fluent (Arabic a plus).
-💰 Salary: 1000 KD
-📩 Apply here: https://bit.ly/47z2aQw
-
-📌 Sales / Marketing Roles
-
-━━━━━━━━</div></div><div class="pane" id="pane-sales"><div class="job">━━━━━━━━
-
-📌 Female Roles – Leading Company
-Location: Kuwait
-💼 Details: Secretary (1), Personal Assistant (1), Sales & Marketing (2)
+💼 Details: Secretary (1), Personal Assistant (1), Sales &amp; Marketing (2)
 ✅ Requirements: Female, Arab nationals, good English, professional skills.
 📩 Apply: anushkakuwait22@gmail.com
- (include recent photo)
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Client Success Executive – E3LANATQ8i
+ (include recent photo)</div><div class="job">📌 Multiple Engineering &amp; Support Roles – Leading Companies (Admin subset: Site Secretary, Registration Officer, Call Centre Executive)
+✅ Requirements: Relevant experience/qualifications per role, residents of Kuwait, transferable visa (where applicable).
+📩 Apply: Engineering: hrd.vacancies1984@gmail.com</div><div class="job">📌 Administrative / Secretarial Roles</div>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Secretary – Flower Shop
+Location: Farwaniya - Al-Rai Area - Block 1, Kuwait
+🌸 Details: Competent secretary for upscale flower shop. Handle orders efficiently with 1–2 years experience.
+✅ Tasks: Receive &amp; supervise orders, excellent customer service, use WhatsApp/Instagram.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Executive Business Secretary – AI &amp; IT Startups
+💼 Details: Manage executive schedules, correspondence, reports, proposals, presentations, coordinate with clients &amp; partners, support decision-making.
+✅ Requirements: 5+ yrs experience as executive secretary, strong business management skills, Levant nationality only, remote work possible, Article 18 residence.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Female Roles – Leading Company
+Location: Kuwait
+💼 Details: Secretary (1), Personal Assistant (1), Sales &amp; Marketing (2)
+✅ Requirements: Female, Arab nationals, good English, professional skills.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Multiple Engineering &amp; Support Roles – Leading Companies (Admin subset: Site Secretary, Registration Officer, Call Centre Executive)
+✅ Requirements: Relevant experience/qualifications per role, residents of Kuwait, transferable visa (where applicable).
+📩 Apply here: https://bit.ly/47z2aQw</div><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-it" style="display:none"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+<div class="job">📌 IT / Technical Roles</div><div class="job">📌 IT Technician – Omar Co.
+Location: Kuwait
+✅ Networking &amp; PC troubleshooting, independent &amp; team work, strong technical skills.
+📩 Apply: rao@coaxialit.com</div><div class="job">📌 Odoo Developer – Kuwait
+✅ 2–5 yrs Odoo experience, Python, PostgreSQL, CRM, custom modules.
+📩 Apply: applynow2023@gmail.com</div><div class="job">📌 Female Laboratory Technician – Salmiya Clinic
+💼 Details: Conduct lab tests, maintain equipment, support medical staff.
+✅ Requirements: Female, Kuwaiti MOH license, NOC, immediate start.
+💰 Salary: 450 KD
+📩 Apply: WhatsApp 65597294</div><div class="job">📌 Bovine Farm Veterinarian – United Dairy Company
+Location: Kuwait
+💼 Details: Clinical care, herd health programs, reproduction &amp; nutrition, emergency interventions, staff training.
+✅ Requirements: DVM, 3+ yrs experience in large-scale dairy, farm management software familiarity, strong communication, English fluent (Arabic a plus).
+💰 Salary: 1000 KD
+📩 Apply: Link</div><div class="job">📌 IT / Technical Roles</div>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 IT Technician – Omar Co.
+Location: Kuwait
+✅ Networking &amp; PC troubleshooting, independent &amp; team work, strong technical skills.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Odoo Developer – Kuwait
+✅ 2–5 yrs Odoo experience, Python, PostgreSQL, CRM, custom modules.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Female Laboratory Technician – Salmiya Clinic
+💼 Details: Conduct lab tests, maintain equipment, support medical staff.
+✅ Requirements: Female, Kuwaiti MOH license, NOC, immediate start.
+💰 Salary: 450 KD
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Bovine Farm Veterinarian – United Dairy Company
+Location: Kuwait
+💼 Details: Clinical care, herd health programs, reproduction &amp; nutrition, emergency interventions, staff training.
+✅ Requirements: DVM, 3+ yrs experience in large-scale dairy, farm management software familiarity, strong communication, English fluent (Arabic a plus).
+💰 Salary: 1000 KD
+📩 Apply here: https://bit.ly/47z2aQw</div><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-sales" style="display:none"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+<div class="job">📌 Client Success Executive – E3LANATQ8i
 Location: Kuwait
 ✅ 2+ yrs experience, client management, content creation, marketing plans.
-📩 Apply: e3lanatq8i@gmail.com
-
-📌 Engineering / Technical Supervisory Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Store Keeper – Maximator Manufacturing / Royal Technic
+📩 Apply: e3lanatq8i@gmail.com</div><div class="job">📌 Store Keeper – Maximator Manufacturing / Royal Technic
 Location: Mangaf, Kuwait
 💼 Details: Manage inventory, stock records, receive/store/issue materials, coordinate with suppliers.
 ✅ Requirements: Transferable residency (Article 18), valid Kuwait driving license, organized, reliable, immediate availability preferred.
 📩 Apply: sales@royaltechnic.com
- / WhatsApp: 97325577
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Sales Representative – Sable International
+ / WhatsApp: 97325577</div><div class="job">📌 Sales / Marketing Roles</div><div class="job">📌 Sales Representative – Sable International
 Location: Kuwait
-✅ Experience with cooperatives & supermarkets, transferable visa, immediate joining.
+✅ Experience with cooperatives &amp; supermarkets, transferable visa, immediate joining.
 📩 Apply: hr@sabelgroup.net
- / WhatsApp: 98003485
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Store Supervisor / Outdoor Sales Executive / Kitchen Operations Manager – Wathif
+ / WhatsApp: 98003485</div><div class="job">📌 Store Supervisor / Outdoor Sales Executive / Kitchen Operations Manager – Wathif
 Location: Kuwait
 ✅ Immediate joining, regular visa, experience 3–7 yrs depending on role.
-📩 Apply via WhatsApp: +965 66961228
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Sales Representative – Solitaire Aluminium Works
+📩 Apply via WhatsApp: +965 66961228</div><div class="job">📌 Sales Representative – Solitaire Aluminium Works
 ✅ Experience in WPC interior doors, fixed salary + commission.
-📩 Apply via WhatsApp: 55518147
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Alghanim Automotive – Sales / Service Advisors / Call Center / Receptionists / Delivery / Marketing
-📩 Apply: malnoubi@alghanim.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Heavy Driver with Sales Skills – FMCG
+📩 Apply via WhatsApp: 55518147</div><div class="job">📌 Alghanim Automotive – Sales / Service Advisors / Call Center / Receptionists / Delivery / Marketing
+📩 Apply: malnoubi@alghanim.com</div><div class="job">📌 Walk-in Interviews – Multiple Retail/FMCG Positions
+Location: Kuwait &amp; Tirur (Brothers International &amp; ETC Fresh Food)
+📆 20–21 August 2025
+🕘 09:30 AM – 12:30 PM
+📱 Contact: 8921773390 / 8921773393 / 9567899853</div><div class="job">📌 Heavy Driver with Sales Skills – FMCG
 💼 Details: Sell products in retail outlets, plan daily sales routes, report market feedback.
 ✅ Requirements: Heavy driving license, 3+ yrs sales experience in FMCG, transferable Article 18 visa.
 💰 Salary: 250 KD + 200 KD incentives
 📩 Apply: Careers@al-dhow.com
- / WhatsApp 60636133
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Female Roles – Leading Company
-Location: Kuwait
-💼 Details: Secretary (1), Personal Assistant (1), Sales & Marketing (2)
-✅ Requirements: Female, Arab nationals, good English, professional skills.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Client Success Executive – E3LANATQ8i
+ / WhatsApp 60636133</div>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Client Success Executive – E3LANATQ8i
 Location: Kuwait
 ✅ 2+ yrs experience, client management, content creation, marketing plans.
-📩 Apply here: https://bit.ly/47z2aQw
-
-📌 Engineering / Technical Supervisory Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Sales Representative – Sable International
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Sales / Marketing Roles</div><div class="job">📌 Sales Representative – Sable International
 Location: Kuwait
-✅ Experience with cooperatives & supermarkets, transferable visa, immediate joining.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Store Supervisor / Outdoor Sales Executive / Kitchen Operations Manager – Wathif
+✅ Experience with cooperatives &amp; supermarkets, transferable visa, immediate joining.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Store Supervisor / Outdoor Sales Executive / Kitchen Operations Manager – Wathif
 Location: Kuwait
 ✅ Immediate joining, regular visa, experience 3–7 yrs depending on role.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Sales Representative – Solitaire Aluminium Works
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Sales Representative – Solitaire Aluminium Works
 ✅ Experience in WPC interior doors, fixed salary + commission.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Alghanim Automotive – Sales / Service Advisors / Call Center / Receptionists / Delivery / Marketing
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Heavy Driver with Sales Skills – FMCG
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Alghanim Automotive – Sales / Service Advisors / Call Center / Receptionists / Delivery / Marketing
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Walk-in Interviews – Multiple Retail/FMCG Positions
+Location: Kuwait &amp; Tirur (Brothers International &amp; ETC Fresh Food)
+📆 20–21 August 2025
+🕘 09:30 AM – 12:30 PM
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Heavy Driver with Sales Skills – FMCG
 💼 Details: Sell products in retail outlets, plan daily sales routes, report market feedback.
 ✅ Requirements: Heavy driving license, 3+ yrs sales experience in FMCG, transferable Article 18 visa.
 💰 Salary: 250 KD + 200 KD incentives
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div></div><div class="pane" id="pane-medical"><div class="job">━━━━━━━━
-
-📌 Logistics Company – Procurement, Warehouse Supervisor, Maintenance Coordinator
-💼 Details: Manage procurement, oversee warehouse operations, coordinate maintenance.
-✅ Requirements: 2–3 yrs relevant experience, organizational & communication skills, familiar with logistics operations.
-📩 Apply: raeda@sabafreigth.com
-
-📌 Healthcare Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Logistics Company – Procurement, Warehouse Supervisor, Maintenance Coordinator
-💼 Details: Manage procurement, oversee warehouse operations, coordinate maintenance.
-✅ Requirements: 2–3 yrs relevant experience, organizational & communication skills, familiar with logistics operations.
-📩 Apply here: https://bit.ly/47z2aQw
-
-📌 Healthcare Roles
-
-━━━━━━━━</div></div><div class="pane" id="pane-logistics"><div class="job">━━━━━━━━
-
-📌 Senior & Junior Accountant – Provenance Company
+📩 Apply here: https://bit.ly/47z2aQw</div><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-medical" style="display:none"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+<div class="job">📌 Healthcare Roles</div><div class="job">📌 Optometrist – MD Clinic
+Location: Kuwait
+✅ Bilingual, prior experience in clinics, valid license.
+📩 Apply: careers@md-clinic.co</div><div class="job">📌 Healthcare Roles</div>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Optometrist – MD Clinic
+Location: Kuwait
+✅ Bilingual, prior experience in clinics, valid license.
+📩 Apply here: https://bit.ly/47z2aQw</div><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-logistics" style="display:none"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+<div class="job">📌 Senior &amp; Junior Accountant – Provenance Company
 Location: Kuwait
 ✅ Requirements: Senior: 10+ yrs exp, Junior: 2 yrs exp. Logistics/transportation background preferred. Transferable residency.
-📩 Apply: vacancies.jobkw26@gmail.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Light Driver – Oil & Gas Company
-💼 Details: Safely operate vehicles, timely transport of personnel & materials, vehicle maintenance.
-✅ Requirements: Transferable visa 18, experience in oil & gas preferred, English fluent.
-📩 Apply: recruitment.kwt05@gmail.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Senior & Junior Accountant – Provenance Company
+📩 Apply: vacancies.jobkw26@gmail.com</div><div class="job">📌 Logistics Company – Procurement, Warehouse Supervisor, Maintenance Coordinator
+💼 Details: Manage procurement, oversee warehouse operations, coordinate maintenance.
+✅ Requirements: 2–3 yrs relevant experience, organizational &amp; communication skills, familiar with logistics operations.
+📩 Apply: raeda@sabafreigth.com</div><div class="job">📌 Light Driver – Oil &amp; Gas Company
+💼 Details: Safely operate vehicles, timely transport of personnel &amp; materials, vehicle maintenance.
+✅ Requirements: Transferable visa 18, experience in oil &amp; gas preferred, English fluent.
+📩 Apply: recruitment.kwt05@gmail.com</div><div class="job">📌 Senior &amp; Junior Accountant – Provenance Company
 Location: Kuwait
 ✅ Requirements: Senior: 10+ yrs exp, Junior: 2 yrs exp. Logistics/transportation background preferred. Transferable residency.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Store Keeper – Maximator Manufacturing / Royal Technic
+📩 Apply here: https://bit.ly/47z2aQw</div>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Store Keeper – Maximator Manufacturing / Royal Technic
 Location: Mangaf, Kuwait
 💼 Details: Manage inventory, stock records, receive/store/issue materials, coordinate with suppliers.
 ✅ Requirements: Transferable residency (Article 18), valid Kuwait driving license, organized, reliable, immediate availability preferred.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Light Driver – Oil & Gas Company
-💼 Details: Safely operate vehicles, timely transport of personnel & materials, vehicle maintenance.
-✅ Requirements: Transferable visa 18, experience in oil & gas preferred, English fluent.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div></div><div class="pane" id="pane-fnb"><div class="job">━━━━━━━━
-
-📌 Pastry Staff – Blob KW
-✅ 1+ yr experience in cookies & molten desserts, transferable visa, local hiring.
-📩 Apply: ck@blobkwt.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Pastry Staff – Blob KW
-✅ 1+ yr experience in cookies & molten desserts, transferable visa, local hiring.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div></div><div class="pane" id="pane-eng"><div class="job">━━━━━━━━
-
-📌 Estimation Engineer – Turnkey Projects
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Logistics Company – Procurement, Warehouse Supervisor, Maintenance Coordinator
+💼 Details: Manage procurement, oversee warehouse operations, coordinate maintenance.
+✅ Requirements: 2–3 yrs relevant experience, organizational &amp; communication skills, familiar with logistics operations.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Light Driver – Oil &amp; Gas Company
+💼 Details: Safely operate vehicles, timely transport of personnel &amp; materials, vehicle maintenance.
+✅ Requirements: Transferable visa 18, experience in oil &amp; gas preferred, English fluent.
+📩 Apply here: https://bit.ly/47z2aQw</div><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-fnb" style="display:none"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+<div class="job">📌 Finance Manager – F&amp;B &amp; Electronics
+💼 Details: Oversee financial planning, budgeting, reporting, manage finance teams, support strategic decisions.
+✅ Requirements: 10+ yrs experience, transferable visa 18, available in Kuwait.
+📩 Apply: hr@chayahgroup.com</div><div class="job">📌 Pastry Staff – Blob KW
+✅ 1+ yr experience in cookies &amp; molten desserts, transferable visa, local hiring.
+📩 Apply: ck@blobkwt.com</div><div class="job">📌 Finance Manager – F&amp;B &amp; Electronics
+💼 Details: Oversee financial planning, budgeting, reporting, manage finance teams, support strategic decisions.
+✅ Requirements: 10+ yrs experience, transferable visa 18, available in Kuwait.
+📩 Apply here: https://bit.ly/47z2aQw</div>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Pastry Staff – Blob KW
+✅ 1+ yr experience in cookies &amp; molten desserts, transferable visa, local hiring.
+📩 Apply here: https://bit.ly/47z2aQw</div><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-eng" style="display:none"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+<div class="job">📌 Estimation Engineer – Turnkey Projects
 Location: Kuwait
 ✅ 3–8 yrs experience in BOQ, MTO, costing, project planning.
-📩 Apply: hr@aigccgroup.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Lead Technical Engineers (Mechanical/Civil/Electrical) – EPC Company
+📩 Apply: hr@aigccgroup.com</div><div class="job">📌 Lead Technical Engineers (Mechanical/Civil/Electrical) – EPC Company
 Location: Kuwait (Saudi Branch Project)
-✅ 10–15 yrs total exp, 4–6 yrs boilers & turbines. Salary: 13000–17000 SAR/month (food & accommodation included).
-📩 Apply: sanchita.rzindia@gmail.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 HVAC Supervisor – Liberty KW
+✅ 10–15 yrs total exp, 4–6 yrs boilers &amp; turbines. Salary: 13000–17000 SAR/month (food &amp; accommodation included).
+📩 Apply: sanchita.rzindia@gmail.com</div><div class="job">📌 HVAC Supervisor – Liberty KW
 Location: Kuwait
 💼 Details: Supervise installation, maintenance, troubleshooting of Ducted/Package AC systems, coordinate projects, monitor equipment, ensure safety compliance.
-✅ Requirements: 5+ yrs Kuwait experience, diploma/degree in Mechanical/Electrical Engineering, transferable visa (No. 18), English & Arabic proficiency, driving license.
-📩 Apply: info@liberty-kwt.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Safety Officer – Oil & Gas / Construction
+✅ Requirements: 5+ yrs Kuwait experience, diploma/degree in Mechanical/Electrical Engineering, transferable visa (No. 18), English &amp; Arabic proficiency, driving license.
+📩 Apply: info@liberty-kwt.com</div><div class="job">📌 Safety Officer – Oil &amp; Gas / Construction
 Location: Kuwait
-💼 Details: Implement & maintain safety policies, conduct audits/inspections, lead training programs.
-✅ Requirements: B.Tech (Mechanical/Civil/Electrical/Instrumentation), 5+ yrs experience in oil & gas/construction, NEBOSH Lead Auditor & ISO certifications, knowledge of safety regulations & NEBOSH OSHA.
-📩 Apply: WhatsApp CV: 69019270
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Packaging Engineer – FMCG
+💼 Details: Implement &amp; maintain safety policies, conduct audits/inspections, lead training programs.
+✅ Requirements: B.Tech (Mechanical/Civil/Electrical/Instrumentation), 5+ yrs experience in oil &amp; gas/construction, NEBOSH Lead Auditor &amp; ISO certifications, knowledge of safety regulations &amp; NEBOSH OSHA.
+📩 Apply: WhatsApp CV: 69019270</div><div class="job">📌 Packaging Engineer – FMCG
 Location: Kuwait
 ✅ 3+ yrs experience in packaging, CAD tools, sustainability, project management.
-📩 Apply via WhatsApp: 67700514
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Estimation Engineer – Turnkey Projects
+📩 Apply via WhatsApp: 67700514</div><div class="job">📌 Estimation Engineer – Turnkey Projects
 Location: Kuwait
 ✅ 3–8 yrs experience in BOQ, MTO, costing, project planning.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Lead Technical Engineers (Mechanical/Civil/Electrical) – EPC Company
+📩 Apply here: https://bit.ly/47z2aQw</div>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Lead Technical Engineers (Mechanical/Civil/Electrical) – EPC Company
 Location: Kuwait (Saudi Branch Project)
-✅ 10–15 yrs total exp, 4–6 yrs boilers & turbines. Salary: 13000–17000 SAR/month (food & accommodation included).
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 HVAC Supervisor – Liberty KW
+✅ 10–15 yrs total exp, 4–6 yrs boilers &amp; turbines. Salary: 13000–17000 SAR/month (food &amp; accommodation included).
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 HVAC Supervisor – Liberty KW
 Location: Kuwait
 💼 Details: Supervise installation, maintenance, troubleshooting of Ducted/Package AC systems, coordinate projects, monitor equipment, ensure safety compliance.
-✅ Requirements: 5+ yrs Kuwait experience, diploma/degree in Mechanical/Electrical Engineering, transferable visa (No. 18), English & Arabic proficiency, driving license.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Safety Officer – Oil & Gas / Construction
+✅ Requirements: 5+ yrs Kuwait experience, diploma/degree in Mechanical/Electrical Engineering, transferable visa (No. 18), English &amp; Arabic proficiency, driving license.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Safety Officer – Oil &amp; Gas / Construction
 Location: Kuwait
-💼 Details: Implement & maintain safety policies, conduct audits/inspections, lead training programs.
-✅ Requirements: B.Tech (Mechanical/Civil/Electrical/Instrumentation), 5+ yrs experience in oil & gas/construction, NEBOSH Lead Auditor & ISO certifications, knowledge of safety regulations & NEBOSH OSHA.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Packaging Engineer – FMCG
+💼 Details: Implement &amp; maintain safety policies, conduct audits/inspections, lead training programs.
+✅ Requirements: B.Tech (Mechanical/Civil/Electrical/Instrumentation), 5+ yrs experience in oil &amp; gas/construction, NEBOSH Lead Auditor &amp; ISO certifications, knowledge of safety regulations &amp; NEBOSH OSHA.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Packaging Engineer – FMCG
 Location: Kuwait
 ✅ 3+ yrs experience in packaging, CAD tools, sustainability, project management.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div></div><div class="pane" id="pane-misc"><div class="job">📌 Administrative / Secretarial Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Secretary – Flower Shop
-Location: Farwaniya - Al-Rai Area - Block 1, Kuwait
-🌸 Details: Competent secretary for upscale flower shop. Handle orders efficiently with 1–2 years experience.
-✅ Tasks: Receive & supervise orders, excellent customer service, use WhatsApp/Instagram.
-📱 Apply via WhatsApp: 50825582
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Front Office Lead – NOC Operations – Shabakkat
+📩 Apply here: https://bit.ly/47z2aQw</div><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-education" style="display:none"><div class="job">No items in this category.</div><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-driver" style="display:none"><div class="job">No items in this category.</div><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-misc" style="display:none"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+<div class="job">📌 Front Office Lead – NOC Operations – Shabakkat
 Location: Kuwait
 ✅ Requirements: 5+ yrs experience in telecom NOC/FO roles, OSS/NMS tools proficiency, immediate joiner.
-📩 Apply: shabakkat.hr@shabakkat.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Finance Manager – Light Fields
+📩 Apply: shabakkat.hr@shabakkat.com</div><div class="job">📌 Finance / Accounting Roles</div><div class="job">📌 Finance Manager – Light Fields
 Location: Kuwait
 💼 Responsibilities: Manage accounting, treasury, cost control, payroll, budgeting, forecasting, product pricing, financial analysis.
 ✅ Requirements: Experience in Odoo ERP, CFA certification a plus.
-📩 Apply: careers@lightfields.co
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Senior Risk Management Analyst – Mezzan Holding Co.
+📩 Apply: careers@lightfields.co</div><div class="job">📌 Senior Risk Management Analyst – Mezzan Holding Co.
 Location: Kuwait
 ✅ 5–8 yrs experience in risk, audit, financial planning.
-📩 Apply: careers.mezzan.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Intern / Fresher Graphic Designer – Digital Endurance
+📩 Apply: careers.mezzan.com</div><div class="job">📌 Intern / Fresher Graphic Designer – Digital Endurance
 💼 Details: Assist in creating visual content, support senior designers, follow brand guidelines, collaborate on design concepts.
 ✅ Requirements: Freshers/interns in graphic design, willingness to learn, creativity, adaptability.
-📩 Apply: hello@digitalendurance.digital
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Clinical Dietitian – WeCare
+📩 Apply: hello@digitalendurance.digital</div><div class="job">📌 Engineering / Technical Supervisory Roles</div><div class="job">📌 Clinical Dietitian – WeCare
 Location: Kuwait
-✅ Bachelor's/Master’s in Nutrition, MOH license, Arabic & English, currently in Kuwait.
-📩 Apply: info@wecarekuwait.com
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Optometrist – MD Clinic
-Location: Kuwait
-✅ Bilingual, prior experience in clinics, valid license.
-📩 Apply: careers@md-clinic.co
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 JOURY FLOWER – Beauty & Spa Staff
+✅ Bachelor's/Master’s in Nutrition, MOH license, Arabic &amp; English, currently in Kuwait.
+📩 Apply: info@wecarekuwait.com</div><div class="job">📌 JOURY FLOWER – Beauty &amp; Spa Staff
 ✅ Filipino, transferable visa, fixed salary + commission.
-📱 Apply: 55832213 / O@jouryflowersalons
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Walk-in Interviews – Multiple Retail/FMCG Positions
-Location: Kuwait & Tirur (Brothers International & ETC Fresh Food)
-📆 20–21 August 2025
-🕘 09:30 AM – 12:30 PM
-📱 Contact: 8921773390 / 8921773393 / 9567899853
-
-📌 Drivers / Transportation Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-MY JOB HUNT</div><div class="job">Date: 19-August-2025</div><div class="job">📌 Administrative / Secretarial Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Secretary – Flower Shop
-Location: Farwaniya - Al-Rai Area - Block 1, Kuwait
-🌸 Details: Competent secretary for upscale flower shop. Handle orders efficiently with 1–2 years experience.
-✅ Tasks: Receive & supervise orders, excellent customer service, use WhatsApp/Instagram.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Front Office Lead – NOC Operations – Shabakkat
+📱 Apply: 55832213 / O@jouryflowersalons</div><div class="job">📌 Drivers / Transportation Roles</div><div class="job">MY JOB HUNT</div><div class="job">Date: 19-August-2025</div>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Front Office Lead – NOC Operations – Shabakkat
 Location: Kuwait
 ✅ Requirements: 5+ yrs experience in telecom NOC/FO roles, OSS/NMS tools proficiency, immediate joiner.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Finance Manager – Light Fields
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Finance / Accounting Roles</div><div class="job">📌 Finance Manager – Light Fields
 Location: Kuwait
 💼 Responsibilities: Manage accounting, treasury, cost control, payroll, budgeting, forecasting, product pricing, financial analysis.
 ✅ Requirements: Experience in Odoo ERP, CFA certification a plus.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Senior Risk Management Analyst – Mezzan Holding Co.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Senior Risk Management Analyst – Mezzan Holding Co.
 Location: Kuwait
 ✅ 5–8 yrs experience in risk, audit, financial planning.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Intern / Fresher Graphic Designer – Digital Endurance
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Intern / Fresher Graphic Designer – Digital Endurance
 💼 Details: Assist in creating visual content, support senior designers, follow brand guidelines, collaborate on design concepts.
 ✅ Requirements: Freshers/interns in graphic design, willingness to learn, creativity, adaptability.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Clinical Dietitian – WeCare
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Engineering / Technical Supervisory Roles</div><div class="job">📌 Clinical Dietitian – WeCare
 Location: Kuwait
-✅ Bachelor's/Master’s in Nutrition, MOH license, Arabic & English, currently in Kuwait.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Optometrist – MD Clinic
-Location: Kuwait
-✅ Bilingual, prior experience in clinics, valid license.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 JOURY FLOWER – Beauty & Spa Staff
+✅ Bachelor's/Master’s in Nutrition, MOH license, Arabic &amp; English, currently in Kuwait.
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 JOURY FLOWER – Beauty &amp; Spa Staff
 ✅ Filipino, transferable visa, fixed salary + commission.
-📩 Apply here: https://bit.ly/47z2aQw
-
-━━━━━━━━</div><div class="job">━━━━━━━━
-
-📌 Walk-in Interviews – Multiple Retail/FMCG Positions
-Location: Kuwait & Tirur (Brothers International & ETC Fresh Food)
-📆 20–21 August 2025
-🕘 09:30 AM – 12:30 PM
-📩 Apply here: https://bit.ly/47z2aQw
-
-📌 Drivers / Transportation Roles
-
-━━━━━━━━</div><div class="job">━━━━━━━━</div></div>
-<footer>MY JOB HUNT © 2K25</footer>
-</div>
-<script>
-const t=document.querySelectorAll('.tab'),p=document.querySelectorAll('.pane');
-t.forEach(x=>x.addEventListener('click',()=>{t.forEach(a=>a.classList.remove('active'));p.forEach(b=>b.classList.remove('active'));x.classList.add('active');document.querySelector('#pane-'+x.dataset.k).classList.add('active');}));
-</script>
-</body>
-</html>
+📩 Apply here: https://bit.ly/47z2aQw</div><div class="job">📌 Drivers / Transportation Roles</div><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane" id="pane-archive" style="display:none"><div class="archive-list"><span class="archive-toggle">[+] Archives</span><ul style="display:none"><li><a href="www.yahoo.com" target="_blank">August 25th, 2025</a></li></ul></div></div></div></div><footer>MY JOB HUNT © 2K25</footer></div><script>document.querySelectorAll(".menu-item").forEach(item=>{item.addEventListener("click",()=>{document.querySelectorAll(".menu-item").forEach(a=>a.classList.remove("active"));document.querySelectorAll(".content-pane").forEach(p=>p.style.display="none");item.classList.add("active");document.querySelector("#pane-"+item.dataset.k).style.display="block";});});const toggle=document.querySelector(".archive-toggle");if(toggle){toggle.addEventListener("click",()=>{const ul=toggle.nextElementSibling;if(ul.style.display==="none"){ul.style.display="block";toggle.textContent="[-] Archives";}else{ul.style.display="none";toggle.textContent="[+] Archives";}});}</script></body></html>
