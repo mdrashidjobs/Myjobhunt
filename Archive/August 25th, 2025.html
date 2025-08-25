@@ -1,0 +1,345 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MY JOB HUNT</title><meta name="google-adsense-account" content="ca-pub-3037151964199001"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001" crossorigin="anonymous"></script><style>
+    *{box-sizing:border-box}
+    body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);color:#2c3e50;line-height:1.6;margin:0;padding:24px;min-height:100vh}
+    .app{max-width:1200px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.12);overflow:hidden}
+    header{padding:28px;background:linear-gradient(135deg,#2c3e50,#1a2530);color:#fff;text-align:center;position:relative}
+    header h1{margin:0;font-size:2.4rem;letter-spacing:.5px;font-weight:800}
+    .subhead{margin-top:10px;opacity:.9;font-weight:500;font-size:1.1rem}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:28px}
+    textarea{width:100%;min-height:340px;padding:16px;border:2px solid #e5e7eb;border-radius:12px;font-size:14px;resize:vertical;transition:all 0.3s ease;font-family:inherit}
+    textarea:focus{outline:none;border-color:#3498db;box-shadow:0 0 0 3px rgba(52,152,219,.2)}
+    .controls{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+    .field{display:flex;flex-direction:column;gap:6px;flex:1}
+    .field label{font-weight:600;font-size:0.9rem}
+    .field input{padding:12px;border:1.5px solid #e5e7eb;border-radius:10px;transition:all 0.3s ease;font-family:inherit}
+    .field input:focus{border-color:#3498db;box-shadow:0 0 0 2px rgba(52,152,219,.1)}
+    .btns{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
+    button{background:linear-gradient(90deg,#3498db,#2980b9);border:none;color:#fff;padding:14px 22px;border-radius:999px;cursor:pointer;font-weight:600;transition:all 0.2s ease;display:flex;align-items:center;gap:8px}
+    button:hover{transform:translateY(-2px);box-shadow:0 6px 12px rgba(0,0,0,0.15)}
+    button:disabled{background:#95a5a6;transform:none;box-shadow:none}
+    .card{border:1.5px solid #eaecef;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 6px 15px rgba(0,0,0,0.08)}
+    .card-head{padding:16px 20px;border-bottom:1px solid #eef0f4;background:linear-gradient(90deg, #fafbfc, #f0f4f8);font-weight:700;font-size:1.2rem;display:flex;align-items:center;gap:10px}
+    .card-head i{color:#3498db}
+    .preview{max-height:560px;overflow:auto;padding:10px}
+    footer{padding:16px 20px;border-top:1px solid #eef0f4;background:#fafbfc;color:#6b7280;text-align:center}
+    .instructions{margin-top:20px;font-size:14px;color:#444;background:#fafbfc;padding:16px;border-radius:10px;line-height:1.5}
+    .layout{display:flex;min-height:600px}
+    .menu{width:240px;background:#fafbfc;border-right:1px solid #eef0f4;display:flex;flex-direction:column}
+    .menu-item{padding:14px 18px;cursor:pointer;border-bottom:1px solid #eef0f4;font-weight:600;transition:all 0.2s ease;display:flex;align-items:center;gap:12px}
+    .menu-item:hover{background:#f0f4f8}
+    .menu-item.active{background:#fff;color:#3498db;border-left:4px solid #3498db}
+    .menu-item i{width:20px;text-align:center}
+    .content{flex:1;padding:20px;overflow-y:auto;background:#fafbfc}
+    .job{background:#fff;border-left:4px solid #3498db;padding:16px;border-radius:8px;margin:0 0 18px;white-space:pre-wrap;box-shadow:0 3px 8px rgba(0,0,0,0.06);transition:all 0.2s ease}
+    .job:hover{transform:translateY(-2px);box-shadow:0 5px 12px rgba(0,0,0,0.1)}
+    .archive-list ul{list-style:none;padding-left:20px}
+    .archive-toggle{cursor:pointer;color:#3498db;font-weight:600;margin-bottom:10px;display:inline-block}
+    .category-count{font-size:0.8rem;background:#eef0f4;padding:3px 10px;border-radius:10px;margin-left:8px}
+    .category-title{text-align:center;font-size:1.6rem;font-weight:800;color:#2c3e50;margin:10px 0 25px;padding-bottom:15px;border-bottom:2px solid #eef0f4;background:linear-gradient(135deg, #3498db, #2980b9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0px 2px 3px rgba(0,0,0,0.1)}
+    .ad-container{background:#f8f9fb;padding:15px;border-radius:8px;margin:20px 0;text-align:center;border:1px dashed #ccc;width:100%}
+    .empty-state{padding:40px 20px;text-align:center;color:#7f8c8d}
+    .empty-state i{font-size:3rem;margin-bottom:15px;color:#bdc3c7}
+    .logo{position:absolute;top:20px;left:20px;font-size:1.8rem;color:#3498db}
+    @media (max-width: 900px) {
+      .grid{grid-template-columns:1fr}
+    }
+  </style></head><body><div class="container"><header><h1>MY JOB HUNT</h1><div class="date">Monday, August 25, 2025</div></header><div class="layout"><div class="menu"><div class="menu-item active" data-k="all"><i class="fas fa-list"></i> All <span class="category-count">60</span></div><div class="menu-item " data-k="admin"><i class="fas fa-file-alt"></i> Administrative / Secretarial <span class="category-count">2</span></div><div class="menu-item " data-k="it"><i class="fas fa-laptop-code"></i> IT / Technology <span class="category-count">12</span></div><div class="menu-item " data-k="sales"><i class="fas fa-chart-line"></i> Sales / Marketing <span class="category-count">5</span></div><div class="menu-item " data-k="medical"><i class="fas fa-heartbeat"></i> Medical / Healthcare <span class="category-count">2</span></div><div class="menu-item " data-k="logistics"><i class="fas fa-truck"></i> Logistics / Supply Chain <span class="category-count">4</span></div><div class="menu-item " data-k="driver"><i class="fas fa-truck-moving"></i> Driver / Transportation <span class="category-count">1</span></div><div class="menu-item " data-k="fnb"><i class="fas fa-utensils"></i> Food &amp; Beverage <span class="category-count">5</span></div><div class="menu-item " data-k="eng"><i class="fas fa-cogs"></i> Engineering / Technical <span class="category-count">6</span></div><div class="menu-item " data-k="education"><i class="fas fa-graduation-cap"></i> Education / Training <span class="category-count">3</span></div><div class="menu-item " data-k="finance"><i class="fas fa-dollar-sign"></i> Finance / Accounting <span class="category-count">6</span></div><div class="menu-item " data-k="misc"><i class="fas fa-ellipsis-h"></i> Miscellaneous <span class="category-count">14</span></div><div class="menu-item " data-k="archive"><i class="fas fa-archive"></i> Archive <span class="category-count">3</span></div></div><div class="content"><div class="content-pane " id="pane-all" style=""><div class="category-title">All</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">CATEGORY: ACCOUNTING &amp; FINANCE</div><div class="job">📌 Chief Accountant – Qiblah, Kuwait
+✅ Visa: Transferable 18 (Ahli)
+🌍 Nationality: Jordanian, Palestinian, Lebanese, Syrian
+📨 WhatsApp CV: 55079769 (No calls)
+📝 Subject: Chief Accountant</div><div class="job">📌 Junior Accountant – Vida United Group General Trading Co. – Kuwait
+💰 Salary: KD 250–300/month
+Responsibilities: Post journal entries, update accounts receivable/payable, assist senior accountants
+🌐 Apply online: https://kw.indeed.com/cmp/Vida-United-Group-General-Trading-Co./jobs#cmp-skip-header-desktop</div><div class="job">📌 Accountant – Major Company – Kuwait
+2+ yrs experience
+📱 WhatsApp CV: 56558298 (No calls)</div><div class="job">📌 Senior Accountant – Ahlia Aluminum Company – Kuwait
+Responsibilities: Full accounting cycle, budgeting, reporting, internal controls
+Minimum 7 years experience (3+ managerial)
+🔗 Apply via LinkedIn: https://www.linkedin.com/jobs/search/?currentJobId=4286742094&amp;f_C=8144506</div><div class="job">📌 Accountant – United Gulf Construction Co. W.L.L – Kuwait
+Bilingual, construction &amp; real estate projects
+🔗 Apply via Indeed: https://www.bayt.com/en/international/jobs/united-gulf-construction-co.-w.l.l-jobs/?filters%5Bgid_pid%5D%5B%5D=2243038-0&amp;jobId=5330286</div><div class="job">CATEGORY: IT &amp; TECH JOBS</div><div class="job">💻 Odoo Developer – Kuwait
+📧 Apply: applynow2023@gmail.com</div><div class="job">📌 IT Professionals – System Infrastructure, Security, DBA, Software Development – Kuwait
+📨 Email: wafa@aims-kw.com
+Responsibilities: System infrastructure, IT security, database administration, software development</div><div class="job">CATEGORY: MEDICAL &amp; HEALTHCARE JOBS</div><div class="job">🏥 Al Seef Hospital – Kuwait
+Health Information Clerk
+Room Sales Coordinator
+Call Center Agent
+Admission &amp; Patient Accounts Officer
+Patient Relations Agent
+Patient Care Coordinator
+Outpatient Officer
+📌 Apply: https://careers.alseef-hospital.com/jobs</div><div class="job">🏥 TEBA United Group – Kuwait
+Female Plastic Surgeon
+Female OB/GYN
+Lab Technician (KWD 400–450)
+Female GP (Dermatology &amp; Aesthetics, MOH License)
+Dermatologist &amp; Aesthetic Doctor
+📌 Apply: https://kw.indeed.com/cmp/United-Teba/jobs</div><div class="job">🏥 Private Hospital – Kuwait City
+Speech &amp; Language Therapists / Occupational Therapists
+💰 Salary: 2,000–2,300 USD
+🏠 Housing + Transport + Air Ticket
+📨 Email: recruitment@ifecjo.com
+📱 WhatsApp: +962796868143</div><div class="job">CATEGORY: TEACHING &amp; EDUCATION</div><div class="job">📌 Assistant Teacher – Kuwait
+💰 Salary: 250–300 KWD
+✅ 1+ year teaching/childcare exp.
+🔗 Apply: https://kw.indeed.com/cmp/Emerge-General-Contracting/jobs?jk=012f28162a37c953&amp;start=0&amp;clearPrefilter=1</div><div class="job">📌 Preschool English Teacher – Kuwait
+💰 Salary: 350–450 KWD
+✅ 2+ years teaching exp.
+🔗 Apply: https://kw.indeed.com/cmp/Emerge-General-Contracting/jobs?jk=012f28162a37c953&amp;start=0&amp;clearPrefilter=1</div><div class="job">📌 Preschool Branch Director – Kuwait
+💰 Salary: 650–1,100 KWD
+✅ 10+ years leadership + education experience
+🔗 Apply: https://kw.indeed.com/cmp/Emerge-General-Contracting/jobs?jk=012f28162a37c953&amp;start=0&amp;clearPrefilter=1</div><div class="job">CATEGORY: ENGINEERING &amp; TECHNICAL</div><div class="job">📌 Electrical Supervisor / Foreman – EPC Projects – Kuwait
+✅ 6+ yrs exp. oil &amp; gas projects
+💰 Competitive salary
+📨 Email: jobs@almeer.com.kw</div><div class="job">🛠 Planning Engineer – KDSC Kuwait
+Minimum 6 years experience in project planning
+📧 Email: recruit@kdsc-kuwait.com</div><div class="job">🌱 Landscape Engineer – Kuwait
+📞 WhatsApp: +96566992811</div><div class="job">🏭 Consultancy Project – Refinery &amp; Petrochemicals – Kuwait</div><div class="job">Draftsman Civil
+Cost &amp; Planning Engineer
+Static Equipment Design Engineer
+📧 Email: kwtjobs2022@gmail.com</div><div class="job">📌 International Project Manager – Tunnelling (Gulf Projects)
+📩 Email: ellen.gallagher@josephgallagher.co.uk</div><div class="job">CATEGORY: SALES, MARKETING &amp; RETAIL</div><div class="job">📢 Marketing Coordinator – Automotive Sector, Kuwait
+📧 CVs to: recruit@alghanimsons.com</div><div class="job">🏬 WIBI – WANT IT BUY IT (Retail Sales)
+📧 Apply: talent5253@gmail.com</div><div class="job">⚡ Al Mulla Power Solution – Sales Engineer
+📧 Apply: amps@almullagroup.com
+🌐 Website: https://www.almullagroup.com</div><div class="job">📦 Aspire – Procurement &amp; Shipping Officer
+📧 Apply: prajith@aspire.com.kw
+🌐 Website: http://www.aspire.com.kw</div><div class="job">⚙️ Energy Services Middle East – Field Operator
+📧 Apply: recruit@evensysvs.com</div><div class="job">🔥 FIE Kuwait – Fire &amp; Safety Roles
+📧 Apply: info@fiekw.com
+🌐 Website: http://www.fiekw.com</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Salesman / Salesman Representative – Meshkati Trading Company – Kuwait
+🔗 Apply: https://kw.indeed.com/cmp/Meshkati-Trading/jobs</div><div class="job">📌 Sales Executive – Medical &amp; Laboratory Solutions – BASMED / GULFMOON TRADING LLC – Kuwait
+🔗 Apply: https://kw.indeed.com/cmp/Basmed---Gulfmoon-Trading-LLC/jobs</div><div class="job">📌 E. Behbehani – Kuwait
+Automotive Team Leader
+Fire &amp; Miscellaneous Underwriter
+Sales Associate – Watches &amp; Jewelry
+Automotive Service Advisor
+Technician – Petroleum Engineers
+Supervisor – Retail Sales (Automotive)
+Sales Associate – Rental Sales (Fleet)
+CRM Consultant (Kuwaiti only)
+Vehicle Polisher
+🌍 Apply: https://ebehbehani.com/career</div><div class="job">CATEGORY: HOSPITALITY &amp; F&amp;B</div><div class="job">🚗 Valet Parking Driver – Kuwait
+📨 WhatsApp CV: 67700514</div><div class="job">🍔 Food &amp; Beverage Company – Manqaf</div><div class="job">Area Manager: 400–500 JOD
+Head Chef – Fast Food: 400–500 JOD</div><div class="job">Call Center Manager: 300–350 JOD
+📧 Apply: Mm298394@gmail.com</div><div class="job">📌 Waiter – Kuwait
+📞 Contact: Mubarak Kabeer +96597219883</div><div class="job">🍳 Cloud Kitchen Staff – Fahaheel
+📧 Email: supplyshr@gmail.com</div><div class="job">🍦 Ice Cream Shop Employee – Kuwait
+📲 WhatsApp: 98900415</div><div class="job">📌 Purchasing Officer – F&amp;B Industry – Kuwait
+📩 Email: Careers@al-dhow.com</div><div class="job">CATEGORY: LOGISTICS &amp; WAREHOUSE</div><div class="job">📌 Warehouse Keeper – Kuwait
+📞 Contact: 51218938 / 99845265</div><div class="job">📌 Warehouse Worker – Auto Parts Company – Kuwait
+📞 WhatsApp: +96565787387</div><div class="job">🚚 Delivery Drivers – Kuwait
+💰 KD 1,300 (car) | KD 1,150 (bike)
+📞 WhatsApp: +96566395177</div><div class="job">CATEGORY: INDUSTRIAL &amp; TEMPORARY LABOR</div><div class="job">🏭 Temporary Labor Jobs – Industrial Company, Sulaibiya
+📲 Contact mobile: 65065230</div><div class="job">💧 Water Works Projects – Engineers &amp; Foremen
+📧 Email: redandfab@gmail.com</div><div class="job">CATEGORY: OFFICE &amp; ADMIN SUPPORT</div><div class="job">🛎️ AAC Kuwait
+Receptionist
+A/C Technician
+Irrigation Systems Technician (x4)
+Retail Sales Supervisor
+📧 Apply via LinkedIn: https://www.linkedin.com/company/aac-kuwait</div><div class="job">📌 Office Boy – Kuwait
+📲 WhatsApp/Call: 96788531</div><div class="job">CATEGORY: IMPORT &amp; COMMISSION SALES</div><div class="job">📌 Import Representative – Remote / Commission-Based
+📨 WhatsApp: 60982747</div><div class="job">CATEGORY: OIL &amp; GAS / PETROLEUM</div><div class="job">📌 GULF SPIC / SPIC Gulf Petroleum Company – Kuwait
+📨 Email: gulfspickuwaitlocalrecruitment@gmail.com
+29 Vacancies: HSE Manager, Safety Officer, Industrial Hygiene, Supervisors, Technicians, Instrumentation, Mechanical, Electrical</div><div class="job">🚨 Hiring in Kuwait – IT Manager (Local Hire Only)
+💼 Position: IT Manager (Regular Company Visa, Local Transfer)
+👤 Nationality: Arabic Fluency Mandatory | Education: Bachelor’s Degree
+🧑‍💼 Reports to: Director | Team Size: 10 employees
+⏰ Working Hours: 8 AM – 4 PM | 5 days/week (Sunday–Thursday)
+📅 Joining Date: 1/11/2025
+Key Responsibilities:
+✅ Develop IT strategic objectives aligned with group goals
+✅ Identify and adapt to emerging technology trends
+✅ Define long-term ERP &amp; business applications strategy (SAP/Oracle preferred)
+✅ Oversee infrastructure, networking, integration, IT services &amp; governance
+✅ Lead, manage, and improve IT policies, procedures &amp; processes
+✅ Ensure responsible use of company resources and risk management
+Requirements:
+🔹 10–15 years’ experience in IT management
+🔹 Strong background in SAP, Networking, Infrastructure, Integration, Development
+🔹 Proven senior-level leadership and strategic IT planning
+📩 Apply via WhatsApp: +965 66961228</div><div class="job">🚨 We’re Hiring: E-Commerce Sales Representative 🚨
+Requirements:
+✅ 3–5 years of proven experience in e-commerce sales within the FMCG sector.
+✅ Strong analytical skills to interpret sales reports and market trends.
+✅ Established network and strong relations in the Kuwait market.
+✅ Excellent communication and negotiation skills.
+✅ Fluency in English (Arabic is a plus).
+✅ Local hiring only (Kuwait).
+Interested or know someone who fits this role? Apply now!
+📧 recruitment@aralsane.com
+📱 WhatsApp: +965 559 24223 (No Calls)</div><div class="job">Hiring - EPG School - Kuwait
+Position Available: Arabic Female Teachers
+We are seeking female teachers who have at least 1+Year of experience in a similar role. 
+Preference will be given to candidates with an Article 18 transferable Ahli or 22 Family Visa.
+Candidates must be fluent in both English and Arabic and should reside in or near Sabha Al Ahmad, Mangaf, Mahboula, Abu Halifa, etc.
+Note: This opportunity is exclusively for female teacher candidates in Kuwait. 
+If you are interested in working with us, please share your documents via the Email address or WhatsApp number provided below:
+Email ID: divyasuresh@ajial.com.kw 
+Mobile/WhatsApp: +965 97597046 (Please do not call; send your CV instead.)</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-admin" style="display:none"><div class="category-title">Administrative / Secretarial</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">🏥 Al Seef Hospital – Kuwait
+Health Information Clerk
+Room Sales Coordinator
+Call Center Agent
+Admission &amp; Patient Accounts Officer
+Patient Relations Agent
+Patient Care Coordinator
+Outpatient Officer
+📌 Apply: https://careers.alseef-hospital.com/jobs</div><div class="job">CATEGORY: OFFICE &amp; ADMIN SUPPORT</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-it" style="display:none"><div class="category-title">IT / Technology</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">CATEGORY: IT &amp; TECH JOBS</div><div class="job">💻 Odoo Developer – Kuwait
+📧 Apply: applynow2023@gmail.com</div><div class="job">📌 IT Professionals – System Infrastructure, Security, DBA, Software Development – Kuwait
+📨 Email: wafa@aims-kw.com
+Responsibilities: System infrastructure, IT security, database administration, software development</div><div class="job">🏥 TEBA United Group – Kuwait
+Female Plastic Surgeon
+Female OB/GYN
+Lab Technician (KWD 400–450)
+Female GP (Dermatology &amp; Aesthetics, MOH License)
+Dermatologist &amp; Aesthetic Doctor
+📌 Apply: https://kw.indeed.com/cmp/United-Teba/jobs</div><div class="job">🏬 WIBI – WANT IT BUY IT (Retail Sales)
+📧 Apply: talent5253@gmail.com</div><div class="job">⚡ Al Mulla Power Solution – Sales Engineer
+📧 Apply: amps@almullagroup.com
+🌐 Website: https://www.almullagroup.com</div><div class="job">📦 Aspire – Procurement &amp; Shipping Officer
+📧 Apply: prajith@aspire.com.kw
+🌐 Website: http://www.aspire.com.kw</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">🔥 FIE Kuwait – Fire &amp; Safety Roles
+📧 Apply: info@fiekw.com
+🌐 Website: http://www.fiekw.com</div><div class="job">📌 E. Behbehani – Kuwait
+Automotive Team Leader
+Fire &amp; Miscellaneous Underwriter
+Sales Associate – Watches &amp; Jewelry
+Automotive Service Advisor
+Technician – Petroleum Engineers
+Supervisor – Retail Sales (Automotive)
+Sales Associate – Rental Sales (Fleet)
+CRM Consultant (Kuwaiti only)
+Vehicle Polisher
+🌍 Apply: https://ebehbehani.com/career</div><div class="job">🛎️ AAC Kuwait
+Receptionist
+A/C Technician
+Irrigation Systems Technician (x4)
+Retail Sales Supervisor
+📧 Apply via LinkedIn: https://www.linkedin.com/company/aac-kuwait</div><div class="job">🚨 Hiring in Kuwait – IT Manager (Local Hire Only)
+💼 Position: IT Manager (Regular Company Visa, Local Transfer)
+👤 Nationality: Arabic Fluency Mandatory | Education: Bachelor’s Degree
+🧑‍💼 Reports to: Director | Team Size: 10 employees
+⏰ Working Hours: 8 AM – 4 PM | 5 days/week (Sunday–Thursday)
+📅 Joining Date: 1/11/2025
+Key Responsibilities:
+✅ Develop IT strategic objectives aligned with group goals
+✅ Identify and adapt to emerging technology trends
+✅ Define long-term ERP &amp; business applications strategy (SAP/Oracle preferred)
+✅ Oversee infrastructure, networking, integration, IT services &amp; governance
+✅ Lead, manage, and improve IT policies, procedures &amp; processes
+✅ Ensure responsible use of company resources and risk management
+Requirements:
+🔹 10–15 years’ experience in IT management
+🔹 Strong background in SAP, Networking, Infrastructure, Integration, Development
+🔹 Proven senior-level leadership and strategic IT planning
+📩 Apply via WhatsApp: +965 66961228</div><div class="job">🚨 We’re Hiring: E-Commerce Sales Representative 🚨
+Requirements:
+✅ 3–5 years of proven experience in e-commerce sales within the FMCG sector.
+✅ Strong analytical skills to interpret sales reports and market trends.
+✅ Established network and strong relations in the Kuwait market.
+✅ Excellent communication and negotiation skills.
+✅ Fluency in English (Arabic is a plus).
+✅ Local hiring only (Kuwait).
+Interested or know someone who fits this role? Apply now!
+📧 recruitment@aralsane.com
+📱 WhatsApp: +965 559 24223 (No Calls)</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-sales" style="display:none"><div class="category-title">Sales / Marketing</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">CATEGORY: SALES, MARKETING &amp; RETAIL</div><div class="job">📢 Marketing Coordinator – Automotive Sector, Kuwait
+📧 CVs to: recruit@alghanimsons.com</div><div class="job">📌 Sales Executive – Medical &amp; Laboratory Solutions – BASMED / GULFMOON TRADING LLC – Kuwait
+🔗 Apply: https://kw.indeed.com/cmp/Basmed---Gulfmoon-Trading-LLC/jobs</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">Call Center Manager: 300–350 JOD
+📧 Apply: Mm298394@gmail.com</div><div class="job">CATEGORY: IMPORT &amp; COMMISSION SALES</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-medical" style="display:none"><div class="category-title">Medical / Healthcare</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">CATEGORY: MEDICAL &amp; HEALTHCARE JOBS</div><div class="job">🏥 Private Hospital – Kuwait City
+Speech &amp; Language Therapists / Occupational Therapists
+💰 Salary: 2,000–2,300 USD
+🏠 Housing + Transport + Air Ticket
+📨 Email: recruitment@ifecjo.com
+📱 WhatsApp: +962796868143</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-logistics" style="display:none"><div class="category-title">Logistics / Supply Chain</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">CATEGORY: LOGISTICS &amp; WAREHOUSE</div><div class="job">📌 Warehouse Keeper – Kuwait
+📞 Contact: 51218938 / 99845265</div><div class="job">📌 Warehouse Worker – Auto Parts Company – Kuwait
+📞 WhatsApp: +96565787387</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">🚚 Delivery Drivers – Kuwait
+💰 KD 1,300 (car) | KD 1,150 (bike)
+📞 WhatsApp: +96566395177</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-driver" style="display:none"><div class="category-title">Driver / Transportation</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">🚗 Valet Parking Driver – Kuwait
+📨 WhatsApp CV: 67700514</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-fnb" style="display:none"><div class="category-title">Food &amp; Beverage</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">CATEGORY: HOSPITALITY &amp; F&amp;B</div><div class="job">Area Manager: 400–500 JOD
+Head Chef – Fast Food: 400–500 JOD</div><div class="job">📌 Waiter – Kuwait
+📞 Contact: Mubarak Kabeer +96597219883</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">🍳 Cloud Kitchen Staff – Fahaheel
+📧 Email: supplyshr@gmail.com</div><div class="job">📌 Purchasing Officer – F&amp;B Industry – Kuwait
+📩 Email: Careers@al-dhow.com</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-eng" style="display:none"><div class="category-title">Engineering / Technical</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Electrical Supervisor / Foreman – EPC Projects – Kuwait
+✅ 6+ yrs exp. oil &amp; gas projects
+💰 Competitive salary
+📨 Email: jobs@almeer.com.kw</div><div class="job">🛠 Planning Engineer – KDSC Kuwait
+Minimum 6 years experience in project planning
+📧 Email: recruit@kdsc-kuwait.com</div><div class="job">🌱 Landscape Engineer – Kuwait
+📞 WhatsApp: +96566992811</div><div class="job">Draftsman Civil
+Cost &amp; Planning Engineer
+Static Equipment Design Engineer
+📧 Email: kwtjobs2022@gmail.com</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">CATEGORY: OIL &amp; GAS / PETROLEUM</div><div class="job">📌 GULF SPIC / SPIC Gulf Petroleum Company – Kuwait
+📨 Email: gulfspickuwaitlocalrecruitment@gmail.com
+29 Vacancies: HSE Manager, Safety Officer, Industrial Hygiene, Supervisors, Technicians, Instrumentation, Mechanical, Electrical</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-education" style="display:none"><div class="category-title">Education / Training</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Assistant Teacher – Kuwait
+💰 Salary: 250–300 KWD
+✅ 1+ year teaching/childcare exp.
+🔗 Apply: https://kw.indeed.com/cmp/Emerge-General-Contracting/jobs?jk=012f28162a37c953&amp;start=0&amp;clearPrefilter=1</div><div class="job">📌 Preschool English Teacher – Kuwait
+💰 Salary: 350–450 KWD
+✅ 2+ years teaching exp.
+🔗 Apply: https://kw.indeed.com/cmp/Emerge-General-Contracting/jobs?jk=012f28162a37c953&amp;start=0&amp;clearPrefilter=1</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">Hiring - EPG School - Kuwait
+Position Available: Arabic Female Teachers
+We are seeking female teachers who have at least 1+Year of experience in a similar role. 
+Preference will be given to candidates with an Article 18 transferable Ahli or 22 Family Visa.
+Candidates must be fluent in both English and Arabic and should reside in or near Sabha Al Ahmad, Mangaf, Mahboula, Abu Halifa, etc.
+Note: This opportunity is exclusively for female teacher candidates in Kuwait. 
+If you are interested in working with us, please share your documents via the Email address or WhatsApp number provided below:
+Email ID: divyasuresh@ajial.com.kw 
+Mobile/WhatsApp: +965 97597046 (Please do not call; send your CV instead.)</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-finance" style="display:none"><div class="category-title">Finance / Accounting</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">CATEGORY: ACCOUNTING &amp; FINANCE</div><div class="job">📌 Chief Accountant – Qiblah, Kuwait
+✅ Visa: Transferable 18 (Ahli)
+🌍 Nationality: Jordanian, Palestinian, Lebanese, Syrian
+📨 WhatsApp CV: 55079769 (No calls)
+📝 Subject: Chief Accountant</div><div class="job">📌 Junior Accountant – Vida United Group General Trading Co. – Kuwait
+💰 Salary: KD 250–300/month
+Responsibilities: Post journal entries, update accounts receivable/payable, assist senior accountants
+🌐 Apply online: https://kw.indeed.com/cmp/Vida-United-Group-General-Trading-Co./jobs#cmp-skip-header-desktop</div><div class="job">📌 Accountant – Major Company – Kuwait
+2+ yrs experience
+📱 WhatsApp CV: 56558298 (No calls)</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Senior Accountant – Ahlia Aluminum Company – Kuwait
+Responsibilities: Full accounting cycle, budgeting, reporting, internal controls
+Minimum 7 years experience (3+ managerial)
+🔗 Apply via LinkedIn: https://www.linkedin.com/jobs/search/?currentJobId=4286742094&amp;f_C=8144506</div><div class="job">📌 Accountant – United Gulf Construction Co. W.L.L – Kuwait
+Bilingual, construction &amp; real estate projects
+🔗 Apply via Indeed: https://www.bayt.com/en/international/jobs/united-gulf-construction-co.-w.l.l-jobs/?filters%5Bgid_pid%5D%5B%5D=2243038-0&amp;jobId=5330286</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-misc" style="display:none"><div class="category-title">Miscellaneous</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">CATEGORY: TEACHING &amp; EDUCATION</div><div class="job">📌 Preschool Branch Director – Kuwait
+💰 Salary: 650–1,100 KWD
+✅ 10+ years leadership + education experience
+🔗 Apply: https://kw.indeed.com/cmp/Emerge-General-Contracting/jobs?jk=012f28162a37c953&amp;start=0&amp;clearPrefilter=1</div><div class="job">CATEGORY: ENGINEERING &amp; TECHNICAL</div><div class="job">🏭 Consultancy Project – Refinery &amp; Petrochemicals – Kuwait</div><div class="job">📌 International Project Manager – Tunnelling (Gulf Projects)
+📩 Email: ellen.gallagher@josephgallagher.co.uk</div><div class="job">⚙️ Energy Services Middle East – Field Operator
+📧 Apply: recruit@evensysvs.com</div><div class="job">📌 Salesman / Salesman Representative – Meshkati Trading Company – Kuwait
+🔗 Apply: https://kw.indeed.com/cmp/Meshkati-Trading/jobs</div><div class="job">🍔 Food &amp; Beverage Company – Manqaf</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">🍦 Ice Cream Shop Employee – Kuwait
+📲 WhatsApp: 98900415</div><div class="job">CATEGORY: INDUSTRIAL &amp; TEMPORARY LABOR</div><div class="job">🏭 Temporary Labor Jobs – Industrial Company, Sulaibiya
+📲 Contact mobile: 65065230</div><div class="job">💧 Water Works Projects – Engineers &amp; Foremen
+📧 Email: redandfab@gmail.com</div><div class="job">📌 Office Boy – Kuwait
+📲 WhatsApp/Call: 96788531</div><div class="job">📌 Import Representative – Remote / Commission-Based
+📨 WhatsApp: 60982747</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane" id="pane-archive" style="display:none"><div class="archive-list"><span class="archive-toggle">[+] Archives</span><ul style="display:none"><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August 22nd, 2025.html" target="_blank">August 22nd, 2025</a></li><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August 23rd, 2025.html" target="_blank">August 23rd, 202</a></li><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August 24th, 2025.html" target="_blank">August 24th, 2025</a></li></ul></div></div></div></div><footer>MY JOB HUNT © 2K25 | Enhanced Version</footer></div><script>document.querySelectorAll(".menu-item").forEach(item=>{item.addEventListener("click",()=>{document.querySelectorAll(".menu-item").forEach(a=>a.classList.remove("active"));document.querySelectorAll(".content-pane").forEach(p=>p.style.display="none");item.classList.add("active");document.querySelector("#pane-"+item.dataset.k).style.display="block";});});const toggle=document.querySelector(".archive-toggle");if(toggle){toggle.addEventListener("click",()=>{const ul=toggle.nextElementSibling;if(ul.style.display==="none"){ul.style.display="block";toggle.textContent="[-] Archives";}else{ul.style.display="none";toggle.textContent="[+] Archives";}});}</script></body></html>

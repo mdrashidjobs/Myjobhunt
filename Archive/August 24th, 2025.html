@@ -1,0 +1,853 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MY JOB HUNT</title><meta name="google-adsense-account" content="ca-pub-3037151964199001"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001" crossorigin="anonymous"></script><style>
+    *{box-sizing:border-box}
+    body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);color:#2c3e50;line-height:1.6;margin:0;padding:24px;min-height:100vh}
+    .app{max-width:1200px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.12);overflow:hidden}
+    header{padding:28px;background:linear-gradient(135deg,#2c3e50,#1a2530);color:#fff;text-align:center;position:relative}
+    header h1{margin:0;font-size:2.4rem;letter-spacing:.5px;font-weight:800}
+    .subhead{margin-top:10px;opacity:.9;font-weight:500;font-size:1.1rem}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:28px}
+    textarea{width:100%;min-height:340px;padding:16px;border:2px solid #e5e7eb;border-radius:12px;font-size:14px;resize:vertical;transition:all 0.3s ease;font-family:inherit}
+    textarea:focus{outline:none;border-color:#3498db;box-shadow:0 0 0 3px rgba(52,152,219,.2)}
+    .controls{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+    .field{display:flex;flex-direction:column;gap:6px;flex:1}
+    .field label{font-weight:600;font-size:0.9rem}
+    .field input{padding:12px;border:1.5px solid #e5e7eb;border-radius:10px;transition:all 0.3s ease;font-family:inherit}
+    .field input:focus{border-color:#3498db;box-shadow:0 0 0 2px rgba(52,152,219,.1)}
+    .btns{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
+    button{background:linear-gradient(90deg,#3498db,#2980b9);border:none;color:#fff;padding:14px 22px;border-radius:999px;cursor:pointer;font-weight:600;transition:all 0.2s ease;display:flex;align-items:center;gap:8px}
+    button:hover{transform:translateY(-2px);box-shadow:0 6px 12px rgba(0,0,0,0.15)}
+    button:disabled{background:#95a5a6;transform:none;box-shadow:none}
+    .card{border:1.5px solid #eaecef;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 6px 15px rgba(0,0,0,0.08)}
+    .card-head{padding:16px 20px;border-bottom:1px solid #eef0f4;background:linear-gradient(90deg, #fafbfc, #f0f4f8);font-weight:700;font-size:1.2rem;display:flex;align-items:center;gap:10px}
+    .card-head i{color:#3498db}
+    .preview{max-height:560px;overflow:auto;padding:10px}
+    footer{padding:16px 20px;border-top:1px solid #eef0f4;background:#fafbfc;color:#6b7280;text-align:center}
+    .instructions{margin-top:20px;font-size:14px;color:#444;background:#fafbfc;padding:16px;border-radius:10px;line-height:1.5}
+    .layout{display:flex;min-height:600px}
+    .menu{width:240px;background:#fafbfc;border-right:1px solid #eef0f4;display:flex;flex-direction:column}
+    .menu-item{padding:14px 18px;cursor:pointer;border-bottom:1px solid #eef0f4;font-weight:600;transition:all 0.2s ease;display:flex;align-items:center;gap:12px}
+    .menu-item:hover{background:#f0f4f8}
+    .menu-item.active{background:#fff;color:#3498db;border-left:4px solid #3498db}
+    .menu-item i{width:20px;text-align:center}
+    .content{flex:1;padding:20px;overflow-y:auto;background:#fafbfc}
+    .job{background:#fff;border-left:4px solid #3498db;padding:16px;border-radius:8px;margin:0 0 18px;white-space:pre-wrap;box-shadow:0 3px 8px rgba(0,0,0,0.06);transition:all 0.2s ease}
+    .job:hover{transform:translateY(-2px);box-shadow:0 5px 12px rgba(0,0,0,0.1)}
+    .archive-list ul{list-style:none;padding-left:20px}
+    .archive-toggle{cursor:pointer;color:#3498db;font-weight:600;margin-bottom:10px;display:inline-block}
+    .category-count{font-size:0.8rem;background:#eef0f4;padding:3px 10px;border-radius:10px;margin-left:8px}
+    .category-title{text-align:center;font-size:1.6rem;font-weight:800;color:#2c3e50;margin:10px 0 25px;padding-bottom:15px;border-bottom:2px solid #eef0f4;background:linear-gradient(135deg, #3498db, #2980b9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0px 2px 3px rgba(0,0,0,0.1)}
+    .ad-container{background:#f8f9fb;padding:15px;border-radius:8px;margin:20px 0;text-align:center;border:1px dashed #ccc;width:100%}
+    .empty-state{padding:40px 20px;text-align:center;color:#7f8c8d}
+    .empty-state i{font-size:3rem;margin-bottom:15px;color:#bdc3c7}
+    .logo{position:absolute;top:20px;left:20px;font-size:1.8rem;color:#3498db}
+    @media (max-width: 900px) {
+      .grid{grid-template-columns:1fr}
+    }
+  </style></head><body><div class="container"><header><h1>MY JOB HUNT</h1><div class="date">Sunday, August 24, 2025</div></header><div class="layout"><div class="menu"><div class="menu-item active" data-k="all"><i class="fas fa-list"></i> All <span class="category-count">51</span></div><div class="menu-item " data-k="admin"><i class="fas fa-file-alt"></i> Administrative / Secretarial <span class="category-count">4</span></div><div class="menu-item " data-k="it"><i class="fas fa-laptop-code"></i> IT / Technology <span class="category-count">5</span></div><div class="menu-item " data-k="sales"><i class="fas fa-chart-line"></i> Sales / Marketing <span class="category-count">4</span></div><div class="menu-item " data-k="medical"><i class="fas fa-heartbeat"></i> Medical / Healthcare <span class="category-count">2</span></div><div class="menu-item " data-k="logistics"><i class="fas fa-truck"></i> Logistics / Supply Chain <span class="category-count">2</span></div><div class="menu-item " data-k="driver"><i class="fas fa-truck-moving"></i> Driver / Transportation <span class="category-count">2</span></div><div class="menu-item " data-k="fnb"><i class="fas fa-utensils"></i> Food &amp; Beverage <span class="category-count">4</span></div><div class="menu-item " data-k="eng"><i class="fas fa-cogs"></i> Engineering / Technical <span class="category-count">12</span></div><div class="menu-item " data-k="education"><i class="fas fa-graduation-cap"></i> Education / Training <span class="category-count">2</span></div><div class="menu-item " data-k="finance"><i class="fas fa-dollar-sign"></i> Finance / Accounting <span class="category-count">2</span></div><div class="menu-item " data-k="misc"><i class="fas fa-ellipsis-h"></i> Miscellaneous <span class="category-count">12</span></div><div class="menu-item " data-k="archive"><i class="fas fa-archive"></i> Archive <span class="category-count">2</span></div></div><div class="content"><div class="content-pane " id="pane-all" style=""><div class="category-title">All</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="2026981589" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">A leading Fashion company in Kuwait is currently hiring the following position:</div><div class="job">Job Title: Telesales Representative
+ Department: Sales / Customer Engagement
+ Location: Kuwait HO &amp; GCC
+ Employment Type: Full Time
+ Reports To: Sales Manager / Telesales Supervisor
+Job Summary:
+We are looking for a persuasive and goal-driven Telesales Representative to join our growing sales team. In this role, you will be responsible for reaching out to potential and existing customers via phone to promote our products/services, close sales, and provide excellent customer support.
+Key Responsibilities:
+Make outbound calls to prospective customers using provided leads or cold calling.
+Present, promote, and sell products/services over the phone in a clear and professional manner.
+Understand customer needs and provide appropriate solutions or product recommendations.
+Build strong customer relationships to encourage repeat business and referrals.
+Meet or exceed daily, weekly, and monthly sales targets.
+Handle inbound calls and follow up on previous customer interactions as needed.
+Maintain accurate records of calls, sales, and customer information in CRM systems.
+Work closely with the sales and marketing teams to align messaging and campaign goals.
+Stay updated on product knowledge, pricing, and promotions.
+Required Qualifications:
+High school diploma or equivalent (bachelor’s degree is a plus).
+Proven experience in telesales, telemarketing, or a similar sales/customer service role.
+Excellent verbal communication and listening skills.
+Ability to handle objections and remain calm under pressure.
+Confident, persuasive, and customer-focused attitude.
+Basic computer skills and familiarity with CRM or call center software.
+Preferred Skills:
+Experience in Fashion, telecom, SaaS, retail
+Multilingual communication skills are a plus.
+Familiarity with sales scripts and techniques such as SPIN or consultative selling.
+Fast typing skills and attention to detail.
+What We Offer:
+Paid training and development programs
+Opportunities for career advancement
+Supportive and dynamic team environment
+To apply please send your resume to the following whatsapp number:
++965 60761310</div><div class="job">Wathif Is Hiring Locally in Kuwait 💼
+Salesman
+💰 Salary: 275 KD + bonus/commissions + company transportation ⏰ Working Hours: 8 hrs/day | 6 days/week (1 day off)
+🚀 Immediate Joining 📍 Work Location: Rotating stores – Khiran Mall, Warehouse Mall, 360 Mall, and other events
+👤 Experience: 4–6 years in retail or customer service | Tagalog Speakers
+Key Responsibilities:
+✅ Sell sunglasses and related products
+✅ Provide excellent customer service
+✅ Manage inventory and support store operations
+📌 Only accepting applicants with Regular Company Visa (Local Transferable)
+📩 Apply via WhatsApp: +965 66961228</div><div class="job">URGENT HIRING – 
+We are looking for experienced and qualified professionals to join our team for operating 3000 HP Deep Drilling Rigs in State of Kuwait.
+If you meet the following criteria, we want to hear from you!
+🌟 Open Positions:
+1. Senior Mechanic
+ • Qualification: Engineering Graduate
+ • Industry Experience:
+ • Minimum 7 years of mechanical maintenance experience in the drilling industry
+ • Preferred: Experience with top drive, drilling equipment, and automated control systems
+ • Present Position Experience: Minimum 2 years in current role
+2. Senior Electrician
+ • Qualification: Engineering Graduate
+ • Experience:
+ • Minimum 7 years in electrical maintenance in the drilling industry
+ • Preferred: Hands-on with AC driven systems and automated electrical control systems
+ • Minimum 2 years in the present position
+- How to Apply:
+Send your CV, experience certificates, and relevant qualifications to:
+hrsupport@burgandrilling.com</div><div class="job">Wathif Is Hiring Locally in Kuwait 💼
+Quality Manager
+💰 Salary: 250-380 KD | 👤 3-5 yrs experience | 🚀 Immediate Joining
+⏰ Working Hours: 9 hrs/day (1 hr break) | 6 days/week
+Key Responsibilities:
+✅Develop and maintain quality standards
+✅Ensure customer satisfaction and problem-solving
+✅Maintain branch hygiene across all locations
+✅Monitor compliance and operational efficiency
+Additional: Transportation provided by the company for work based duties 
+📌 Only accepting applicants with Visa 18 (Ahli– Local Transferable)
+📩 Apply via WhatsApp: +965 66961228</div><div class="job">🚛 We Are Hiring – Truck &amp; Coaster Drivers 🚌
+We are urgently looking for experienced Truck Drivers and Coaster Drivers to join our team in Kuwait.
+📌 Requirements:
+Valid Kuwait Heavy Driving License
+Visa 18 (Ahli), transferable
+Any nationality
+Ready to join immediately
+📌 Offer:
+Salary: 250 KWD + Accommodation
+Duty: 12 hours per day
+📩 Interested candidates, please send your CV to 67700514</div><div class="job">📢 We're Hiring: Sales Engineer (HVAC)
+🕒 Experience Required: 2–5 years
+We are looking for a motivated and technically skilled Sales Engineer (HVAC) to join our growing team. The ideal candidate will be responsible for driving HVAC system sales by understanding client requirements, providing tailored solutions, preparing proposals, and closing deals.
+Key Responsibilities:
+* Identify and develop new business opportunities in the HVAC market.
+* Meet with contractors, consultants, developers, and building owners to assess HVAC needs.
+* Recommend suitable HVAC systems based on site conditions and project specifications.
+* Negotiate terms and close deals in line with company objectives.
+* Stay updated on market trends, competitor offerings, and industry standards.
+* Achieve monthly, quarterly, and annual sales targets.
+Requirements:
+* 2–5 years of experience in HVAC sales or project engineering.
+* Strong knowledge of HVAC systems and equipment (VRF, Ductable, Rooftop Package units).
+* Experience working with consultants and MEP contractors.
+* Familiarity with local HVAC codes and regulations.
+📧 Send your CV to: virendra.pathania@yousifi.com.kw</div><div class="job">*We are hiring* 
+1- pastry chef 
+2- chocolate chef
+3- bakery chef 
+• Visa Ahli transferable 
+Immediately join
+• Only in kuwait 
+ *Send your cv to 66019321*</div><div class="job">We’re Hiring: Assistant Restaurant Managers – Casual Dining Concepts
+Are you passionate about hospitality and ready to take the next step in your leadership journey? We are looking for experienced and energetic Assistant Restaurant Managers to join our team across our well-established casual dining concepts.
+In this role, you will support daily operations, lead and motivate the team, ensure excellent guest service, and help drive performance and efficiency. We're seeking individuals with strong communication skills, a hands-on approach, and a genuine passion for creating great dining experiences.
+If you have prior experience in a similar role and thrive in a fast-paced, people-focused environment—we want to hear from you!
+📍Location: Gastronomica, Kuwait
+ 💼 Full-time 
+📧 To apply, please send your CV to samantha@gastronomica-me.com</div><div class="job">Automak is seeking a dynamic and driven Sales Executive (Female) to join our team of professionals. 
+If you're passionate about cars, love working with people, and have a knack for closing deals, we want to hear from you!
+Requirements:
+ ✅ Native Arab female
+ ✅ Proven sales experience (automotive preferred)
+ ✅ Excellent communication and customer service skills
+ ✅ Presentable, confident, and motivated
+Why Automak?
+ ✔ Competitive salary + commission
+ ✔ Supportive work environment
+ ✔ Opportunity for growth
+📩 Apply now at recruitment@automak.com</div><div class="job">📌 Walk-In Interview – NBTC Petroleum Group (Oil &amp; Gas, Kuwait)
+🚧 HSE / Safety Officer
+📅 Date: Today, 23 Aug 2025 (Saturday)
+🕘 Time: 09:00 AM – 02:00 PM
+📍 NBTC Corporate Office, Plot No. 1, Block-5, Shuaiba Industrial Area, Ahmadi
+✅ Min. 5 yrs HSE exp. in Oil &amp; Gas
+✅ KOC/KNPC approval preferred
+✅ Transferable visa 18 mandatory
+💼 Benefits: Food, accommodation, transport provided
+📧 CV: recruitment@nbtc-kuwait.com</div><div class="job">📌 F&amp;B Industry – Immediate Hiring
+👥 HR Manager / Operations Manager
+✅ Proven F&amp;B industry experience
+✅ Leadership &amp; communication skills
+✅ Transferable Ahli visa (immediate joining)
+📞 Apply: +965 50441258</div><div class="job">📌 Driver – Kuwait
+🚗 Light Vehicle Driver
+✅ Valid Kuwait driving license (or transferable foreign license)
+✅ Knowledge of Kuwait routes
+✅ Transferable visa 18
+📧 Send CV + License: Talentconnectkw@gmail.com
+📲 WhatsApp/Call: 55388369</div><div class="job">📌 Pastry Chef – Cookies &amp; Desserts
+🎂 Baking &amp; molten dessert specialist
+✅ Min. 1 yr experience
+✅ Transferable visa (local hire only)
+📧 Apply: ck@blobkwt.com</div><div class="job">📌 Electrician – Kuwait
+⚡ Electrical installation &amp; wiring
+✅ Min. 1 yr experience in Kuwait
+✅ Transferable residence
+💰 Salary: KWD 200 + overtime + meals
+📲 WhatsApp CV: 97175150</div><div class="job">📌 Electrical &amp; Mechanical Technician – Water Factory
+🏭 Operate &amp; maintain Krones, Sidel, Tetrapak machines
+✅ Transferable Visa 18 / Factory Visa
+✅ Exp. in water factory operations
+📧 Apply: careers@mezzan.com</div><div class="job">📌 Leading Oil &amp; Gas EPC Company – Urgent Hiring
+👷 Multiple Vacancies (128 positions)
+Project Manager (15 yrs)
+Project Control Manager (15 yrs)
+Senior Safety Engineer (12 yrs)
+QA/QC Manager (15 yrs)
+Planning Engineer (8 yrs)
+Civil, Mech, Elec, Instrument Engineers (8 yrs)
+Supervisors &amp; QA/QC Engineers
+📧 Send CV: me-mus@hotmail.com</div><div class="job">📌 Designer &amp; Printer – Kuwait
+🖨️ Printing Press Job
+✅ Exp. in design &amp; printing
+✅ Fluent in Arabic
+📲 Contact: 51165653</div><div class="job">📌 Technician – Heavy Equipment
+🔧 Exp. with Rollers, Generators, Plate Compactors, Cutting/Bending machines, Vehicles
+✅ Driving license preferred
+📲 WhatsApp only: 94783171</div><div class="job">📌 Car Polishing / Painting Specialist
+🚘 14 yrs exp. in Kuwait
+✅ Polishing, detailing, ceramic coating, wall/wood spray painting
+✅ Article 20 transferable visa
+📲 WhatsApp/Call: 98713870</div><div class="job">📌 Accountant – Kuwait
+💼 Junior / Fresh Graduate welcome
+✅ 0–3 yrs exp., Excel &amp; ERP skills
+✅ Bilingual (Arabic + English)
+✅ Transferable visa 18
+📱 WhatsApp CV: 94920212
+📧 Email: info@yardekcoffee.com</div><div class="job">📌 Real Estate Marketer – Kuwait
+🏡 Fixed salary + high commissions
+✅ Exp. in real estate marketing preferred
+✅ Strong negotiation skills
+📧 CV: Abyat_united@hotmail.com
+📲 Call: 66488333 / 41112714</div><div class="job">📌 Private American School – Kuwait (AY 2025-26)
+🎓 Hiring Teachers &amp; Leaders:
+KG &amp; Elementary English (Native only)
+Middle/High Math Teacher
+AP English (Native only)
+Culinary Arts Teacher
+Social Studies / Humanities
+Elementary Counselor
+Dean of Students (MSHS)
+🔗 Apply: abs.edu.kw/careers/abs</div><div class="job">📌 Commercial Manager – Govt Projects
+🏗️ Leading Project Management Co.
+✅ 15 yrs exp. in govt tendering
+✅ Bilingual (Arabic + English)
+✅ Engineering degree required
+📧 CV: info@alkazemiq8.com
+📞 Call: 22452445 / 22413522</div><div class="job">📌 IMCO Engineering &amp; Construction – Urgent Hiring
+👷 Vacancies:
+Storekeeper (English communication required)
+Planning Engineer / Sr. Planning Engineer (KOC/KNPC approval preferred)
+QA/QC Assistant / Document Controller
+CCTV Operator / Surveillance Operator
+📧 Apply: srodrigues@canarholding.com
+📌 Mention job title in subject line.</div><div class="job">📌 Multiple Openings – Kuwait
+👥 Workers required (immediate start)
+✅ Relevant qualifications/experience
+✅ Ready to join immediately
+📧 Send CV: dcfdesk2025@gmail.com</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="4708985248" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Bilingual Secretary (Female, Arabic Native)
+📍 Kuwait – Immediate Joining
+✅ Strong English + Arabic
+✅ Secretarial/admin experience
+📧 Apply: info@taepku.com</div><div class="job">📌 Junior Accountant – Kuwait City
+👩‍💼 Freshers welcome (0–2 yrs)
+✅ B.Com/Finance
+✅ MS Excel + Tally
+✅ Strong academics preferred
+📧 Apply: info@thepearlkw.com
+📌 Subject: Junior Accountant – Your Name</div><div class="job">📌 Oil &amp; Gas Rig-Based Roles – Immediate Hiring
+⛽ Positions:
+Senior Tool Pusher / Night Tool Pusher
+Driller / Assistant Driller
+Chief Mechanic / Chief Electrician
+✅ ICF Certificate required
+✅ Rig experience mandatory
+✅ English mandatory (Arabic an advantage)
+📧 Apply: ongcrewqatar@ghrsme.com</div><div class="job">📌 Auto Maintenance (Drying Engines)
+💰 Salary: 500 KD
+📅 Sat–Thu (Fri off)
+✅ Article 18 visa (transferable)
+📞 Call: 99116178</div><div class="job">📌 Al-Jaafaria Islamic School (Girls Only)
+👩‍🏫 Hiring: Female Math Teachers (Primary)
+📍 Surra – Block 3, Street 1
+📱 WhatsApp CV only: 66864643</div><div class="job">📌 Videographer – Egypt (Work for Kuwait Co.)
+🎥 Interior design projects
+✅ Must be based in Egypt
+✅ Proven videography skills
+📞 Contact: 95570969</div><div class="job">📌 Teachers – Evening Classes (Sabah Al Salem)
+🕔 Evening shifts only
+📚 All subjects (Male/Female)
+📱 WhatsApp CV: 65957481 (No calls)</div><div class="job">📌 Govt. Project Engineering Roles (Kuwait)
+🏗️ Public Authority for Roads &amp; Transport
+📌 Vacancies:
+Scheduler Engineer
+Safety &amp; Security Specialist
+✅ Min. 8 yrs experience
+✅ Pre-approval from authority
+📧 CV: cv@aldowailah.net</div><div class="job">📌 Oil &amp; Gas Specialist Roles – Kuwait
+👨‍🔧 Vacancies:
+Power BI Specialist
+SAP Engineer
+Chemical Engineer
+Instrumentation Engineer
+✅ Must be in Kuwait
+📱 WhatsApp CV: 97932469</div><div class="job">📌 Healthcare Jobs – Kuwait
+🧑‍⚕️ Speech Therapist &amp; Physiotherapist
+✅ Must be in Kuwait
+📧 Apply: anjali@thiqamedical.com</div><div class="job">📌 Nursing Jobs – Salmiya (Female Only)
+💰 Salary:
+540 KD + 100 KD (Laser Exp.)
+450 KD + Housing (Prometric nurses)
+📱 WhatsApp CV only: 97634952 (No calls)</div><div class="job">📌 Female Staff Required – Kuwait
+👩‍💼 Vacancies:
+Accountant
+Logistics Coordinator
+Secretary (1 month temp.)
+📧 CV: careers.royalrichkwt@gmail.com</div><div class="job">📌 Part-Time Faculty – Kuwait
+🎓 Subjects:
+IGCSE Biology
+ACCA / CMA / CFA
+Primavera P6
+📧 CV: associate1@uikuwait.com
+📱 WhatsApp: 66078041</div><div class="job">📌 Kuwait Fluid Drilling &amp; Oil Services
+👷 Hiring Skilled Workers – Ahmadi (Shuaiba)
+💰 Salary:
+170 KD (8 hrs)
+205 KD (12 hrs)
+✅ Medical insurance + 34 days leave
+✅ Age: 28–40
+📱 WhatsApp docs to: 69002239</div><div class="job">📌 Cashiers &amp; Helpers – Immediate Hiring
+🛒 Electronics sales &amp; warehouse assistants
+✅ Visa 18 transferable only
+📧 CV: hr@chayahgroup.com
+📞 Call: 94749190</div><div class="job">🚗 Car Driver – Divert Logistics
+📍 Kuwait
+✅ Valid Kuwait light vehicle license (or assistance provided for conversion)
+✅ Good knowledge of routes &amp; traffic rules
+✅ Transferable Article 18 visa | Immediate joiners preferred
+🛠 Deliveries, vehicle upkeep, safe driving
+💼 Full-time | Salary: Competitive
+📧 Talentconnectkw@gmail.com
+📱 55388369</div><div class="job">🏗️ Engineering &amp; Supervisory Jobs – Oil Project (North Kuwait)
+📌 International Group hiring for prestigious oil project
+✅ BSc Mechanical Eng. | 8+ yrs exp.
+✅ Immediate joining preferred
+Open Roles:
+QA/QC Inspector (Welding)
+Piping Engineer (5+ yrs exp.)
+Mechanical Supervisor
+Mechanical Foreman
+Crane Supervisor / Crane Foreman
+Crane/Lifting Workers
+Documentation Officer
+Planning Engineer (Mechanical)
+📧 business@ig-kwt.com</div><div class="job">🔍 Quality Controller / Inspector – Manufacturing
+📍 Kuwait
+✅ B.Tech (Civil) or Diploma
+✅ Factory/manufacturing QC experience preferred
+🛠 Inspect raw materials, production &amp; final products | Maintain QC reports
+📧 careers@recafco.com
+📱 WhatsApp: 97362267</div><div class="job">⚡ Immediate Hiring – Multiple Roles
+📍 Kuwait | Urgent openings
+Vacancies:
+Assistant Manager
+Storekeeper
+Sales Representative
+Musharraf
+Driver
+Electrical/Electronics Engineer
+Security Guard
+Vendor
+Accountant (M/F, Fresh grads welcome)
+Packaging Assistant
+Factory Worker
+General Assistant
+Cashier
+Warehouse Worker
+Customer Service
+📧 drduhemcraig@gmail.com
+📱 For Accountant only (WhatsApp): 69969980
+🚫 No calls accepted</div><div class="job">📋 Registration &amp; Regulatory Officer
+📍 Confidential Company – Kuwait
+✅ Degree in Science / Pharmacy / Chemistry / Engineering
+✅ 2–5 yrs in Regulatory Affairs (FMCG / Cosmetics / Pharma)
+✅ Knowledge of GCC, SFDA, SASO, GSO standards
+🛠 Product registration, compliance, regulatory submissions
+💼 Salary: Competitive + benefits
+📱 WhatsApp CV: 67700514</div><div class="job">🏢 Leading Company – Immediate Hiring
+📌 Multiple Openings:
+Corporate HSE Manager
+Corporate HSE Officer
+Graphic Designer
+Technical Sales Manager (ICT &amp; ELV)
+Cost Controller (10+ yrs exp.)
+Admin Assistant
+Business Development Assistant / Officer
+✅ Reputable &amp; growing company
+✅ Competitive salary + career growth
+📧 recruitment4ch@gmail.com</div><div class="job">🌿 Receptionist – The Organic Spa Health Institute
+📍 Kuwait (Inside Spa Institute)
+✅ Previous reception/admin exp.
+✅ Strong English communication
+✅ Transferable residence (Kuwait only)
+💰 Salary: 300 KD
+📧 kingsleymenspakuwait@gmail.com
+📱 WhatsApp CV only: 96097006 (🚫 No calls)</div><div class="job">🔧 Technical Engineer / Supervisor – CCTV &amp; Networking
+📍 KSS Kuwait (Security Tech)
+✅ Driving license
+✅ 2+ yrs exp. (Fresh grads welcome)
+🛠 CCTV &amp; networking projects, supervise teams, client coordination
+💼 Career growth in a growing sector
+📧 info@kuwaitsecure.com</div><div class="job">🛍️ WANT IT BUY IT (WIBI) – Showroom Sales Jobs
+🚀 Multiple positions available in Electronics, Mobiles &amp; Jewelry
+📌 Position 1: Showroom Sales (Electronics &amp; Mobiles)
+✅ Experience in electronics &amp; mobile phones sales
+✅ Inside Kuwait only – Transferable Article 18 visa
+✅ Immediate joining – Customer focused &amp; proactive
+🛠️ Duties: Product selection support, achieve targets, maintain showroom displays
+📌 Position 2: Sales Associate (Jewelry)
+✅ Jewelry or luxury retail sales experience
+✅ Inside Kuwait only – Transferable Article 18 visa
+✅ Immediate joining – Strong interpersonal skills
+🛠️ Duties: Guide customers, handle POS, maintain aesthetics, build client relations
+📧 Apply: talent5253@gmail.com</div><div class="job">👨‍💼 MM Ali Manpower Co. – Management Roles (Catering &amp; Retail)
+Lead with excellence in Fine Dining &amp; Luxury Retail
+📌 Available Positions:
+Operation Manager
+Area Manager
+Outlet Manager
+✅ 3–5 yrs experience in fine dining/retail
+✅ Inside Kuwait only – Transferable Article 18 visa
+✅ Immediate joining – Strong leadership skills
+📧 Apply: bryan@mmckuwait.com
+ | hr@mmckuwait.com
+📲 WhatsApp: +96594482067</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="3395903576" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-admin" style="display:none"><div class="category-title">Administrative / Secretarial</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="2026981589" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Bilingual Secretary (Female, Arabic Native)
+📍 Kuwait – Immediate Joining
+✅ Strong English + Arabic
+✅ Secretarial/admin experience
+📧 Apply: info@taepku.com</div><div class="job">📌 Female Staff Required – Kuwait
+👩‍💼 Vacancies:
+Accountant
+Logistics Coordinator
+Secretary (1 month temp.)
+📧 CV: careers.royalrichkwt@gmail.com</div><div class="job">🏢 Leading Company – Immediate Hiring
+📌 Multiple Openings:
+Corporate HSE Manager
+Corporate HSE Officer
+Graphic Designer
+Technical Sales Manager (ICT &amp; ELV)
+Cost Controller (10+ yrs exp.)
+Admin Assistant
+Business Development Assistant / Officer
+✅ Reputable &amp; growing company
+✅ Competitive salary + career growth
+📧 recruitment4ch@gmail.com</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="4708985248" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">🌿 Receptionist – The Organic Spa Health Institute
+📍 Kuwait (Inside Spa Institute)
+✅ Previous reception/admin exp.
+✅ Strong English communication
+✅ Transferable residence (Kuwait only)
+💰 Salary: 300 KD
+📧 kingsleymenspakuwait@gmail.com
+📱 WhatsApp CV only: 96097006 (🚫 No calls)</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="3395903576" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-it" style="display:none"><div class="category-title">IT / Technology</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="2026981589" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">Job Title: Telesales Representative
+ Department: Sales / Customer Engagement
+ Location: Kuwait HO &amp; GCC
+ Employment Type: Full Time
+ Reports To: Sales Manager / Telesales Supervisor
+Job Summary:
+We are looking for a persuasive and goal-driven Telesales Representative to join our growing sales team. In this role, you will be responsible for reaching out to potential and existing customers via phone to promote our products/services, close sales, and provide excellent customer support.
+Key Responsibilities:
+Make outbound calls to prospective customers using provided leads or cold calling.
+Present, promote, and sell products/services over the phone in a clear and professional manner.
+Understand customer needs and provide appropriate solutions or product recommendations.
+Build strong customer relationships to encourage repeat business and referrals.
+Meet or exceed daily, weekly, and monthly sales targets.
+Handle inbound calls and follow up on previous customer interactions as needed.
+Maintain accurate records of calls, sales, and customer information in CRM systems.
+Work closely with the sales and marketing teams to align messaging and campaign goals.
+Stay updated on product knowledge, pricing, and promotions.
+Required Qualifications:
+High school diploma or equivalent (bachelor’s degree is a plus).
+Proven experience in telesales, telemarketing, or a similar sales/customer service role.
+Excellent verbal communication and listening skills.
+Ability to handle objections and remain calm under pressure.
+Confident, persuasive, and customer-focused attitude.
+Basic computer skills and familiarity with CRM or call center software.
+Preferred Skills:
+Experience in Fashion, telecom, SaaS, retail
+Multilingual communication skills are a plus.
+Familiarity with sales scripts and techniques such as SPIN or consultative selling.
+Fast typing skills and attention to detail.
+What We Offer:
+Paid training and development programs
+Opportunities for career advancement
+Supportive and dynamic team environment
+To apply please send your resume to the following whatsapp number:
++965 60761310</div><div class="job">📢 We're Hiring: Sales Engineer (HVAC)
+🕒 Experience Required: 2–5 years
+We are looking for a motivated and technically skilled Sales Engineer (HVAC) to join our growing team. The ideal candidate will be responsible for driving HVAC system sales by understanding client requirements, providing tailored solutions, preparing proposals, and closing deals.
+Key Responsibilities:
+* Identify and develop new business opportunities in the HVAC market.
+* Meet with contractors, consultants, developers, and building owners to assess HVAC needs.
+* Recommend suitable HVAC systems based on site conditions and project specifications.
+* Negotiate terms and close deals in line with company objectives.
+* Stay updated on market trends, competitor offerings, and industry standards.
+* Achieve monthly, quarterly, and annual sales targets.
+Requirements:
+* 2–5 years of experience in HVAC sales or project engineering.
+* Strong knowledge of HVAC systems and equipment (VRF, Ductable, Rooftop Package units).
+* Experience working with consultants and MEP contractors.
+* Familiarity with local HVAC codes and regulations.
+📧 Send your CV to: virendra.pathania@yousifi.com.kw</div><div class="job">📌 Electrical &amp; Mechanical Technician – Water Factory
+🏭 Operate &amp; maintain Krones, Sidel, Tetrapak machines
+✅ Transferable Visa 18 / Factory Visa
+✅ Exp. in water factory operations
+📧 Apply: careers@mezzan.com</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="4708985248" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Technician – Heavy Equipment
+🔧 Exp. with Rollers, Generators, Plate Compactors, Cutting/Bending machines, Vehicles
+✅ Driving license preferred
+📲 WhatsApp only: 94783171</div><div class="job">🛍️ WANT IT BUY IT (WIBI) – Showroom Sales Jobs
+🚀 Multiple positions available in Electronics, Mobiles &amp; Jewelry
+📌 Position 1: Showroom Sales (Electronics &amp; Mobiles)
+✅ Experience in electronics &amp; mobile phones sales
+✅ Inside Kuwait only – Transferable Article 18 visa
+✅ Immediate joining – Customer focused &amp; proactive
+🛠️ Duties: Product selection support, achieve targets, maintain showroom displays
+📌 Position 2: Sales Associate (Jewelry)
+✅ Jewelry or luxury retail sales experience
+✅ Inside Kuwait only – Transferable Article 18 visa
+✅ Immediate joining – Strong interpersonal skills
+🛠️ Duties: Guide customers, handle POS, maintain aesthetics, build client relations
+📧 Apply: talent5253@gmail.com</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="3395903576" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-sales" style="display:none"><div class="category-title">Sales / Marketing</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="2026981589" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">Automak is seeking a dynamic and driven Sales Executive (Female) to join our team of professionals. 
+If you're passionate about cars, love working with people, and have a knack for closing deals, we want to hear from you!
+Requirements:
+ ✅ Native Arab female
+ ✅ Proven sales experience (automotive preferred)
+ ✅ Excellent communication and customer service skills
+ ✅ Presentable, confident, and motivated
+Why Automak?
+ ✔ Competitive salary + commission
+ ✔ Supportive work environment
+ ✔ Opportunity for growth
+📩 Apply now at recruitment@automak.com</div><div class="job">📌 Real Estate Marketer – Kuwait
+🏡 Fixed salary + high commissions
+✅ Exp. in real estate marketing preferred
+✅ Strong negotiation skills
+📧 CV: Abyat_united@hotmail.com
+📲 Call: 66488333 / 41112714</div><div class="job">📌 Cashiers &amp; Helpers – Immediate Hiring
+🛒 Electronics sales &amp; warehouse assistants
+✅ Visa 18 transferable only
+📧 CV: hr@chayahgroup.com
+📞 Call: 94749190</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="4708985248" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">⚡ Immediate Hiring – Multiple Roles
+📍 Kuwait | Urgent openings
+Vacancies:
+Assistant Manager
+Storekeeper
+Sales Representative
+Musharraf
+Driver
+Electrical/Electronics Engineer
+Security Guard
+Vendor
+Accountant (M/F, Fresh grads welcome)
+Packaging Assistant
+Factory Worker
+General Assistant
+Cashier
+Warehouse Worker
+Customer Service
+📧 drduhemcraig@gmail.com
+📱 For Accountant only (WhatsApp): 69969980
+🚫 No calls accepted</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="3395903576" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-medical" style="display:none"><div class="category-title">Medical / Healthcare</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="2026981589" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Healthcare Jobs – Kuwait
+🧑‍⚕️ Speech Therapist &amp; Physiotherapist
+✅ Must be in Kuwait
+📧 Apply: anjali@thiqamedical.com</div><div class="job">📌 Kuwait Fluid Drilling &amp; Oil Services
+👷 Hiring Skilled Workers – Ahmadi (Shuaiba)
+💰 Salary:
+170 KD (8 hrs)
+205 KD (12 hrs)
+✅ Medical insurance + 34 days leave
+✅ Age: 28–40
+📱 WhatsApp docs to: 69002239</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="3395903576" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-logistics" style="display:none"><div class="category-title">Logistics / Supply Chain</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="2026981589" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">Wathif Is Hiring Locally in Kuwait 💼
+Salesman
+💰 Salary: 275 KD + bonus/commissions + company transportation ⏰ Working Hours: 8 hrs/day | 6 days/week (1 day off)
+🚀 Immediate Joining 📍 Work Location: Rotating stores – Khiran Mall, Warehouse Mall, 360 Mall, and other events
+👤 Experience: 4–6 years in retail or customer service | Tagalog Speakers
+Key Responsibilities:
+✅ Sell sunglasses and related products
+✅ Provide excellent customer service
+✅ Manage inventory and support store operations
+📌 Only accepting applicants with Regular Company Visa (Local Transferable)
+📩 Apply via WhatsApp: +965 66961228</div><div class="job">🚗 Car Driver – Divert Logistics
+📍 Kuwait
+✅ Valid Kuwait light vehicle license (or assistance provided for conversion)
+✅ Good knowledge of routes &amp; traffic rules
+✅ Transferable Article 18 visa | Immediate joiners preferred
+🛠 Deliveries, vehicle upkeep, safe driving
+💼 Full-time | Salary: Competitive
+📧 Talentconnectkw@gmail.com
+📱 55388369</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="3395903576" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-driver" style="display:none"><div class="category-title">Driver / Transportation</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="2026981589" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">🚛 We Are Hiring – Truck &amp; Coaster Drivers 🚌
+We are urgently looking for experienced Truck Drivers and Coaster Drivers to join our team in Kuwait.
+📌 Requirements:
+Valid Kuwait Heavy Driving License
+Visa 18 (Ahli), transferable
+Any nationality
+Ready to join immediately
+📌 Offer:
+Salary: 250 KWD + Accommodation
+Duty: 12 hours per day
+📩 Interested candidates, please send your CV to 67700514</div><div class="job">📌 Driver – Kuwait
+🚗 Light Vehicle Driver
+✅ Valid Kuwait driving license (or transferable foreign license)
+✅ Knowledge of Kuwait routes
+✅ Transferable visa 18
+📧 Send CV + License: Talentconnectkw@gmail.com
+📲 WhatsApp/Call: 55388369</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="3395903576" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-fnb" style="display:none"><div class="category-title">Food &amp; Beverage</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="2026981589" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">*We are hiring* 
+1- pastry chef 
+2- chocolate chef
+3- bakery chef 
+• Visa Ahli transferable 
+Immediately join
+• Only in kuwait 
+ *Send your cv to 66019321*</div><div class="job">We’re Hiring: Assistant Restaurant Managers – Casual Dining Concepts
+Are you passionate about hospitality and ready to take the next step in your leadership journey? We are looking for experienced and energetic Assistant Restaurant Managers to join our team across our well-established casual dining concepts.
+In this role, you will support daily operations, lead and motivate the team, ensure excellent guest service, and help drive performance and efficiency. We're seeking individuals with strong communication skills, a hands-on approach, and a genuine passion for creating great dining experiences.
+If you have prior experience in a similar role and thrive in a fast-paced, people-focused environment—we want to hear from you!
+📍Location: Gastronomica, Kuwait
+ 💼 Full-time 
+📧 To apply, please send your CV to samantha@gastronomica-me.com</div><div class="job">📌 F&amp;B Industry – Immediate Hiring
+👥 HR Manager / Operations Manager
+✅ Proven F&amp;B industry experience
+✅ Leadership &amp; communication skills
+✅ Transferable Ahli visa (immediate joining)
+📞 Apply: +965 50441258</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="4708985248" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Pastry Chef – Cookies &amp; Desserts
+🎂 Baking &amp; molten dessert specialist
+✅ Min. 1 yr experience
+✅ Transferable visa (local hire only)
+📧 Apply: ck@blobkwt.com</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="3395903576" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-eng" style="display:none"><div class="category-title">Engineering / Technical</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="2026981589" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">URGENT HIRING – 
+We are looking for experienced and qualified professionals to join our team for operating 3000 HP Deep Drilling Rigs in State of Kuwait.
+If you meet the following criteria, we want to hear from you!
+🌟 Open Positions:
+1. Senior Mechanic
+ • Qualification: Engineering Graduate
+ • Industry Experience:
+ • Minimum 7 years of mechanical maintenance experience in the drilling industry
+ • Preferred: Experience with top drive, drilling equipment, and automated control systems
+ • Present Position Experience: Minimum 2 years in current role
+2. Senior Electrician
+ • Qualification: Engineering Graduate
+ • Experience:
+ • Minimum 7 years in electrical maintenance in the drilling industry
+ • Preferred: Hands-on with AC driven systems and automated electrical control systems
+ • Minimum 2 years in the present position
+- How to Apply:
+Send your CV, experience certificates, and relevant qualifications to:
+hrsupport@burgandrilling.com</div><div class="job">📌 Walk-In Interview – NBTC Petroleum Group (Oil &amp; Gas, Kuwait)
+🚧 HSE / Safety Officer
+📅 Date: Today, 23 Aug 2025 (Saturday)
+🕘 Time: 09:00 AM – 02:00 PM
+📍 NBTC Corporate Office, Plot No. 1, Block-5, Shuaiba Industrial Area, Ahmadi
+✅ Min. 5 yrs HSE exp. in Oil &amp; Gas
+✅ KOC/KNPC approval preferred
+✅ Transferable visa 18 mandatory
+💼 Benefits: Food, accommodation, transport provided
+📧 CV: recruitment@nbtc-kuwait.com</div><div class="job">📌 Electrician – Kuwait
+⚡ Electrical installation &amp; wiring
+✅ Min. 1 yr experience in Kuwait
+✅ Transferable residence
+💰 Salary: KWD 200 + overtime + meals
+📲 WhatsApp CV: 97175150</div><div class="job">📌 Leading Oil &amp; Gas EPC Company – Urgent Hiring
+👷 Multiple Vacancies (128 positions)
+Project Manager (15 yrs)
+Project Control Manager (15 yrs)
+Senior Safety Engineer (12 yrs)
+QA/QC Manager (15 yrs)
+Planning Engineer (8 yrs)
+Civil, Mech, Elec, Instrument Engineers (8 yrs)
+Supervisors &amp; QA/QC Engineers
+📧 Send CV: me-mus@hotmail.com</div><div class="job">📌 IMCO Engineering &amp; Construction – Urgent Hiring
+👷 Vacancies:
+Storekeeper (English communication required)
+Planning Engineer / Sr. Planning Engineer (KOC/KNPC approval preferred)
+QA/QC Assistant / Document Controller
+CCTV Operator / Surveillance Operator
+📧 Apply: srodrigues@canarholding.com
+📌 Mention job title in subject line.</div><div class="job">📌 Oil &amp; Gas Rig-Based Roles – Immediate Hiring
+⛽ Positions:
+Senior Tool Pusher / Night Tool Pusher
+Driller / Assistant Driller
+Chief Mechanic / Chief Electrician
+✅ ICF Certificate required
+✅ Rig experience mandatory
+✅ English mandatory (Arabic an advantage)
+📧 Apply: ongcrewqatar@ghrsme.com</div><div class="job">📌 Auto Maintenance (Drying Engines)
+💰 Salary: 500 KD
+📅 Sat–Thu (Fri off)
+✅ Article 18 visa (transferable)
+📞 Call: 99116178</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="4708985248" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Govt. Project Engineering Roles (Kuwait)
+🏗️ Public Authority for Roads &amp; Transport
+📌 Vacancies:
+Scheduler Engineer
+Safety &amp; Security Specialist
+✅ Min. 8 yrs experience
+✅ Pre-approval from authority
+📧 CV: cv@aldowailah.net</div><div class="job">📌 Oil &amp; Gas Specialist Roles – Kuwait
+👨‍🔧 Vacancies:
+Power BI Specialist
+SAP Engineer
+Chemical Engineer
+Instrumentation Engineer
+✅ Must be in Kuwait
+📱 WhatsApp CV: 97932469</div><div class="job">🏗️ Engineering &amp; Supervisory Jobs – Oil Project (North Kuwait)
+📌 International Group hiring for prestigious oil project
+✅ BSc Mechanical Eng. | 8+ yrs exp.
+✅ Immediate joining preferred
+Open Roles:
+QA/QC Inspector (Welding)
+Piping Engineer (5+ yrs exp.)
+Mechanical Supervisor
+Mechanical Foreman
+Crane Supervisor / Crane Foreman
+Crane/Lifting Workers
+Documentation Officer
+Planning Engineer (Mechanical)
+📧 business@ig-kwt.com</div><div class="job">🔍 Quality Controller / Inspector – Manufacturing
+📍 Kuwait
+✅ B.Tech (Civil) or Diploma
+✅ Factory/manufacturing QC experience preferred
+🛠 Inspect raw materials, production &amp; final products | Maintain QC reports
+📧 careers@recafco.com
+📱 WhatsApp: 97362267</div><div class="job">🔧 Technical Engineer / Supervisor – CCTV &amp; Networking
+📍 KSS Kuwait (Security Tech)
+✅ Driving license
+✅ 2+ yrs exp. (Fresh grads welcome)
+🛠 CCTV &amp; networking projects, supervise teams, client coordination
+💼 Career growth in a growing sector
+📧 info@kuwaitsecure.com</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="3395903576" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-education" style="display:none"><div class="category-title">Education / Training</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="2026981589" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Private American School – Kuwait (AY 2025-26)
+🎓 Hiring Teachers &amp; Leaders:
+KG &amp; Elementary English (Native only)
+Middle/High Math Teacher
+AP English (Native only)
+Culinary Arts Teacher
+Social Studies / Humanities
+Elementary Counselor
+Dean of Students (MSHS)
+🔗 Apply: abs.edu.kw/careers/abs</div><div class="job">📌 Al-Jaafaria Islamic School (Girls Only)
+👩‍🏫 Hiring: Female Math Teachers (Primary)
+📍 Surra – Block 3, Street 1
+📱 WhatsApp CV only: 66864643</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="3395903576" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-finance" style="display:none"><div class="category-title">Finance / Accounting</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="2026981589" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Accountant – Kuwait
+💼 Junior / Fresh Graduate welcome
+✅ 0–3 yrs exp., Excel &amp; ERP skills
+✅ Bilingual (Arabic + English)
+✅ Transferable visa 18
+📱 WhatsApp CV: 94920212
+📧 Email: info@yardekcoffee.com</div><div class="job">📌 Junior Accountant – Kuwait City
+👩‍💼 Freshers welcome (0–2 yrs)
+✅ B.Com/Finance
+✅ MS Excel + Tally
+✅ Strong academics preferred
+📧 Apply: info@thepearlkw.com
+📌 Subject: Junior Accountant – Your Name</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="3395903576" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane hidden" id="pane-misc" style="display:none"><div class="category-title">Miscellaneous</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="2026981589" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">A leading Fashion company in Kuwait is currently hiring the following position:</div><div class="job">Wathif Is Hiring Locally in Kuwait 💼
+Quality Manager
+💰 Salary: 250-380 KD | 👤 3-5 yrs experience | 🚀 Immediate Joining
+⏰ Working Hours: 9 hrs/day (1 hr break) | 6 days/week
+Key Responsibilities:
+✅Develop and maintain quality standards
+✅Ensure customer satisfaction and problem-solving
+✅Maintain branch hygiene across all locations
+✅Monitor compliance and operational efficiency
+Additional: Transportation provided by the company for work based duties 
+📌 Only accepting applicants with Visa 18 (Ahli– Local Transferable)
+📩 Apply via WhatsApp: +965 66961228</div><div class="job">📌 Designer &amp; Printer – Kuwait
+🖨️ Printing Press Job
+✅ Exp. in design &amp; printing
+✅ Fluent in Arabic
+📲 Contact: 51165653</div><div class="job">📌 Car Polishing / Painting Specialist
+🚘 14 yrs exp. in Kuwait
+✅ Polishing, detailing, ceramic coating, wall/wood spray painting
+✅ Article 20 transferable visa
+📲 WhatsApp/Call: 98713870</div><div class="job">📌 Commercial Manager – Govt Projects
+🏗️ Leading Project Management Co.
+✅ 15 yrs exp. in govt tendering
+✅ Bilingual (Arabic + English)
+✅ Engineering degree required
+📧 CV: info@alkazemiq8.com
+📞 Call: 22452445 / 22413522</div><div class="job">📌 Multiple Openings – Kuwait
+👥 Workers required (immediate start)
+✅ Relevant qualifications/experience
+✅ Ready to join immediately
+📧 Send CV: dcfdesk2025@gmail.com</div><div class="job">📌 Videographer – Egypt (Work for Kuwait Co.)
+🎥 Interior design projects
+✅ Must be based in Egypt
+✅ Proven videography skills
+📞 Contact: 95570969</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="4708985248" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="job">📌 Teachers – Evening Classes (Sabah Al Salem)
+🕔 Evening shifts only
+📚 All subjects (Male/Female)
+📱 WhatsApp CV: 65957481 (No calls)</div><div class="job">📌 Nursing Jobs – Salmiya (Female Only)
+💰 Salary:
+540 KD + 100 KD (Laser Exp.)
+450 KD + Housing (Prometric nurses)
+📱 WhatsApp CV only: 97634952 (No calls)</div><div class="job">📌 Part-Time Faculty – Kuwait
+🎓 Subjects:
+IGCSE Biology
+ACCA / CMA / CFA
+Primavera P6
+📧 CV: associate1@uikuwait.com
+📱 WhatsApp: 66078041</div><div class="job">📋 Registration &amp; Regulatory Officer
+📍 Confidential Company – Kuwait
+✅ Degree in Science / Pharmacy / Chemistry / Engineering
+✅ 2–5 yrs in Regulatory Affairs (FMCG / Cosmetics / Pharma)
+✅ Knowledge of GCC, SFDA, SASO, GSO standards
+🛠 Product registration, compliance, regulatory submissions
+💼 Salary: Competitive + benefits
+📱 WhatsApp CV: 67700514</div><div class="job">👨‍💼 MM Ali Manpower Co. – Management Roles (Catering &amp; Retail)
+Lead with excellence in Fine Dining &amp; Luxury Retail
+📌 Available Positions:
+Operation Manager
+Area Manager
+Outlet Manager
+✅ 3–5 yrs experience in fine dining/retail
+✅ Inside Kuwait only – Transferable Article 18 visa
+✅ Immediate joining – Strong leadership skills
+📧 Apply: bryan@mmckuwait.com
+ | hr@mmckuwait.com
+📲 WhatsApp: +96594482067</div><div class="ad-container"><ins class="adsbygoogle" style="display:block; width: 100% !important;" data-ad-client="ca-pub-3037151964199001" data-ad-slot="3395903576" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><div class="content-pane" id="pane-archive" style="display:none"><div class="archive-list"><span class="archive-toggle">[+] Archives</span><ul style="display:none"><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August 22nd, 2025.html" target="_blank">August 22nd, 2025</a></li><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August 23rd, 2025.html" target="_blank">August 23rd, 2025</a></li></ul></div></div></div></div><footer>MY JOB HUNT © 2K25 | Enhanced Version</footer></div><script>document.querySelectorAll(".menu-item").forEach(item=>{item.addEventListener("click",()=>{document.querySelectorAll(".menu-item").forEach(a=>a.classList.remove("active"));document.querySelectorAll(".content-pane").forEach(p=>p.style.display="none");item.classList.add("active");document.querySelector("#pane-"+item.dataset.k).style.display="block";});});const toggle=document.querySelector(".archive-toggle");if(toggle){toggle.addEventListener("click",()=>{const ul=toggle.nextElementSibling;if(ul.style.display==="none"){ul.style.display="block";toggle.textContent="[-] Archives";}else{ul.style.display="none";toggle.textContent="[+] Archives";}});}</script></body></html>
