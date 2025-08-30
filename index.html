@@ -1,356 +1,151 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Home — Latest Jobs</title><meta name="google-adsense-account" content="ca-pub-3037151964199001"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001" crossorigin="anonymous"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"><style>
-    :root{
-      --bg: #f5f7fa;
-      --bg2:#e4efe9;
-      --card:#ffffff;
-      --text:#2c3e50;
-      --muted:#6b7280;
-      --border:#e5e7eb;
-      --primary:#3498db;
-      --primary2:#2980b9;
-      --accent:#27ae60;
-      --shadow: 0 12px 30px rgba(0,0,0,.12);
-      --radius: 16px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; padding:24px;
-      font-family:'Segoe UI', Tahoma, Arial, sans-serif;
-      color:var(--text);
-      background:linear-gradient(135deg,var(--bg) 0%,var(--bg2) 100%);
-    }
-    .theme-soft{ --bg:#f7f8fc; --bg2:#eef2f7; }
-    .theme-dusk{ --bg:#0f2027; --bg2:#203a43; --card:#111827; --text:#e5e7eb; --border:#1f2937; --muted:#9ca3af; --shadow: 0 8px 24px rgba(0,0,0,.35); }
-    .theme-royal{ --bg:#f6f3ff; --bg2:#e9e4ff; --primary:#6d28d9; --primary2:#5b21b6; --accent:#10b981; }
-    .theme-sunset{ --bg:#fff1eb; --bg2:#ace0f9; --primary:#ef4444; --primary2:#dc2626; --accent:#22c55e; }
-    .theme-ocean{ --bg:#e0f7ff; --bg2:#b3e5fc; --primary:#0066cc; --primary2:#0052a3; --accent:#ff6b6b; }
-    .theme-forest{ --bg:#e8f5e9; --bg2:#c8e6c9; --primary:#2e7d32; --primary2:#1b5e20; --accent:#ff9800; }
-    .container{max-width:1200px;margin:0 auto;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-    header{padding:28px;background:linear-gradient(135deg, #2c3e50, #1a2530);color:#fff;text-align:center;position:relative}
-    header h1{margin:0;font-size:2.2rem;font-weight:800;letter-spacing:.3px}
-    header .sub{opacity:.9;margin-top:6px}
-    .bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px 16px;background:#fafbfc;border-bottom:1px solid var(--border)}
-    .tabs{display:flex;flex-wrap:wrap;gap:6px}
-    .tab{padding:10px 14px;border-radius:999px;border:1px solid var(--border);background:#fff;cursor:pointer;font-weight:600}
-    .tab.active{background:linear-gradient(90deg,var(--primary),var(--primary2));color:#fff;border-color:transparent}
-    .theme-picker{display:flex;align-items:center;gap:8px}
-    select, input[type="text"], textarea{width:100%;padding:12px;border:2px solid var(--border);border-radius:12px;background:#fff;color:inherit;font:inherit}
-    textarea{min-height:140px;resize:vertical}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .card{background:#fff;border:1.5px solid var(--border);border-radius:12px;box-shadow:0 6px 14px rgba(0,0,0,.07);overflow:hidden}
-    .card-head{padding:14px 16px;border-bottom:1px solid var(--border);background:linear-gradient(90deg,#fafbfc,#f0f4f8);font-weight:700;display:flex;align-items:center;gap:10px}
-    .card-body{padding:16px}
-    .btn{background:linear-gradient(90deg,var(--primary),var(--primary2));border:none;color:#fff;padding:12px 18px;border-radius:999px;cursor:pointer;font-weight:700;display:inline-flex;align-items:center;gap:8px}
-    .btn:disabled{opacity:.6;cursor:not-allowed}
-    .btn-ghost{background:#fff;color:var(--primary);border:2px solid var(--primary)}
-    .btn-success{background:linear-gradient(90deg,#27ae60,#219653)}
-    .stack{display:flex;flex-wrap:wrap;gap:10px}
-    .tab-pane{display:none;padding:20px}
-    .tab-pane.active{display:block}
-    .center{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-    /* Preview / index look */
-    .layout{display:flex;min-height:520px;background:#fafbfc;border:1px solid var(--border);border-radius:12px;overflow:hidden}
-    .menu{width:260px;background:#fafbfc;border-right:1px solid var(--border);display:flex;flex-direction:column}
-    .menu-item{padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;font-weight:700;display:flex;align-items:center;gap:10px}
-    .menu-item:hover{background:#f0f4f8}
-    .menu-item.active{background:#fff;color:var(--primary);border-left:4px solid var(--primary)}
-    .menu-item .count{margin-left:auto;background:#eef0f4;border-radius:999px;padding:2px 8px;font-size:.8rem}
-    .content{flex:1;padding:18px;overflow:auto;background:#fafbfc}
-    .category-title{text-align:center;font-size:1.4rem;font-weight:800;margin:6px 0 16px;color:var(--text)}
-    .job{background:#fff;border-left:4px solid var(--primary);padding:14px;border-radius:10px;margin:0 0 14px;white-space:pre-wrap;box-shadow:0 3px 8px rgba(0,0,0,.06)}
-    .ad{background:#f8f9fb;border:1px dashed var(--border);padding:12px;border-radius:10px;margin:14px 0;text-align:center}
-    footer{padding:14px 16px;border-top:1px solid var(--border);background:#fafbfc;color:var(--muted);text-align:center}
-    .note{font-size:.9rem;color:var(--muted)}
-    .page-nav {display: flex; justify-content: center; margin: 20px 0; gap: 15px; flex-wrap: wrap;}
-    .page-nav a {padding: 10px 20px; background: var(--primary); color: white; border-radius: 5px; text-decoration: none;}
-    .page-nav a:hover {background: var(--primary2);}
-  </style></head><body class="theme-soft"><div class="container"><header><h1>MY JOB HUNT</h1><div class="sub">Home — Latest Jobs</div></header><div class="page-nav"><a href="index.html">Home</a><a href="about.html">About</a><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact</a><a href="terms.html">Terms of Service</a></div><div class="bar"><div class="tabs"><button class="tab active"><i class="fa-solid fa-house"></i> Home</button></div><div class="theme-picker"><i class="fa-solid fa-palette"></i> <label>Theme:</label><select id="theme" onchange="document.body.className=this.value"><option value="theme-soft">Soft</option><option value="theme-royal">Royal</option><option value="theme-sunset">Sunset</option><option value="theme-dusk">Dusk</option><option value="theme-ocean">Ocean</option><option value="theme-forest">Forest</option></select></div></div><div class="layout"><div class="menu"><div class="menu-item active" data-k="all"><i class="fa-solid fa-circle-notch"></i> All <span class="count">11</span></div><div class="menu-item" data-k="admin"><i class="fa-solid fa-circle-notch"></i> Administrative / Secretarial <span class="count">0</span></div><div class="menu-item" data-k="it"><i class="fa-solid fa-circle-notch"></i> IT / Technology <span class="count">0</span></div><div class="menu-item" data-k="sales"><i class="fa-solid fa-circle-notch"></i> Sales / Marketing <span class="count">0</span></div><div class="menu-item" data-k="medical"><i class="fa-solid fa-circle-notch"></i> Medical / Healthcare <span class="count">3</span></div><div class="menu-item" data-k="logistics"><i class="fa-solid fa-circle-notch"></i> Logistics / Supply Chain <span class="count">0</span></div><div class="menu-item" data-k="driver"><i class="fa-solid fa-circle-notch"></i> Driver / Transportation <span class="count">4</span></div><div class="menu-item" data-k="fnb"><i class="fa-solid fa-circle-notch"></i> Food & Beverage <span class="count">0</span></div><div class="menu-item" data-k="eng"><i class="fa-solid fa-circle-notch"></i> Engineering / Technical <span class="count">4</span></div><div class="menu-item" data-k="education"><i class="fa-solid fa-circle-notch"></i> Education / Training <span class="count">0</span></div><div class="menu-item" data-k="finance"><i class="fa-solid fa-circle-notch"></i> Finance / Accounting <span class="count">0</span></div><div class="menu-item" data-k="misc"><i class="fa-solid fa-circle-notch"></i> Miscellaneous <span class="count">0</span></div><div class="menu-item" data-k="archive"><i class="fa-solid fa-circle-notch"></i> Archive <span class="count">0</span></div></div><div class="content"><div class="ad"><ins class="adsbygoogle" style="display:block;width:100% !important" data-ad-client="ca-pub-3037151964199001" data-ad-slot="2026981589" data-ad-format="auto" data-full-width-responsive="true"></ins></div><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="content-pane" id="pane-all" style="display:block"><div class="category-title">All (11 jobs)</div><div class="job">📌 Technician – Fabrication & Welding – Al Rai, Kuwait
-💼 Mustafa Hossam | Last updated: August 28, 2025
-Become part of a hands-on workshop team specializing in SS and MS fabrication and site installation. Competitive salary based on skills.
-🛠️ Responsibilities:
-🔹 Perform welding and fabrication on SS and MS materials
-🔹 Assist in site installation tasks
-🔹 Collaborate with workshop team for smooth operations
-🔹 Support metalwork helpers as needed
-✅ Requirements:
-🔹 Experience in welding/fabrication with SS and MS
-🔹 Preference for prior site installation experience
-🔹 Visa 18
-🔹 Helper roles also available
-💰 Benefits:
-🔹 Salary commensurate with experience
-🔹 Work in specialized fabrication workshop
-📍 How to Apply:
-Call 97864850 (9:00 AM – 5:00 PM)
-Highlight your welding skills and experience clearly.
-</div><div class="job">📌 Expert Rewinding Technician – 3-Phase Motors
-Work on repairing and maintaining critical electrical equipment.
-🛠️ Responsibilities:
-🔹 Diagnose and rewind 3-phase motors and submersible pumps
-🔹 Perform motor testing and repairs
-🔹 Follow strict safety and quality standards
-🔹 Support installation and maintenance teams
-✅ Requirements:
-🔹 3–5 years experience in motor rewinding
-🔹 Knowledge of winding techniques and testing tools
-🔹 Ability to read wiring diagrams
-🔹 Male, transferable 18 visa, immediate joining
-💰 Benefits:
-🔹 Competitive salary and immediate employment
-🔹 Work with a specialized team
-📍 How to Apply:
-Call 67097467 or send CV to hr@atlaspool.com
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kuwait Job Listings</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f9f9f9; padding: 20px; }
+  h2, h3 { color: #333; }
+  ul { list-style: none; padding-left: 0; }
+  li { background: #fff; margin: 5px 0; padding: 10px; border-radius: 5px; }
+  a { text-decoration: none; color: #007BFF; }
+  a:hover { text-decoration: underline; }
+  .count { font-weight: bold; }
+</style>
+</head>
+<body>
 
-</div><div class="job">📌 Junior Planning Engineer – Construction, Kuwait
-Unlock potential in Kuwait’s construction industry; expertise in Primavera P6 required.
-🛠️ Responsibilities:
-🔹 Develop and maintain project schedules using Primavera P6
-🔹 Monitor project progress
-🔹 Coordinate with project teams
-🔹 Assist in resource allocation
-🔹 Support project control documentation
-✅ Requirements:
-🔹 3–5 years experience in Kuwait construction project planning
-🔹 Valid Visa 18 for immediate joining
-🔹 Strong analytical and organizational skills
-💰 Benefits:
-🔹 Immediate joining
-🔹 Career growth in dynamic construction projects
-📍 How to Apply:
-Send CV to: engr.usmanmd@gmail.com
-</div><div class="job">📌 Telecom Engineer – Kuwait
-Advance your career in cutting-edge telecom projects. Salary: 400 KD.
-🛠️ Responsibilities:
-🔹 Install, configure, maintain telecom systems
-🔹 Troubleshoot network and technical issues
-🔹 Conduct site surveys, testing, QA
-🔹 Support telecom projects technically
-✅ Requirements:
-🔹 Bachelor’s in Telecom, Electronics, Electrical Engineering
-🔹 Relevant experience in GSM, LTE, Fiber, Microwave
-🔹 Hands-on with installation, commissioning, maintenance
-💰 Benefits:
-🔹 Competitive salary 400 KD
-🔹 Career advancement
-📍 How to Apply:
-Send CV to kuwaitj975@gmail.com
-, subject: “Application – Telecom Engineer”
-</div><div class="job">📌 Expert Dermatology Nurse – Salmiya Clinic, Kuwait
-Join leading dermatology & aesthetics clinic for laser hair removal.
-🛠️ Responsibilities:
-🔹 Perform laser hair removal treatments
-🔹 Provide patient care during procedures
-🔹 Maintain hygiene and safety protocols
-✅ Requirements:
-🔹 Female nurse, experience in laser hair removal
-🔹 Valid MOH license, transferable visa holder
-💰 Benefits:
-🔹 Attractive salary package
-🔹 Immediate joining
-📍 How to Apply:
-Call 65597294
-</div><div class="job">📌 Male Nurse – Oil & Gas Sector, Kuwait
-Step into rewarding healthcare role with leading Oil & Gas company.
-🛠️ Responsibilities:
-🔹 Provide nursing care to employees
-🔹 Maintain health and safety standards
-🔹 Monitor patient conditions
-✅ Requirements:
-🔹 Bachelor’s degree preferred
-🔹 Proven experience as a Nurse
-🔹 MOH license preferred
-🔹 Transferable residency in Kuwait
-💰 Benefits:
-🔹 Market competitive salary
-🔹 Free food & accommodation
-🔹 Full-time employment stability
-📍 How to Apply:
-Send CV to: apply4jobkwt@gmail.com
-</div><div class="job">📌 Asnan Tower Dental Center – Multiple Positions
-(Social Media, Graphic Designer, Coordinator, Marketing, etc.)
-🛠️ Responsibilities & Requirements: Vary per role – social media, marketing, design, guest services.
-💰 Benefits: Professional environment, career growth, international standards.
-📍 How to Apply:
-Website: https://www.asnan.com/ar/careers
-Email CV: recruit@asnan.com</div><div class="job">📌 Heavy Driver – Minabdullah Ahmadi, Kuwait
-🛠️ Responsibilities:
-🔹 Operate heavy vehicles safely
-🔹 Follow safety regulations
-🔹 Assist in loading/unloading
-✅ Requirements:
-🔹 Valid Civil ID, Iznul Amel, Ethimad
-🔹 Experience driving heavy vehicles
-💰 Benefits:
-🔹 Immediate hiring
-🔹 Stable factory environment
-📍 How to Apply:
-Send CV + documents to WhatsApp: +965 97362267
-</div><div class="job">📌 Food Delivery Driver – Kuwait
-🛠️ Responsibilities:
-🔹 Deliver food promptly
-🔹 Maintain communication with dispatch/customers
-🔹 Ensure vehicle safety
-✅ Requirements:
-🔹 Transferable Visa 18
-🔹 Valid driving license
-💰 Benefits:
-🔹 12-hour shifts, 2 days off/month
-🔹 Immediate employment
-📍 How to Apply:
-Call/WhatsApp: 50818778
-</div><div class="job">📌 Light Vehicle Driver – Kuwait
-🛠️ Responsibilities: Safely transport goods/personnel, maintain vehicle
-✅ Requirements: Valid light vehicle license, punctual, responsible
-💰 Benefits: Immediate joining
-📍 How to Apply: WhatsApp: 65973604 (8 AM – 5 PM)
-</div><div class="job">📌 Delivery Driver – Manarat Al-Aqsa, Kuwait
-🛠️ Responsibilities: Deliver packages efficiently, maintain vehicle, follow routes
-✅ Requirements: Valid Kuwaiti license, Transferable Residency Article 18
-💰 Benefits: 250 KD salary + fuel 50 KD + food 20 KD + maintenance
-📍 How to Apply: Office: Khaitan – Block 9 – Muscat St. – Complex 22 – Office 6 | Call: 66031085
-</div></div><div class="content-pane" id="pane-admin" style="display:none"><div class="category-title">Administrative / Secretarial (0 jobs)</div></div><div class="content-pane" id="pane-it" style="display:none"><div class="category-title">IT / Technology (0 jobs)</div></div><div class="content-pane" id="pane-sales" style="display:none"><div class="category-title">Sales / Marketing (0 jobs)</div></div><div class="content-pane" id="pane-medical" style="display:none"><div class="category-title">Medical / Healthcare (3 jobs)</div><div class="job">📌 Expert Dermatology Nurse – Salmiya Clinic, Kuwait
-Join leading dermatology & aesthetics clinic for laser hair removal.
-🛠️ Responsibilities:
-🔹 Perform laser hair removal treatments
-🔹 Provide patient care during procedures
-🔹 Maintain hygiene and safety protocols
-✅ Requirements:
-🔹 Female nurse, experience in laser hair removal
-🔹 Valid MOH license, transferable visa holder
-💰 Benefits:
-🔹 Attractive salary package
-🔹 Immediate joining
-📍 How to Apply:
-Call 65597294
-</div><div class="job">📌 Male Nurse – Oil & Gas Sector, Kuwait
-Step into rewarding healthcare role with leading Oil & Gas company.
-🛠️ Responsibilities:
-🔹 Provide nursing care to employees
-🔹 Maintain health and safety standards
-🔹 Monitor patient conditions
-✅ Requirements:
-🔹 Bachelor’s degree preferred
-🔹 Proven experience as a Nurse
-🔹 MOH license preferred
-🔹 Transferable residency in Kuwait
-💰 Benefits:
-🔹 Market competitive salary
-🔹 Free food & accommodation
-🔹 Full-time employment stability
-📍 How to Apply:
-Send CV to: apply4jobkwt@gmail.com
-</div><div class="job">📌 Asnan Tower Dental Center – Multiple Positions
-(Social Media, Graphic Designer, Coordinator, Marketing, etc.)
-🛠️ Responsibilities & Requirements: Vary per role – social media, marketing, design, guest services.
-💰 Benefits: Professional environment, career growth, international standards.
-📍 How to Apply:
-Website: https://www.asnan.com/ar/careers
-Email CV: recruit@asnan.com</div></div><div class="content-pane" id="pane-logistics" style="display:none"><div class="category-title">Logistics / Supply Chain (0 jobs)</div></div><div class="content-pane" id="pane-driver" style="display:none"><div class="category-title">Driver / Transportation (4 jobs)</div><div class="job">📌 Heavy Driver – Minabdullah Ahmadi, Kuwait
-🛠️ Responsibilities:
-🔹 Operate heavy vehicles safely
-🔹 Follow safety regulations
-🔹 Assist in loading/unloading
-✅ Requirements:
-🔹 Valid Civil ID, Iznul Amel, Ethimad
-🔹 Experience driving heavy vehicles
-💰 Benefits:
-🔹 Immediate hiring
-🔹 Stable factory environment
-📍 How to Apply:
-Send CV + documents to WhatsApp: +965 97362267
-</div><div class="job">📌 Food Delivery Driver – Kuwait
-🛠️ Responsibilities:
-🔹 Deliver food promptly
-🔹 Maintain communication with dispatch/customers
-🔹 Ensure vehicle safety
-✅ Requirements:
-🔹 Transferable Visa 18
-🔹 Valid driving license
-💰 Benefits:
-🔹 12-hour shifts, 2 days off/month
-🔹 Immediate employment
-📍 How to Apply:
-Call/WhatsApp: 50818778
-</div><div class="job">📌 Light Vehicle Driver – Kuwait
-🛠️ Responsibilities: Safely transport goods/personnel, maintain vehicle
-✅ Requirements: Valid light vehicle license, punctual, responsible
-💰 Benefits: Immediate joining
-📍 How to Apply: WhatsApp: 65973604 (8 AM – 5 PM)
-</div><div class="job">📌 Delivery Driver – Manarat Al-Aqsa, Kuwait
-🛠️ Responsibilities: Deliver packages efficiently, maintain vehicle, follow routes
-✅ Requirements: Valid Kuwaiti license, Transferable Residency Article 18
-💰 Benefits: 250 KD salary + fuel 50 KD + food 20 KD + maintenance
-📍 How to Apply: Office: Khaitan – Block 9 – Muscat St. – Complex 22 – Office 6 | Call: 66031085
-</div></div><div class="content-pane" id="pane-fnb" style="display:none"><div class="category-title">Food & Beverage (0 jobs)</div></div><div class="content-pane" id="pane-eng" style="display:none"><div class="category-title">Engineering / Technical (4 jobs)</div><div class="job">📌 Technician – Fabrication & Welding – Al Rai, Kuwait
-💼 Mustafa Hossam | Last updated: August 28, 2025
-Become part of a hands-on workshop team specializing in SS and MS fabrication and site installation. Competitive salary based on skills.
-🛠️ Responsibilities:
-🔹 Perform welding and fabrication on SS and MS materials
-🔹 Assist in site installation tasks
-🔹 Collaborate with workshop team for smooth operations
-🔹 Support metalwork helpers as needed
-✅ Requirements:
-🔹 Experience in welding/fabrication with SS and MS
-🔹 Preference for prior site installation experience
-🔹 Visa 18
-🔹 Helper roles also available
-💰 Benefits:
-🔹 Salary commensurate with experience
-🔹 Work in specialized fabrication workshop
-📍 How to Apply:
-Call 97864850 (9:00 AM – 5:00 PM)
-Highlight your welding skills and experience clearly.
-</div><div class="job">📌 Expert Rewinding Technician – 3-Phase Motors
-Work on repairing and maintaining critical electrical equipment.
-🛠️ Responsibilities:
-🔹 Diagnose and rewind 3-phase motors and submersible pumps
-🔹 Perform motor testing and repairs
-🔹 Follow strict safety and quality standards
-🔹 Support installation and maintenance teams
-✅ Requirements:
-🔹 3–5 years experience in motor rewinding
-🔹 Knowledge of winding techniques and testing tools
-🔹 Ability to read wiring diagrams
-🔹 Male, transferable 18 visa, immediate joining
-💰 Benefits:
-🔹 Competitive salary and immediate employment
-🔹 Work with a specialized team
-📍 How to Apply:
-Call 67097467 or send CV to hr@atlaspool.com
+<h2>Job Listings</h2>
+<p>Total Jobs: <span id="totalJobs" class="count">0</span></p>
 
-</div><div class="job">📌 Junior Planning Engineer – Construction, Kuwait
-Unlock potential in Kuwait’s construction industry; expertise in Primavera P6 required.
-🛠️ Responsibilities:
-🔹 Develop and maintain project schedules using Primavera P6
-🔹 Monitor project progress
-🔹 Coordinate with project teams
-🔹 Assist in resource allocation
-🔹 Support project control documentation
-✅ Requirements:
-🔹 3–5 years experience in Kuwait construction project planning
-🔹 Valid Visa 18 for immediate joining
-🔹 Strong analytical and organizational skills
-💰 Benefits:
-🔹 Immediate joining
-🔹 Career growth in dynamic construction projects
-📍 How to Apply:
-Send CV to: engr.usmanmd@gmail.com
-</div><div class="job">📌 Telecom Engineer – Kuwait
-Advance your career in cutting-edge telecom projects. Salary: 400 KD.
-🛠️ Responsibilities:
-🔹 Install, configure, maintain telecom systems
-🔹 Troubleshoot network and technical issues
-🔹 Conduct site surveys, testing, QA
-🔹 Support telecom projects technically
-✅ Requirements:
-🔹 Bachelor’s in Telecom, Electronics, Electrical Engineering
-🔹 Relevant experience in GSM, LTE, Fiber, Microwave
-🔹 Hands-on with installation, commissioning, maintenance
-💰 Benefits:
-🔹 Competitive salary 400 KD
-🔹 Career advancement
-📍 How to Apply:
-Send CV to kuwaitj975@gmail.com
-, subject: “Application – Telecom Engineer”
-</div></div><div class="content-pane" id="pane-education" style="display:none"><div class="category-title">Education / Training (0 jobs)</div></div><div class="content-pane" id="pane-finance" style="display:none"><div class="category-title">Finance / Accounting (0 jobs)</div></div><div class="content-pane" id="pane-misc" style="display:none"><div class="category-title">Miscellaneous (0 jobs)</div></div><div class="content-pane" id="pane-archive" style="display:none"><div class="category-title">Archive</div><ul><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August 22rd, 2025.html" target="_blank">August 22nd, 2025</a></li><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August 23rd, 2025.html" target="_blank">August 23rd, 2025</a></li><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August 24th, 2025.html" target="_blank">August 24th, 2026</a></li><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August 25th, 2025.html" target="_blank">August 25th, 2027</a></li><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August 26th, 2025.html" target="_blank">August 26th, 2028</a></li><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August 27th, 2025.html" target="_blank">August 27th, 2029</a></li><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August 28th, 2025.html" target="_blank">August 28th, 2030</a></li></ul></div><div class="ad"><ins class="adsbygoogle" style="display:block;width:100% !important" data-ad-client="ca-pub-3037151964199001" data-ad-slot="3395903576" data-ad-format="auto" data-full-width-responsive="true"></ins></div><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div></div><script>document.querySelectorAll(".menu-item").forEach(el=>{el.addEventListener("click",function(){document.querySelectorAll(".menu-item").forEach(m=>m.classList.remove("active"));this.classList.add("active");document.querySelectorAll(".content-pane").forEach(p=>p.style.display="none");document.getElementById("pane-"+this.dataset.k).style.display="block";});});</script><footer>MY JOB HUNT © 2K25</footer></div></body></html>
+<!-- ENGINEERING & TECHNICAL JOBS -->
+<h3>🏭 Engineering & Technical Jobs (<span id="techCount" class="count">0</span>)</h3>
+<ul id="techJobs">
+  <li><strong>Sr. Engineer – Research & Technology</strong> – Kuwait | Apply: <a href="mailto:m.s.khan@brunel.net">m.s.khan@brunel.net</a></li>
+  <li><strong>Civil / Construction Engineer</strong> – Kuwait | WhatsApp: <a href="https://wa.me/96596005036">+96596005036</a></li>
+  <li><strong>Water Tank Project Engineer</strong> – Kuwait | Apply: <a href="mailto:shinohydro@gmail.com">shinohydro@gmail.com</a>, <a href="mailto:fawasjabbar@gmail.com">fawasjabbar@gmail.com</a> | WhatsApp: <a href="https://wa.me/96555820434">+96555820434</a>, <a href="https://wa.me/96596733028">+96596733028</a></li>
+  <li><strong>Sales Engineer – Lubricants</strong> – Kuwait | Apply: <a href="mailto:jorjobb@outlook.com">jorjobb@outlook.com</a></li>
+  <li><strong>Packing Engineer – FMCG Sector</strong> – Kuwait | Call: 67700514</li>
+  <li><strong>Network Engineer</strong> – Kuwait | Apply: <a href="mailto:tabraham@insiyabi.com">tabraham@insiyabi.com</a></li>
+  <li><strong>Electrical Supervisor / Foreman – Oil & Gas</strong> – Kuwait | Apply: <a href="mailto:jobs@almeer.com.kw">jobs@almeer.com.kw</a></li>
+  <li><strong>Field Specialist – Baker Hughes</strong> – Kuwait | Apply: <a href="https://www.linkedin.com/jobs/search/?currentJobId=4238245196&f_C=4334%2C19091336&geoId=103239229&origin=JOB_SEARCH_PAGE_LOCATION_AUTOCOMPLETE&refresh=true" target="_blank">LinkedIn</a></li>
+  <li><strong>Aftermarket Sales Manager – KHIAR Contracting</strong> – Kuwait | Apply: <a href="https://www.linkedin.com/jobs/view/4291057356/?eBP=NON_CHARGEABLE_CHANNEL&refId=5dL13Rm1bIWyqSjPFOFQxw%3D%3D&trackingId=rCkj2nerELtq%2BO1%2F3ou3rA%3D%3D" target="_blank">LinkedIn</a></li>
+  <li><strong>Piping Supervisor (Erection) – TECNIMONT</strong> – Kuwait | Apply: <a href="https://www.linkedin.com/jobs/view/4288856757/?eBP=NON_CHARGEABLE_CHANNEL&refId=Ve7iw2%2BuS1EnIuQZzwxFMw%3D%3D&trackingId=hviFPNMWAQE9CbMH6jkBYQ%3D%3D" target="_blank">LinkedIn</a></li>
+  <li><strong>Flowtech Co – Fire Alarm & Protection Engineers / Draughtsman</strong> | Apply: <a href="mailto:info@fiekw.com">info@fiekw.com</a></li>
+  <li><strong>BOB Construction – Management Trainee (Engineering)</strong> | Apply: <a href="https://kw.indeed.com/cmp/Bob-Construction-Company/jobs" target="_blank">Indeed</a></li>
+  <li><strong>Al Sayer Construction – HSE Manager</strong> | Apply: <a href="mailto:careers@enshaat.com">careers@enshaat.com</a></li>
+  <li><strong>Wajda Group – Civil Engineer (Telecom/Construction)</strong> | Apply: <a href="mailto:Akhtar.mehmood@witsglobal.com">Akhtar.mehmood@witsglobal.com</a>, <a href="mailto:hrcvs18@gmail.com">hrcvs18@gmail.com</a></li>
+  <li><strong>Construction – Architect/Civil Engineer/Foreman/Supervisor</strong> | Apply: <a href="mailto:naduvilayilvinod2018@gmail.com">naduvilayilvinod2018@gmail.com</a></li>
+  <li><strong>Quality Controller / Inspector – Mina Abdullah Factory</strong> | Apply: <a href="mailto:careers@recafco.com">careers@recafco.com</a> | WhatsApp: 97362267</li>
+</ul>
+
+<!-- IT / SOFTWARE / ERP -->
+<h3>🛠 IT / Software / ERP (<span id="itCount" class="count">0</span>)</h3>
+<ul id="itJobs">
+  <li><strong>Odoo Developer</strong> – Kuwait | Apply: <a href="mailto:applynow2023@gmail.com">applynow2023@gmail.com</a></li>
+  <li><strong>Python Django Developer</strong> – Kuwait | Apply: <a href="mailto:kuwait.talent2020@gmail.com">kuwait.talent2020@gmail.com</a></li>
+  <li><strong>Oracle Cloud & AI / SaaS Sales Executive</strong> | Apply: <a href="https://careers.oracle.com/jobs/#en/sites/jobsearch/requisitions?location=Kuwait&locationId=300000000149001&locationLevel=country&mode=location" target="_blank">Oracle Careers</a></li>
+  <li><strong>PiXiL Apps – Digital Product Manager (UI/UX)</strong> | Apply: <a href="https://www.linkedin.com/jobs/search/?currentJobId=4212068825&f_C=19206708&geoId=92000000" target="_blank">LinkedIn</a></li>
+</ul>
+
+<!-- OFFICE, ADMIN & HR JOBS -->
+<h3>🧾 Office, Admin & HR (<span id="adminCount" class="count">0</span>)</h3>
+<ul id="adminJobs">
+  <li><strong>HR & Admin Coordinator – Al Seedawi Food Industries</strong> | Apply: <a href="mailto:afrah.haider@alseedawifood.com">afrah.haider@alseedawifood.com</a></li>
+  <li><strong>Operations Supervisor – Ardhiya</strong> | Apply: <a href="mailto:AE-HR@postaplus.com">AE-HR@postaplus.com</a> | Website: <a href="http://www.postaplus.com" target="_blank">www.postaplus.com</a></li>
+  <li><strong>Admin Logistics Coordinator</strong> | Apply: <a href="mailto:career@alameed.com.kw">career@alameed.com.kw</a></li>
+  <li><strong>HR Assistant</strong> | Apply: <a href="mailto:amrit@integrated-me.com">amrit@integrated-me.com</a></li>
+  <li><strong>Store Keeper / Site Secretary</strong> | Apply: <a href="mailto:hrjobs@gulfengg.com">hrjobs@gulfengg.com</a></li>
+  <li><strong>Installation Engineer / Sr. Accountant / Cashier</strong> | Apply: <a href="mailto:jobs@hassanabul.com">jobs@hassanabul.com</a></li>
+  <li><strong>Office Cleaner / Secretary / Admin Officer / HR Office Assistant</strong> | WhatsApp: <a href="https://wa.me/96599430382">+96599430382</a>, 91109447, 92296583</li>
+</ul>
+
+<!-- LOGISTICS & DELIVERY -->
+<h3>🚚 Logistics & Delivery (<span id="logisticsCount" class="count">0</span>)</h3>
+<ul id="logisticsJobs">
+  <li><strong>Warehouse Supervisor</strong> | Apply: <a href="mailto:nairksantosh@gmail.com">nairksantosh@gmail.com</a></li>
+  <li><strong>Delivery Team / Drivers / Heavy Vehicle Drivers / Freelance Drivers / Delivery Supervisor – Talabat</strong> | WhatsApp / Call: 50888475, 65608979, 67630778, 97461219, +96598049533</li>
+</ul>
+
+<!-- SALES & MARKETING -->
+<h3>🛍 Sales & Marketing (<span id="salesCount" class="count">0</span>)</h3>
+<ul id="salesJobs">
+  <li><strong>Outdoor Sales Representatives – Carpets / Flooring</strong> | Apply: <a href="mailto:R.Tadrus@ajalgroup.com">R.Tadrus@ajalgroup.com</a></li>
+  <li><strong>Sales Representative / Sales Promoter / Sales Employees – Metal & Automatic Doors</strong> | WhatsApp: <a href="https://wa.me/50405575">50405575</a> | Apply: <a href="mailto:hiringtech556@gmail.com">hiringtech556@gmail.com</a></li>
+  <li><strong>Administrative Sales Assistant</strong> | Apply: <a href="mailto:kvmurli37@gmail.com">kvmurli37@gmail.com</a></li>
+</ul>
+
+<!-- HEALTHCARE / HOSPITAL -->
+<h3>🏥 Healthcare / Hospital (<span id="healthCount" class="count">0</span>)</h3>
+<ul id="healthJobs">
+  <li><strong>Purchase Assistant – Hospital</strong> | Apply: <a href="mailto:Hrfaheem00@gmail.com">Hrfaheem00@gmail.com</a></li>
+  <li><strong>Nurse – Dental Clinic</strong> | Apply: <a href="mailto:samaelite2025@gmail.com">samaelite2025@gmail.com</a> | WhatsApp: 60768137</li>
+  <li><strong>Physical Therapist – Kuwait / Capital Clinic</strong> | Apply: <a href="mailto:admin@yatim-group.com">admin@yatim-group.com</a>, <a href="mailto:ams.vacancy.q8@gmail.com">ams.vacancy.q8@gmail.com</a> | WhatsApp: 95512525</li>
+  <li><strong>Male Nurse – Oil & Gas Sector</strong> | Apply: <a href="mailto:apply4jobkwt@gmail.com">apply4jobkwt@gmail.com</a></li>
+  <li><strong>Registration & Regulatory Officer – FMCG / Pharma / Cosmetics</strong> | WhatsApp: 67700514</li>
+  <li><strong>Asnan Tower Dental Clinic – Multiple Roles</strong> | Apply: <a href="mailto:recruit@asnan.com">recruit@asnan.com</a></li>
+  <li><strong>Taiba Hospital – Multiple Roles</strong> | Apply: <a href="https://www.linkedin.com/jobs/search/?currentJobId=4270505997&f_C=2784156&geoId=103239229&origin=JOB_SEARCH_PAGE_LOCATION_AUTOCOMPLETE&refresh=true" target="_blank">LinkedIn</a></li>
+  <li><strong>Altaqi Clinic – Female General Practitioner</strong> | Apply: <a href="mailto:hrttower@gmail.com">hrttower@gmail.com</a> | WhatsApp: <a href="https://wa.me/96550488068">+96550488068</a></li>
+</ul>
+
+<!-- TEACHING / EDUCATION -->
+<h3>📚 Teaching / Education (<span id="teachingCount" class="count">0</span>)</h3>
+<ul id="teachingJobs">
+  <li><strong>CBSE Part-Time Teachers – Maths, Physics, Chemistry – Khaitan / Farwaniya</strong> | Apply: <a href="mailto:mcckwt3@gmail.com">mcckwt3@gmail.com</a> | Call: 66008517</li>
+  <li><strong>Part-Time High School Math & Physics Teachers – Mangaf</strong> | WhatsApp: 95535300</li>
+  <li><strong>Gulf Indian School – PGT Economics & Art & Craft Teacher</strong> | Apply: <a href="https://www.linkedin.com/jobs/view/4285505354" target="_blank">LinkedIn</a></li>
+  <li><strong>Al-Jaafariyya Islamic School for Girls – Female Mathematics Teacher</strong> | WhatsApp: 66864643</li>
+  <li><strong>Gulf British Academy – PE & Maths Teachers</strong> | Apply: <a href="https://kw.indeed.com/cmp/Gulf-British-Academy-Kuwait/jobs?jk=cedddaedead9b199" target="_blank">Indeed</a></li>
+  <li><strong>Edvectus Education – Multiple Teachers</strong> | Apply: <a href="https://www.edvectus.com/joblist/vacancies?page=1&pageSize=25" target="_blank">Edvectus</a></li>
+  <li><strong>DAAD Scholarship – Architecture (Germany)</strong> | Apply: <a href="http://daad.de/go/en/stipa57135744" target="_blank">DAAD</a></li>
+</ul>
+
+<!-- RESTAURANT / CHEF JOBS -->
+<h3>🍴 Restaurant / Chef (<span id="restaurantCount" class="count">0</span>)</h3>
+<ul id="restaurantJobs">
+  <li><strong>Assistant Tandoor Chef</strong> – Salmiya | WhatsApp: <a href="https://wa.me/68887783">68887783</a></li>
+  <li><strong>Chef – Salads, Cold Sandwiches & Mini Cakes</strong> | WhatsApp: 96060173</li>
+  <li><strong>Burger Chef</strong> | Send CV: 99379616</li>
+  <li><strong>Part-Time Kitchen Helper & Bike Driver</strong> | WhatsApp: 67095674</li>
+  <li><strong>Various Positions – Chef, Waiter, Captain</strong> | WhatsApp: 67671705</li>
+</ul>
+
+<!-- HOSPITALITY & FITNESS -->
+<h3>🏨 Hospitality & Fitness (<span id="hospitalityCount" class="count">0</span>)</h3>
+<ul id="hospitalityJobs">
+  <li><strong>Hotel Receptionist Manager – Faris Villas</strong> | Apply: <a href="https://kw.indeed.com/viewjob?cmp=farisvillas&t=Hotel+Receptionist&jk=6187311cf6972564&xpse=SoCQ67I3zSgMBswkkJ0LbzkdCdPP&xfps=eeebac80-4fe1-4c98-82c4-48c15242d54b&xkcb=SoA_67M3zSvm-YSKQx0CbzkdCdPP&vjs=3" target="_blank">Indeed</a></li>
+  <li><strong>Fitness Attendant (Women’s Gym)</strong> | Apply: <a href="https://www.linkedin.com/jobs/view/4289601035/?eBP=NON_CHARGEABLE_CHANNEL&refId=J6OtgF01vqZSV%2FNddM8Ovg%3D%3D" target="_blank">LinkedIn</a></li>
+</ul>
+
+<script>
+  function updateCounts() {
+    const tech = document.querySelectorAll('#techJobs li').length;
+    const it = document.querySelectorAll('#itJobs li').length;
+    const admin = document.querySelectorAll('#adminJobs li').length;
+    const logistics = document.querySelectorAll('#logisticsJobs li').length;
+    const sales = document.querySelectorAll('#salesJobs li').length;
+    const health = document.querySelectorAll('#healthJobs li').length;
+    const teaching = document.querySelectorAll('#teachingJobs li').length;
+    const restaurant = document.querySelectorAll('#restaurantJobs li').length;
+    const hospitality = document.querySelectorAll('#hospitalityJobs li').length;
+    
+    document.getElementById('techCount').innerText = tech;
+    document.getElementById('itCount').innerText = it;
+    document.getElementById('adminCount').innerText = admin;
+    document.getElementById('logisticsCount').innerText = logistics;
+    document.getElementById('salesCount').innerText = sales;
+    document.getElementById('healthCount').innerText = health;
+    document.getElementById('teachingCount').innerText = teaching;
+    document.getElementById('restaurantCount').innerText = restaurant;
+    document.getElementById('hospitalityCount').innerText = hospitality;
+    
+    const total = tech + it + admin + logistics + sales + health + teaching + restaurant + hospitality;
+    document.getElementById('totalJobs').innerText = total;
+  }
+  
+  window.onload = updateCounts;
+</script>
+
+</body>
+</html>
