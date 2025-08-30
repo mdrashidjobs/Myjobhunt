@@ -1,0 +1,456 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Home — Latest Jobs</title><meta name="google-adsense-account" content="ca-pub-3037151964199001"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3037151964199001" crossorigin="anonymous"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"><style>
+    :root{
+      --bg: #f5f7fa;
+      --bg2:#e4efe9;
+      --card:#ffffff;
+      --text:#2c3e50;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --primary:#3498db;
+      --primary2:#2980b9;
+      --accent:#27ae60;
+      --shadow: 0 12px 30px rgba(0,0,0,.12);
+      --radius: 16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; padding:24px;
+      font-family:'Segoe UI', Tahoma, Arial, sans-serif;
+      color:var(--text);
+      background:linear-gradient(135deg,var(--bg) 0%,var(--bg2) 100%);
+    }
+    .theme-soft{ --bg:#f7f8fc; --bg2:#eef2f7; }
+    .theme-dusk{ --bg:#0f2027; --bg2:#203a43; --card:#111827; --text:#e5e7eb; --border:#1f2937; --muted:#9ca3af; --shadow: 0 8px 24px rgba(0,0,0,.35); }
+    .theme-royal{ --bg:#f6f3ff; --bg2:#e9e4ff; --primary:#6d28d9; --primary2:#5b21b6; --accent:#10b981; }
+    .theme-sunset{ --bg:#fff1eb; --bg2:#ace0f9; --primary:#ef4444; --primary2:#dc2626; --accent:#22c55e; }
+    .theme-ocean{ --bg:#e0f7ff; --bg2:#b3e5fc; --primary:#0066cc; --primary2:#0052a3; --accent:#ff6b6b; }
+    .theme-forest{ --bg:#e8f5e9; --bg2:#c8e6c9; --primary:#2e7d32; --primary2:#1b5e20; --accent:#ff9800; }
+    .container{max-width:1200px;margin:0 auto;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    header{padding:28px;background:linear-gradient(135deg, #2c3e50, #1a2530);color:#fff;text-align:center;position:relative}
+    header h1{margin:0;font-size:2.2rem;font-weight:800;letter-spacing:.3px}
+    header .sub{opacity:.9;margin-top:6px}
+    .bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px 16px;background:#fafbfc;border-bottom:1px solid var(--border)}
+    .tabs{display:flex;flex-wrap:wrap;gap:6px}
+    .tab{padding:10px 14px;border-radius:999px;border:1px solid var(--border);background:#fff;cursor:pointer;font-weight:600}
+    .tab.active{background:linear-gradient(90deg,var(--primary),var(--primary2));color:#fff;border-color:transparent}
+    .theme-picker{display:flex;align-items:center;gap:8px}
+    select, input[type="text"], textarea{width:100%;padding:12px;border:2px solid var(--border);border-radius:12px;background:#fff;color:inherit;font:inherit}
+    textarea{min-height:140px;resize:vertical}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .card{background:#fff;border:1.5px solid var(--border);border-radius:12px;box-shadow:0 6px 14px rgba(0,0,0,.07);overflow:hidden}
+    .card-head{padding:14px 16px;border-bottom:1px solid var(--border);background:linear-gradient(90deg,#fafbfc,#f0f4f8);font-weight:700;display:flex;align-items:center;gap:10px}
+    .card-body{padding:16px}
+    .btn{background:linear-gradient(90deg,var(--primary),var(--primary2));border:none;color:#fff;padding:12px 18px;border-radius:999px;cursor:pointer;font-weight:700;display:inline-flex;align-items:center;gap:8px}
+    .btn:disabled{opacity:.6;cursor:not-allowed}
+    .btn-ghost{background:#fff;color:var(--primary);border:2px solid var(--primary)}
+    .btn-success{background:linear-gradient(90deg,#27ae60,#219653)}
+    .stack{display:flex;flex-wrap:wrap;gap:10px}
+    .tab-pane{display:none;padding:20px}
+    .tab-pane.active{display:block}
+    .center{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+    /* Preview / index look */
+    .layout{display:flex;min-height:520px;background:#fafbfc;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+    .menu{width:260px;background:#fafbfc;border-right:1px solid var(--border);display:flex;flex-direction:column}
+    .menu-item{padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;font-weight:700;display:flex;align-items:center;gap:10px}
+    .menu-item:hover{background:#f0f4f8}
+    .menu-item.active{background:#fff;color:var(--primary);border-left:4px solid var(--primary)}
+    .menu-item .count{margin-left:auto;background:#eef0f4;border-radius:999px;padding:2px 8px;font-size:.8rem}
+    .content{flex:1;padding:18px;overflow:auto;background:#fafbfc}
+    .category-title{text-align:center;font-size:1.4rem;font-weight:800;margin:6px 0 16px;color:var(--text)}
+    .job{background:#fff;border-left:4px solid var(--primary);padding:14px;border-radius:10px;margin:0 0 14px;white-space:pre-wrap;box-shadow:0 3px 8px rgba(0,0,0,.06)}
+    .ad{background:#f8f9fb;border:1px dashed var(--border);padding:12px;border-radius:10px;margin:14px 0;text-align:center}
+    footer{padding:14px 16px;border-top:1px solid var(--border);background:#fafbfc;color:var(--muted);text-align:center}
+    .note{font-size:.9rem;color:var(--muted)}
+    .page-nav {display: flex; justify-content: center; margin: 20px 0; gap: 15px; flex-wrap: wrap;}
+    .page-nav a {padding: 10px 20px; background: var(--primary); color: white; border-radius: 5px; text-decoration: none;}
+    .page-nav a:hover {background: var(--primary2);}
+  </style></head><body class="theme-soft"><div class="container"><header><h1>MY JOB HUNT</h1><div class="sub">Home — Latest Jobs</div></header><div class="page-nav"><a href="index.html">Home</a><a href="about.html">About</a><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact</a><a href="terms.html">Terms of Service</a></div><div class="bar"><div class="tabs"><button class="tab active"><i class="fa-solid fa-house"></i> Home</button></div><div class="theme-picker"><i class="fa-solid fa-palette"></i> <label>Theme:</label><select id="theme" onchange="document.body.className=this.value"><option value="theme-soft">Soft</option><option value="theme-royal">Royal</option><option value="theme-sunset">Sunset</option><option value="theme-dusk">Dusk</option><option value="theme-ocean">Ocean</option><option value="theme-forest">Forest</option></select></div></div><div class="layout"><div class="menu"><div class="menu-item active" data-k="all"><i class="fa-solid fa-circle-notch"></i> All <span class="count">9</span></div><div class="menu-item" data-k="admin"><i class="fa-solid fa-circle-notch"></i> Administrative / Secretarial <span class="count">1</span></div><div class="menu-item" data-k="it"><i class="fa-solid fa-circle-notch"></i> IT / Technology <span class="count">1</span></div><div class="menu-item" data-k="sales"><i class="fa-solid fa-circle-notch"></i> Sales / Marketing <span class="count">1</span></div><div class="menu-item" data-k="medical"><i class="fa-solid fa-circle-notch"></i> Medical / Healthcare <span class="count">1</span></div><div class="menu-item" data-k="logistics"><i class="fa-solid fa-circle-notch"></i> Logistics / Supply Chain <span class="count">1</span></div><div class="menu-item" data-k="driver"><i class="fa-solid fa-circle-notch"></i> Driver / Transportation <span class="count">0</span></div><div class="menu-item" data-k="fnb"><i class="fa-solid fa-circle-notch"></i> Food & Beverage <span class="count">2</span></div><div class="menu-item" data-k="eng"><i class="fa-solid fa-circle-notch"></i> Engineering / Technical <span class="count">1</span></div><div class="menu-item" data-k="education"><i class="fa-solid fa-circle-notch"></i> Education / Training <span class="count">1</span></div><div class="menu-item" data-k="finance"><i class="fa-solid fa-circle-notch"></i> Finance / Accounting <span class="count">0</span></div><div class="menu-item" data-k="misc"><i class="fa-solid fa-circle-notch"></i> Miscellaneous <span class="count">0</span></div><div class="menu-item" data-k="archive"><i class="fa-solid fa-circle-notch"></i> Archive <span class="count">0</span></div></div><div class="content"><div class="ad"><ins class="adsbygoogle" style="display:block;width:100% !important" data-ad-client="ca-pub-3037151964199001" data-ad-slot="2026981589" data-ad-format="auto" data-full-width-responsive="true"></ins></div><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><div class="content-pane" id="pane-all" style="display:block"><div class="category-title">All (9 jobs)</div><div class="job">**Sr. Engineer – Research & Technology**
+📍 Kuwait
+📌 Requirements: Bachelor’s in Chemical/Environmental/Mechanical/Metallurgical Engineering, 10+ years in petroleum refining, R\&T knowledge preferred
+📩 Apply: [m.s.khan@brunel.net](mailto:m.s.khan@brunel.net)
+
+**Civil / Construction Engineer**
+📍 Kuwait
+✅ Bachelor’s in Civil Engineering, 3+ years site supervision, experience with marble, stone, ceramic, tiles
+📲 Apply via WhatsApp: +96596005036 (Mention "Civil Engineer – Kuwait")
+
+**Water Tank Project Engineer**
+📍 Kuwait
+✅ 5+ years in concrete & steel water tank projects
+📧 Apply: [shinohydro@gmail.com](mailto:shinohydro@gmail.com) / [fawasjabbar@gmail.com](mailto:fawasjabbar@gmail.com)
+📲 WhatsApp: +96555820434 / +96596733028
+
+**Sales Engineer – Lubricants**
+📍 Kuwait
+✅ Bachelor’s Mechanical/Chemical, 3–5 years lubricants sales experience
+📧 Apply: [jorjobb@outlook.com](mailto:jorjobb@outlook.com)
+
+**Packing Engineer – FMCG Sector**
+📍 Kuwait
+✅ Bachelor’s/diploma in Packaging/Mechanical/Materials, 3+ years FMCG packaging
+📲 Call: 67700514
+
+**Network Engineer**
+📍 Kuwait
+✅ Bachelor’s in Computer Science, 5–7+ years networking/security, Fortinet/Palo Alto/Cisco certs preferred
+📧 Apply: [tabraham@insiyabi.com](mailto:tabraham@insiyabi.com)
+
+**Electrical Supervisor / Foreman – Oil & Gas**
+📍 Kuwait
+✅ 6+ years experience in Oil & Gas projects, transferable residency
+📧 Apply: [jobs@almeer.com.kw](mailto:jobs@almeer.com.kw)
+
+**Field Specialist – Baker Hughes**
+📍 Kuwait
+✅ Bachelor’s in Engineering, 5+ years in liner hanger & Intelligent Production System
+🔗 Apply: [https://www.linkedin.com/jobs/search/?currentJobId=4238245196\&f\_C=4334%2C19091336\&geoId=103239229\&origin=JOB\_SEARCH\_PAGE\_LOCATION\_AUTOCOMPLETE\&refresh=true](https://www.linkedin.com/jobs/search/?currentJobId=4238245196&f_C=4334%2C19091336&geoId=103239229&origin=JOB_SEARCH_PAGE_LOCATION_AUTOCOMPLETE&refresh=true)
+
+**Aftermarket Sales Manager – KHIAR Contracting**
+📍 Kuwait
+✅ Bachelor’s Mechanical Engineering, 15+ years aftermarket sales experience
+🔗 Apply: [https://www.linkedin.com/jobs/view/4291057356/?eBP=NON\_CHARGEABLE\_CHANNEL\&refId=5dL13Rm1bIWyqSjPFOFQxw%3D%3D\&trackingId=rCkj2nerELtq%2BO1%2F3ou3rA%3D%3D](https://www.linkedin.com/jobs/view/4291057356/?eBP=NON_CHARGEABLE_CHANNEL&refId=5dL13Rm1bIWyqSjPFOFQxw%3D%3D&trackingId=rCkj2nerELtq%2BO1%2F3ou3rA%3D%3D)
+
+**Piping Supervisor (Erection) – TECNIMONT**
+📍 Kuwait
+🔗 Apply: [https://www.linkedin.com/jobs/view/4288856757/?eBP=NON\_CHARGEABLE\_CHANNEL\&refId=Ve7iw2%2BuS1EnIuQZzwxFMw%3D%3D\&trackingId=hviFPNMWAQE9CbMH6jkBYQ%3D%3D](https://www.linkedin.com/jobs/view/4288856757/?eBP=NON_CHARGEABLE_CHANNEL&refId=Ve7iw2%2BuS1EnIuQZzwxFMw%3D%3D&trackingId=hviFPNMWAQE9CbMH6jkBYQ%3D%3D)
+
+**Flowtech Co – Fire Alarm & Protection Engineers / Draughtsman**
+📧 Apply: [info@fiekw.com](mailto:info@fiekw.com)
+
+**BOB Construction – Management Trainee (Engineering)**
+🔗 Apply: [https://kw.indeed.com/cmp/Bob-Construction-Company/jobs](https://kw.indeed.com/cmp/Bob-Construction-Company/jobs)
+
+**Al Sayer Construction – HSE Manager**
+📧 Apply: [careers@enshaat.com](mailto:careers@enshaat.com)
+
+**Wajda Group – Civil Engineer (Telecom/Construction)**
+📧 Apply: [Akhtar.mehmood@witsglobal.com](mailto:Akhtar.mehmood@witsglobal.com), [hrcvs18@gmail.com](mailto:hrcvs18@gmail.com)
+
+**Construction – Architect/Civil Engineer/Foreman/Supervisor**
+📧 Apply: [naduvilayilvinod2018@gmail.com](mailto:naduvilayilvinod2018@gmail.com)
+
+**Quality Controller / Inspector – Mina Abdullah Factory**
+📧 Apply: [careers@recafco.com](mailto:careers@recafco.com)
+📲 WhatsApp: 97362267
+</div><div class="job">**Odoo Developer**
+📍 Kuwait
+✅ 2–5 years Odoo (Enterprise/Community), Python/PostgreSQL, CRM & custom module development
+📧 Apply: [applynow2023@gmail.com](mailto:applynow2023@gmail.com)
+
+**Python Django Developer**
+📍 Kuwait
+✅ 5+ years Python Django development, clean & maintainable code
+📧 Apply: [kuwait.talent2020@gmail.com](mailto:kuwait.talent2020@gmail.com)
+
+**Oracle Cloud & AI / SaaS Sales Executive**
+🔗 Apply: [https://careers.oracle.com/jobs/#en/sites/jobsearch/requisitions?location=Kuwait\&locationId=300000000149001\&locationLevel=country\&mode=location](https://careers.oracle.com/jobs/#en/sites/jobsearch/requisitions?location=Kuwait&locationId=300000000149001&locationLevel=country&mode=location)
+
+**PiXiL Apps – Digital Product Manager (UI/UX)**
+🔗 Apply: [https://www.linkedin.com/jobs/search/?currentJobId=4212068825\&f\_C=19206708\&geoId=92000000](https://www.linkedin.com/jobs/search/?currentJobId=4212068825&f_C=19206708&geoId=92000000)
+
+</div><div class="job">**HR & Admin Coordinator** – Al Seedawi Food Industries
+📧 Apply: [afrah.haider@alseedawifood.com](mailto:afrah.haider@alseedawifood.com)
+
+**Operations Supervisor** – Ardhiya
+📧 Apply: [AE-HR@postaplus.com](mailto:AE-HR@postaplus.com)
+Website: [www.postaplus.com](http://www.postaplus.com)
+
+**Admin Logistics Coordinator**
+📧 Apply: [career@alameed.com.kw](mailto:career@alameed.com.kw)
+
+**HR Assistant**
+📧 Apply: [amrit@integrated-me.com](mailto:amrit@integrated-me.com)
+
+**Store Keeper / Site Secretary**
+📧 Apply: [hrjobs@gulfengg.com](mailto:hrjobs@gulfengg.com)
+
+**Installation Engineer / Sr. Accountant / Cashier**
+📧 Apply: [jobs@hassanabul.com](mailto:jobs@hassanabul.com)
+
+**Office Cleaner / Secretary / Admin Officer / HR Office Assistant**
+📲 WhatsApp: +96599430382, 91109447, 92296583
+
+</div><div class="job">**Warehouse Supervisor**
+📧 Apply: [nairksantosh@gmail.com](mailto:nairksantosh@gmail.com)
+
+**Delivery Team / Drivers / Heavy Vehicle Drivers / Freelance Drivers / Delivery Supervisor – Talabat**
+📲 WhatsApp / Call: 50888475, 65608979, 67630778, 97461219, +96598049533
+
+</div><div class="job">**Outdoor Sales Representatives – Carpets / Flooring**
+📧 Apply: [R.Tadrus@ajalgroup.com](mailto:R.Tadrus@ajalgroup.com)
+
+**Sales Representative / Sales Promoter / Sales Employees – Metal & Automatic Doors**
+📲 WhatsApp: 50405575
+📧 Email CV: [hiringtech556@gmail.com](mailto:hiringtech556@gmail.com)
+
+**Administrative Sales Assistant**
+📧 Apply: [kvmurli37@gmail.com](mailto:kvmurli37@gmail.com)
+
+**Aftermarket / Sales Manager / Odoo / CRM roles also fall partly under sales**
+</div><div class="job">**Purchase Assistant – Hospital**
+📧 Apply: [Hrfaheem00@gmail.com](mailto:Hrfaheem00@gmail.com)
+
+**Nurse – Dental Clinic**
+📧 Apply: [samaelite2025@gmail.com](mailto:samaelite2025@gmail.com)
+📲 WhatsApp: 60768137
+
+**Physical Therapist – Kuwait / Capital Clinic**
+📧 Apply: [admin@yatim-group.com](mailto:admin@yatim-group.com), [ams.vacancy.q8@gmail.com](mailto:ams.vacancy.q8@gmail.com)
+📲 WhatsApp: 95512525
+
+**Male Nurse – Oil & Gas Sector**
+📧 Apply: [apply4jobkwt@gmail.com](mailto:apply4jobkwt@gmail.com)
+
+**Registration & Regulatory Officer – FMCG / Pharma / Cosmetics**
+📲 WhatsApp: 67700514
+
+**Asnan Tower Dental Clinic – Multiple Roles**
+📧 Apply: [recruit@asnan.com](mailto:recruit@asnan.com)
+
+**Taiba Hospital – Multiple Roles**
+🔗 Apply: [https://www.linkedin.com/jobs/search/?currentJobId=4270505997\&f\_C=2784156\&geoId=103239229\&origin=JOB\_SEARCH\_PAGE\_LOCATION\_AUTOCOMPLETE\&refresh=true](https://www.linkedin.com/jobs/search/?currentJobId=4270505997&f_C=2784156&geoId=103239229&origin=JOB_SEARCH_PAGE_LOCATION_AUTOCOMPLETE&refresh=true)
+
+**Altaqi Clinic – Female General Practitioner**
+📧 Apply: [hrttower@gmail.com](mailto:hrttower@gmail.com)
+📲 WhatsApp: +96550488068
+</div><div class="job">**CBSE Part-Time Teachers – Maths, Physics, Chemistry – Khaitan / Farwaniya**
+📧 Apply: [mcckwt3@gmail.com](mailto:mcckwt3@gmail.com) | Call: 66008517
+
+**Part-Time High School Math & Physics Teachers – Mangaf**
+📱 WhatsApp: 95535300
+
+**Gulf Indian School – PGT Economics & Art & Craft Teacher**
+🔗 Apply: [https://www.linkedin.com/jobs/view/4285505354](https://www.linkedin.com/jobs/view/4285505354)
+
+**Al-Jaafariyya Islamic School for Girls – Female Mathematics Teacher**
+📱 WhatsApp: 66864643
+
+**Gulf British Academy – PE & Maths Teachers**
+🔗 Apply: [https://kw.indeed.com/cmp/Gulf-British-Academy-Kuwait/jobs?jk=cedddaedead9b199](https://kw.indeed.com/cmp/Gulf-British-Academy-Kuwait/jobs?jk=cedddaedead9b199)
+
+**Edvectus Education – Multiple Teachers**
+🔗 Apply: [https://www.edvectus.com/joblist/vacancies?page=1\&pageSize=25](https://www.edvectus.com/joblist/vacancies?page=1&pageSize=25)
+
+**DAAD Scholarship – Architecture (Germany)**
+🔗 Apply: [http://daad.de/go/en/stipa57135744](http://daad.de/go/en/stipa57135744)
+
+</div><div class="job">**Assistant Tandoor Chef**
+
+
+– Salmiya
+📲 WhatsApp: 68887783
+
+**Chef – Salads, Cold Sandwiches & Mini Cakes**
+📲 WhatsApp: 96060173
+
+**Burger Chef**
+📲 Send CV: 99379616
+
+**Part-Time Kitchen Helper & Bike Driver**
+📲 WhatsApp: 67095674
+
+**Various Positions – Chef, Waiter, Captain**
+📲 WhatsApp: 67671705
+
+</div><div class="job">**Hotel Receptionist Manager – Faris Villas**
+🌐 Apply: [https://kw.indeed.com/viewjob?cmp=farisvillas\&t=Hotel+Receptionist\&jk=6187311cf6972564\&xpse=SoCQ67I3zSgMBswkkJ0LbzkdCdPP\&xfps=eeebac80-4fe1-4c98-82c4-48c15242d54b\&xkcb=SoA\_67M3zSvm-YSKQx0CbzkdCdPP\&vjs=3](https://kw.indeed.com/viewjob?cmp=farisvillas&t=Hotel+Receptionist&jk=6187311cf6972564&xpse=SoCQ67I3zSgMBswkkJ0LbzkdCdPP&xfps=eeebac80-4fe1-4c98-82c4-48c15242d54b&xkcb=SoA_67M3zSvm-YSKQx0CbzkdCdPP&vjs=3)
+
+**Fitness Attendant (Women’s Gym)**
+🌐 Apply: [https://www.linkedin.com/jobs/view/4289601035/?eBP=NON\_CHARGEABLE\_CHANNEL\&refId=J6OtgF01vqZSV%2FNddM8Ovg%3D%3D](https://www.linkedin.com/jobs/view/4289601035/?eBP=NON_CHARGEABLE_CHANNEL&refId=J6OtgF01vqZSV%2FNddM8Ovg%3D%3D)
+
+</div></div><div class="content-pane" id="pane-admin" style="display:none"><div class="category-title">Administrative / Secretarial (1 jobs)</div><div class="job">**HR & Admin Coordinator** – Al Seedawi Food Industries
+📧 Apply: [afrah.haider@alseedawifood.com](mailto:afrah.haider@alseedawifood.com)
+
+**Operations Supervisor** – Ardhiya
+📧 Apply: [AE-HR@postaplus.com](mailto:AE-HR@postaplus.com)
+Website: [www.postaplus.com](http://www.postaplus.com)
+
+**Admin Logistics Coordinator**
+📧 Apply: [career@alameed.com.kw](mailto:career@alameed.com.kw)
+
+**HR Assistant**
+📧 Apply: [amrit@integrated-me.com](mailto:amrit@integrated-me.com)
+
+**Store Keeper / Site Secretary**
+📧 Apply: [hrjobs@gulfengg.com](mailto:hrjobs@gulfengg.com)
+
+**Installation Engineer / Sr. Accountant / Cashier**
+📧 Apply: [jobs@hassanabul.com](mailto:jobs@hassanabul.com)
+
+**Office Cleaner / Secretary / Admin Officer / HR Office Assistant**
+📲 WhatsApp: +96599430382, 91109447, 92296583
+
+</div></div><div class="content-pane" id="pane-it" style="display:none"><div class="category-title">IT / Technology (1 jobs)</div><div class="job">**Odoo Developer**
+📍 Kuwait
+✅ 2–5 years Odoo (Enterprise/Community), Python/PostgreSQL, CRM & custom module development
+📧 Apply: [applynow2023@gmail.com](mailto:applynow2023@gmail.com)
+
+**Python Django Developer**
+📍 Kuwait
+✅ 5+ years Python Django development, clean & maintainable code
+📧 Apply: [kuwait.talent2020@gmail.com](mailto:kuwait.talent2020@gmail.com)
+
+**Oracle Cloud & AI / SaaS Sales Executive**
+🔗 Apply: [https://careers.oracle.com/jobs/#en/sites/jobsearch/requisitions?location=Kuwait\&locationId=300000000149001\&locationLevel=country\&mode=location](https://careers.oracle.com/jobs/#en/sites/jobsearch/requisitions?location=Kuwait&locationId=300000000149001&locationLevel=country&mode=location)
+
+**PiXiL Apps – Digital Product Manager (UI/UX)**
+🔗 Apply: [https://www.linkedin.com/jobs/search/?currentJobId=4212068825\&f\_C=19206708\&geoId=92000000](https://www.linkedin.com/jobs/search/?currentJobId=4212068825&f_C=19206708&geoId=92000000)
+
+</div></div><div class="content-pane" id="pane-sales" style="display:none"><div class="category-title">Sales / Marketing (1 jobs)</div><div class="job">**Outdoor Sales Representatives – Carpets / Flooring**
+📧 Apply: [R.Tadrus@ajalgroup.com](mailto:R.Tadrus@ajalgroup.com)
+
+**Sales Representative / Sales Promoter / Sales Employees – Metal & Automatic Doors**
+📲 WhatsApp: 50405575
+📧 Email CV: [hiringtech556@gmail.com](mailto:hiringtech556@gmail.com)
+
+**Administrative Sales Assistant**
+📧 Apply: [kvmurli37@gmail.com](mailto:kvmurli37@gmail.com)
+
+**Aftermarket / Sales Manager / Odoo / CRM roles also fall partly under sales**
+</div></div><div class="content-pane" id="pane-medical" style="display:none"><div class="category-title">Medical / Healthcare (1 jobs)</div><div class="job">**Purchase Assistant – Hospital**
+📧 Apply: [Hrfaheem00@gmail.com](mailto:Hrfaheem00@gmail.com)
+
+**Nurse – Dental Clinic**
+📧 Apply: [samaelite2025@gmail.com](mailto:samaelite2025@gmail.com)
+📲 WhatsApp: 60768137
+
+**Physical Therapist – Kuwait / Capital Clinic**
+📧 Apply: [admin@yatim-group.com](mailto:admin@yatim-group.com), [ams.vacancy.q8@gmail.com](mailto:ams.vacancy.q8@gmail.com)
+📲 WhatsApp: 95512525
+
+**Male Nurse – Oil & Gas Sector**
+📧 Apply: [apply4jobkwt@gmail.com](mailto:apply4jobkwt@gmail.com)
+
+**Registration & Regulatory Officer – FMCG / Pharma / Cosmetics**
+📲 WhatsApp: 67700514
+
+**Asnan Tower Dental Clinic – Multiple Roles**
+📧 Apply: [recruit@asnan.com](mailto:recruit@asnan.com)
+
+**Taiba Hospital – Multiple Roles**
+🔗 Apply: [https://www.linkedin.com/jobs/search/?currentJobId=4270505997\&f\_C=2784156\&geoId=103239229\&origin=JOB\_SEARCH\_PAGE\_LOCATION\_AUTOCOMPLETE\&refresh=true](https://www.linkedin.com/jobs/search/?currentJobId=4270505997&f_C=2784156&geoId=103239229&origin=JOB_SEARCH_PAGE_LOCATION_AUTOCOMPLETE&refresh=true)
+
+**Altaqi Clinic – Female General Practitioner**
+📧 Apply: [hrttower@gmail.com](mailto:hrttower@gmail.com)
+📲 WhatsApp: +96550488068
+</div></div><div class="content-pane" id="pane-logistics" style="display:none"><div class="category-title">Logistics / Supply Chain (1 jobs)</div><div class="job">**Warehouse Supervisor**
+📧 Apply: [nairksantosh@gmail.com](mailto:nairksantosh@gmail.com)
+
+**Delivery Team / Drivers / Heavy Vehicle Drivers / Freelance Drivers / Delivery Supervisor – Talabat**
+📲 WhatsApp / Call: 50888475, 65608979, 67630778, 97461219, +96598049533
+
+</div></div><div class="content-pane" id="pane-driver" style="display:none"><div class="category-title">Driver / Transportation (0 jobs)</div></div><div class="content-pane" id="pane-fnb" style="display:none"><div class="category-title">Food & Beverage (2 jobs)</div><div class="job">**Assistant Tandoor Chef**
+
+
+– Salmiya
+📲 WhatsApp: 68887783
+
+**Chef – Salads, Cold Sandwiches & Mini Cakes**
+📲 WhatsApp: 96060173
+
+**Burger Chef**
+📲 Send CV: 99379616
+
+**Part-Time Kitchen Helper & Bike Driver**
+📲 WhatsApp: 67095674
+
+**Various Positions – Chef, Waiter, Captain**
+📲 WhatsApp: 67671705
+
+</div><div class="job">**Hotel Receptionist Manager – Faris Villas**
+🌐 Apply: [https://kw.indeed.com/viewjob?cmp=farisvillas\&t=Hotel+Receptionist\&jk=6187311cf6972564\&xpse=SoCQ67I3zSgMBswkkJ0LbzkdCdPP\&xfps=eeebac80-4fe1-4c98-82c4-48c15242d54b\&xkcb=SoA\_67M3zSvm-YSKQx0CbzkdCdPP\&vjs=3](https://kw.indeed.com/viewjob?cmp=farisvillas&t=Hotel+Receptionist&jk=6187311cf6972564&xpse=SoCQ67I3zSgMBswkkJ0LbzkdCdPP&xfps=eeebac80-4fe1-4c98-82c4-48c15242d54b&xkcb=SoA_67M3zSvm-YSKQx0CbzkdCdPP&vjs=3)
+
+**Fitness Attendant (Women’s Gym)**
+🌐 Apply: [https://www.linkedin.com/jobs/view/4289601035/?eBP=NON\_CHARGEABLE\_CHANNEL\&refId=J6OtgF01vqZSV%2FNddM8Ovg%3D%3D](https://www.linkedin.com/jobs/view/4289601035/?eBP=NON_CHARGEABLE_CHANNEL&refId=J6OtgF01vqZSV%2FNddM8Ovg%3D%3D)
+
+</div></div><div class="content-pane" id="pane-eng" style="display:none"><div class="category-title">Engineering / Technical (1 jobs)</div><div class="job">**Sr. Engineer – Research & Technology**
+📍 Kuwait
+📌 Requirements: Bachelor’s in Chemical/Environmental/Mechanical/Metallurgical Engineering, 10+ years in petroleum refining, R\&T knowledge preferred
+📩 Apply: [m.s.khan@brunel.net](mailto:m.s.khan@brunel.net)
+
+**Civil / Construction Engineer**
+📍 Kuwait
+✅ Bachelor’s in Civil Engineering, 3+ years site supervision, experience with marble, stone, ceramic, tiles
+📲 Apply via WhatsApp: +96596005036 (Mention "Civil Engineer – Kuwait")
+
+**Water Tank Project Engineer**
+📍 Kuwait
+✅ 5+ years in concrete & steel water tank projects
+📧 Apply: [shinohydro@gmail.com](mailto:shinohydro@gmail.com) / [fawasjabbar@gmail.com](mailto:fawasjabbar@gmail.com)
+📲 WhatsApp: +96555820434 / +96596733028
+
+**Sales Engineer – Lubricants**
+📍 Kuwait
+✅ Bachelor’s Mechanical/Chemical, 3–5 years lubricants sales experience
+📧 Apply: [jorjobb@outlook.com](mailto:jorjobb@outlook.com)
+
+**Packing Engineer – FMCG Sector**
+📍 Kuwait
+✅ Bachelor’s/diploma in Packaging/Mechanical/Materials, 3+ years FMCG packaging
+📲 Call: 67700514
+
+**Network Engineer**
+📍 Kuwait
+✅ Bachelor’s in Computer Science, 5–7+ years networking/security, Fortinet/Palo Alto/Cisco certs preferred
+📧 Apply: [tabraham@insiyabi.com](mailto:tabraham@insiyabi.com)
+
+**Electrical Supervisor / Foreman – Oil & Gas**
+📍 Kuwait
+✅ 6+ years experience in Oil & Gas projects, transferable residency
+📧 Apply: [jobs@almeer.com.kw](mailto:jobs@almeer.com.kw)
+
+**Field Specialist – Baker Hughes**
+📍 Kuwait
+✅ Bachelor’s in Engineering, 5+ years in liner hanger & Intelligent Production System
+🔗 Apply: [https://www.linkedin.com/jobs/search/?currentJobId=4238245196\&f\_C=4334%2C19091336\&geoId=103239229\&origin=JOB\_SEARCH\_PAGE\_LOCATION\_AUTOCOMPLETE\&refresh=true](https://www.linkedin.com/jobs/search/?currentJobId=4238245196&f_C=4334%2C19091336&geoId=103239229&origin=JOB_SEARCH_PAGE_LOCATION_AUTOCOMPLETE&refresh=true)
+
+**Aftermarket Sales Manager – KHIAR Contracting**
+📍 Kuwait
+✅ Bachelor’s Mechanical Engineering, 15+ years aftermarket sales experience
+🔗 Apply: [https://www.linkedin.com/jobs/view/4291057356/?eBP=NON\_CHARGEABLE\_CHANNEL\&refId=5dL13Rm1bIWyqSjPFOFQxw%3D%3D\&trackingId=rCkj2nerELtq%2BO1%2F3ou3rA%3D%3D](https://www.linkedin.com/jobs/view/4291057356/?eBP=NON_CHARGEABLE_CHANNEL&refId=5dL13Rm1bIWyqSjPFOFQxw%3D%3D&trackingId=rCkj2nerELtq%2BO1%2F3ou3rA%3D%3D)
+
+**Piping Supervisor (Erection) – TECNIMONT**
+📍 Kuwait
+🔗 Apply: [https://www.linkedin.com/jobs/view/4288856757/?eBP=NON\_CHARGEABLE\_CHANNEL\&refId=Ve7iw2%2BuS1EnIuQZzwxFMw%3D%3D\&trackingId=hviFPNMWAQE9CbMH6jkBYQ%3D%3D](https://www.linkedin.com/jobs/view/4288856757/?eBP=NON_CHARGEABLE_CHANNEL&refId=Ve7iw2%2BuS1EnIuQZzwxFMw%3D%3D&trackingId=hviFPNMWAQE9CbMH6jkBYQ%3D%3D)
+
+**Flowtech Co – Fire Alarm & Protection Engineers / Draughtsman**
+📧 Apply: [info@fiekw.com](mailto:info@fiekw.com)
+
+**BOB Construction – Management Trainee (Engineering)**
+🔗 Apply: [https://kw.indeed.com/cmp/Bob-Construction-Company/jobs](https://kw.indeed.com/cmp/Bob-Construction-Company/jobs)
+
+**Al Sayer Construction – HSE Manager**
+📧 Apply: [careers@enshaat.com](mailto:careers@enshaat.com)
+
+**Wajda Group – Civil Engineer (Telecom/Construction)**
+📧 Apply: [Akhtar.mehmood@witsglobal.com](mailto:Akhtar.mehmood@witsglobal.com), [hrcvs18@gmail.com](mailto:hrcvs18@gmail.com)
+
+**Construction – Architect/Civil Engineer/Foreman/Supervisor**
+📧 Apply: [naduvilayilvinod2018@gmail.com](mailto:naduvilayilvinod2018@gmail.com)
+
+**Quality Controller / Inspector – Mina Abdullah Factory**
+📧 Apply: [careers@recafco.com](mailto:careers@recafco.com)
+📲 WhatsApp: 97362267
+</div></div><div class="content-pane" id="pane-education" style="display:none"><div class="category-title">Education / Training (1 jobs)</div><div class="job">**CBSE Part-Time Teachers – Maths, Physics, Chemistry – Khaitan / Farwaniya**
+📧 Apply: [mcckwt3@gmail.com](mailto:mcckwt3@gmail.com) | Call: 66008517
+
+**Part-Time High School Math & Physics Teachers – Mangaf**
+📱 WhatsApp: 95535300
+
+**Gulf Indian School – PGT Economics & Art & Craft Teacher**
+🔗 Apply: [https://www.linkedin.com/jobs/view/4285505354](https://www.linkedin.com/jobs/view/4285505354)
+
+**Al-Jaafariyya Islamic School for Girls – Female Mathematics Teacher**
+📱 WhatsApp: 66864643
+
+**Gulf British Academy – PE & Maths Teachers**
+🔗 Apply: [https://kw.indeed.com/cmp/Gulf-British-Academy-Kuwait/jobs?jk=cedddaedead9b199](https://kw.indeed.com/cmp/Gulf-British-Academy-Kuwait/jobs?jk=cedddaedead9b199)
+
+**Edvectus Education – Multiple Teachers**
+🔗 Apply: [https://www.edvectus.com/joblist/vacancies?page=1\&pageSize=25](https://www.edvectus.com/joblist/vacancies?page=1&pageSize=25)
+
+**DAAD Scholarship – Architecture (Germany)**
+🔗 Apply: [http://daad.de/go/en/stipa57135744](http://daad.de/go/en/stipa57135744)
+
+</div></div><div class="content-pane" id="pane-finance" style="display:none"><div class="category-title">Finance / Accounting (0 jobs)</div></div><div class="content-pane" id="pane-misc" style="display:none"><div class="category-title">Miscellaneous (0 jobs)</div></div><div class="content-pane" id="pane-archive" style="display:none"><div class="category-title">Archive</div><ul><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August%2022rd,%202025.html" target="_blank">August 22nd, 2025</a></li><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August%2023rd,%202025.html" target="_blank">August 23rd, 2025</a></li><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August%2024th,%202025.html" target="_blank">August 24th, 2026</a></li><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August%2025th,%202025.html" target="_blank">August 25th, 2027</a></li><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August%2026th,%202025.html" target="_blank">August 26th, 2028</a></li><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August%2027th,%202025.html" target="_blank">August 27th, 2029</a></li><li><a href="https://mdrashidjobs.github.io/Myjobhunt/Archive/August%2028th,%202025.html" target="_blank">August 28th, 2030</a></li></ul></div><div class="ad"><ins class="adsbygoogle" style="display:block;width:100% !important" data-ad-client="ca-pub-3037151964199001" data-ad-slot="3395903576" data-ad-format="auto" data-full-width-responsive="true"></ins></div><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div></div><script>document.querySelectorAll(".menu-item").forEach(el=>{el.addEventListener("click",function(){document.querySelectorAll(".menu-item").forEach(m=>m.classList.remove("active"));this.classList.add("active");document.querySelectorAll(".content-pane").forEach(p=>p.style.display="none");document.getElementById("pane-"+this.dataset.k).style.display="block";});});</script><footer>MY JOB HUNT © 2K25</footer></div></body></html>
